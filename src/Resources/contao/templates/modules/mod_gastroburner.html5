@@ -1,7 +1,123 @@
-<?php $this->extend('block_searchable'); ?>
+<?php $this->extend('block_searchable');?>
 
-<?php $this->block('content'); ?>
+<?php $this->block('content');?>
 
-<?= $this->message; ?>
+<script type="text/javascript">
+    var points = <?php echo json_encode($this->points) ?>
+</script>
 
-<?php $this->endblock(); ?>
+<section class="section section--yellow">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <span class="h1 center">Gastromat</span>
+              <span class="h2 center">Welcher Typ bist du?</span>
+              <div class="gastromat">
+                <ul class="gastromatlist">
+                  <li class="gastromatlist__item">
+                    <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/icon_chef.svg" alt="Koch"></div>
+                    <div class="gastromatlist__tooltip">Koch</div>
+                  </li>
+                  <li class="gastromatlist__item">
+                    <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/icon_telemarketer.svg" alt="Hotelkaufffrau"></div>
+                    <div class="gastromatlist__tooltip">Hotelkaufffrau</div>
+                  </li>
+                  <li class="gastromatlist__item gastromatlist__item--fullwidth">
+                    <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/icon_waiter.svg" alt="Restaurantfachkraft"></div>
+                    <div class="gastromatlist__tooltip">Restaurantfachkraft</div>
+                  </li>
+                  <li class="gastromatlist__item">
+                    <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/icon_maid.svg" alt="Hotelfachkraft"></div>
+                    <div class="gastromatlist__tooltip">Hotelfachkraft</div>
+                  </li>
+                  <li class="gastromatlist__item">
+                    <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/icon_bartender.svg" alt="Fachkraft im Gastgewerbe"></div>
+                    <div class="gastromatlist__tooltip">Fachkraft im Gastgewerbe</div>
+                  </li>
+                </ul>
+                <div class="center"><a class="btn js-start" href="javascript:;" title="Jetzt starten"><div class="btninner">Jetzt starten</div><span></span></a></div>
+
+                <div class="row js-gastroburner-module" style="display: none">
+                  <div class="col-12 col-lg-10 offset-lg-1">
+                    <!-- Step 1 -->
+                    <div class="js-questions">
+                        <?php foreach ($this->questions as $question): ?>
+                            <div class="js-question" style="display: none;" data-type="<?php echo $question['type'] ?>">
+                                <h3><?php echo $question['question'] ?></h3>
+                                <?php foreach ($question['formattedAnswers'] as $strLetter => $arrAnswer): ?>
+                                    <div class="js-question__item question__item" data-value="<?php echo $arrAnswer['points'] ?>">
+                                      <div class="question__number"><?php echo $strLetter ?></div>
+                                      <div class="question__copy"><?php echo $arrAnswer['answer'] ?></div>
+                                    </div>
+                                <?php endforeach;?>
+                            </div>
+                        <?php endforeach;?>
+                        <!-- next-button -->
+                        <div class="row">
+                            <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+                                <a class="btn btn--disable js-next-button" href="javascript:;" title="weiter"><div class="btninner">weiter</div><span></span></a>
+                            </div>
+                            <div class="col-12 col-sm-8 col-md-6 col-lg-8">
+                                <div class="status_line">
+                                    <div class="js-status-width status_count">&nbsp;</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / Step 1 -->
+
+
+                    <!-- Step 2 -->
+                    <br>
+                    <div class="js-gastroburner-result" style="display: none;">
+                    <h3>Ein Ergebnis, das sich sehen lassen kann!</h3>
+                    <div class="result__item js-COOK">
+                      <div class="result__checkbox"></div>
+                      <div class="result__copy"><div class="result__indicator" style="width: 75%;"></div><span>Koch/in</span> <span class="js-value">75%</span></div>
+                      <div class="result__info">i</div>
+                    </div>
+                    <div class="result__item js-RESTAURANT">
+                      <div class="result__checkbox"></div>
+                      <div class="result__copy"><div class="result__indicator" style="width: 35%;"></div><span>Restaurant&shy;fach&shy;kraft</span> <span class="js-value">35%</span></div>
+                      <div class="result__info">i</div>
+                    </div>
+                    <div class="result__item js-HOTELCLEANER">
+                      <div class="result__checkbox"></div>
+                      <div class="result__copy"><div class="result__indicator" style="width: 50%;"></div><span>Hotelfachkraft</span> <span class="js-value">50%</span></div>
+                      <div class="result__info">i</div>
+                    </div>
+                    <div class="result__item js-HOTELMANAGER">
+                      <div class="result__checkbox"></div>
+                      <div class="result__copy"><div class="result__indicator result__indicator--full" style="width: 100%;"></div><span>Hotelkaufmann/&shy;frau</span> <span class="js-value">100%</span></div>
+                      <div class="result__info">i</div>
+                    </div>
+                    <div class="result__item js-GASTRO">
+                      <div class="result__checkbox"></div>
+                      <div class="result__copy"><div class="result__indicator" style="width: 80%;"></div><span>Fachkraft im Gastgewerbe</span> <span class="js-value">80%</span></div>
+                      <div class="result__info">i</div>
+                    </div>
+                    <p class="color-black">Wähle die Berufe, die dir gefallen und starte jetzt deine Initiativ-Berwerbung.</p>
+                    <form method="POST" action="<?php echo $this->apply_form_url ?>">
+                        <input type="hidden" name="REQUEST_TOKEN" value="<?= REQUEST_TOKEN ?>">
+                        <input type="hidden" name="restaurant">
+                        <input type="hidden" name="cook" value="1">
+                        <input type="hidden" name="hotelcleaner">
+                        <input type="hidden" name="hotelmanager">
+                        <input type="hidden" name="gastro">
+                        <button type="submit">Jetzt bewerben</button>
+                    </form>
+                    <a class="btn" href="<?php echo $this->apply_form_url ?>" title="Jetzt bewerben"><div class="btninner">Jetzt bewerben</div><span></span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+<br>
+
+
+<?php $this->endblock();?>
