@@ -3,7 +3,8 @@
 // Frontend modules
 $GLOBALS['FE_MOD']['miscellaneous']['gastroburner'] = 'Lumturo\ContaoGastroburnerBundle\Module\GastroburnerModule';
 $GLOBALS['FE_MOD']['miscellaneous']['gastroburnerapplyform'] = 'Lumturo\ContaoGastroburnerBundle\Module\GastroburnerApplyFormModule';
-$GLOBALS['TL_JAVASCRIPT'][] = 'bundles/gastroburner/js/gastroburner.js';
+$GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/gastroburner.js';
+$GLOBALS['TL_CSS'][] = 'bundles/contaogastroburner/css/gastroburner.css';
 // Backend modules
 $GLOBALS['BE_MOD']['gastroburner']['tl_question'] = array(
     'tables' => array('tl_question'),
