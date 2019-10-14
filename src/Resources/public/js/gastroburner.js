@@ -1,4 +1,4 @@
-$(function () {
+window.onload = function () {
     var $nextButton = $('.js-next-button');
     var $questions = $('.js-question');
     var actQuestion = 0;
@@ -66,4 +66,4 @@ $(function () {
         // console.log(type);
         // console.log(point);
     }
-});
+};
