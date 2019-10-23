@@ -5,6 +5,7 @@ namespace Lumturo\ContaoGastroburnerBundle\Module;
 class GastroburnerModule extends \Module
 {
     public static $QUESTION_CATEGORIES = [
+        // Key => label
         'STRESS' => 'STRESSRESISTENZ', //$GLOBALS['TL_LANG']['gastroburner']['category']['STRESS'][0]
         'TEAM' => 'TEAMPLAYER',
         'LEADERSHIP' => 'FÜHRUNGSQUALITÄT',
@@ -29,19 +30,19 @@ class GastroburnerModule extends \Module
     ];
 
     public static $POINTS = [
-        'RESTAURANT' => ['STRESS' => 3, 'TEAM' => 3, 'LEADERSHIP' => 0, 'DETAIL' => 3, 'COMMUNICATION' => 3, 'CRAFT' => 1, 'POLITE' => 3, 'CREATIVE' => 0, 'MANAGE' => 1, 'OPENMINDED' => 2, 'MUMBERORIENTED' => 2, 'OFFICE' => 0, 'FLEXIBLE' => 3,
+        'RESTAURANT' => ['STRESS' => 3, 'TEAM' => 3, 'LEADERSHIP' => 0, 'DETAIL' => 3, 'COMMUNICATION' => 3, 'CRAFT' => 1, 'POLITE' => 3, 'CREATIVE' => 0, 'MANAGE' => 1, 'OPENMINDED' => 2, 'NUMBERORIENTED' => 2, 'OFFICE' => 0, 'FLEXIBLE' => 3,
         ],
         'COOK' => [
-            'STRESS' => 3, 'TEAM' => 1, 'LEADERSHIP' => 2, 'DETAIL' => 3, 'COMMUNICATION' => 0, 'CRAFT' => 3, 'POLITE' => 0, 'CREATIVE' => 3, 'MANAGE' => 3, 'OPENMINDED' => 3, 'MUMBERORIENTED' => 1, 'OFFICE' => 0, 'FLEXIBLE' => 2,
+            'STRESS' => 3, 'TEAM' => 1, 'LEADERSHIP' => 2, 'DETAIL' => 3, 'COMMUNICATION' => 0, 'CRAFT' => 3, 'POLITE' => 0, 'CREATIVE' => 3, 'MANAGE' => 3, 'OPENMINDED' => 3, 'NUMBERORIENTED' => 1, 'OFFICE' => 0, 'FLEXIBLE' => 2,
         ],
         'HOTELCLEANER' => [
-            'STRESS' => 2, 'TEAM' => 2, 'LEADERSHIP' => 0, 'DETAIL' => 3, 'COMMUNICATION' => 2, 'CRAFT' => 0, 'POLITE' => 3, 'CREATIVE' => 1, 'MANAGE' => 3, 'OPENMINDED' => 3, 'MUMBERORIENTED' => 1, 'OFFICE' => 2, 'FLEXIBLE' => 2,
+            'STRESS' => 2, 'TEAM' => 2, 'LEADERSHIP' => 0, 'DETAIL' => 3, 'COMMUNICATION' => 2, 'CRAFT' => 0, 'POLITE' => 3, 'CREATIVE' => 1, 'MANAGE' => 3, 'OPENMINDED' => 3, 'NUMBERORIENTED' => 1, 'OFFICE' => 2, 'FLEXIBLE' => 2,
         ],
         'HOTELMANAGER' => [
-            'STRESS' => 1, 'TEAM' => 1, 'LEADERSHIP' => 2, 'DETAIL' => 1, 'COMMUNICATION' => 1, 'CRAFT' => 0, 'POLITE' => 2, 'CREATIVE' => 1, 'MANAGE' => 2, 'OPENMINDED' => 3, 'MUMBERORIENTED' => 3, 'OFFICE' => 3, 'FLEXIBLE' => 1,
+            'STRESS' => 1, 'TEAM' => 1, 'LEADERSHIP' => 2, 'DETAIL' => 1, 'COMMUNICATION' => 1, 'CRAFT' => 0, 'POLITE' => 2, 'CREATIVE' => 1, 'MANAGE' => 2, 'OPENMINDED' => 3, 'NUMBERORIENTED' => 3, 'OFFICE' => 3, 'FLEXIBLE' => 1,
         ],
         'GASTRO' => [
-            'STRESS' => 2, 'TEAM' => 2, 'LEADERSHIP' => 0, 'DETAIL' => 2, 'COMMUNICATION' => 1, 'CRAFT' => 1, 'POLITE' => 1, 'CREATIVE' => 0, 'MANAGE' => 1, 'OPENMINDED' => 1, 'MUMBERORIENTED' => 1, 'OFFICE' => 1, 'FLEXIBLE' => 1,
+            'STRESS' => 2, 'TEAM' => 2, 'LEADERSHIP' => 0, 'DETAIL' => 2, 'COMMUNICATION' => 1, 'CRAFT' => 1, 'POLITE' => 1, 'CREATIVE' => 0, 'MANAGE' => 1, 'OPENMINDED' => 1, 'NUMBERORIENTED' => 1, 'OFFICE' => 1, 'FLEXIBLE' => 1,
         ],
     ];
 
@@ -91,7 +92,6 @@ class GastroburnerModule extends \Module
 
         // Hole pro Category jetzt 1 Frage
         foreach ($arrCategories as $strCategory) {
-            // http://jan.kneschke.de/projects/mysql/order-by-rand/
             $objQuestions = $this->Database->prepare("SELECT * from tl_question where type=? ;")->execute($strCategory);
             $intRand = rand(0, $objQuestions->count() - 1);
             for ($intI = 0; $intI <= $intRand; $intI++) {
@@ -105,15 +105,23 @@ class GastroburnerModule extends \Module
         $arrLetters = array('A', 'B', 'C', 'D');
         foreach ($arrQuestions as $intIndex => $arrQuestion) {
             $intLetterIndex = 0;
-            $arrQuestion['formattedAnswers'] = array();
+            // $arrQuestion['formattedAnswers'] = array();
+            $arrAnswers = array();
 
             for ($intI = 0; $intI < 4; $intI++) {
                 if (strlen($arrQuestion['answer' . $intI])) {
-                    $arrQuestion['formattedAnswers'][$arrLetters[$intLetterIndex++]] = array(
+                    // $arrQuestion['formattedAnswers'][$arrLetters[$intLetterIndex++]] = array(
+                    $arrAnswers[] = array(
                         'points' => $intI,
                         'answer' => $arrQuestion['answer' . $intI],
                     );
                 }
+            }
+
+            // Reihenfolge zufällig verändern
+            shuffle($arrAnswers);
+            foreach ($arrAnswers as $arrAnswer) {
+                $arrQuestion['formattedAnswers'][$arrLetters[$intLetterIndex++]] = $arrAnswer;
             }
 
             $arrQuestions[$intIndex] = $arrQuestion;
