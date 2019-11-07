@@ -12,34 +12,39 @@
             <div class="col-12">
               <span class="h1 center">Gastromat</span>
               <span class="h2 center">Welcher Typ bist du?</span>
+              <p style="color:#000;">Du fischst in Sachen Zukunft noch im Trüben? Lass uns für Klarheit sorgen. Ich stell dir ein paar Fragen, du servierst mir deine Antworten, und ich sag ich dir, welchen Job du willst.</p>
               <div class="gastromat">
                 <ul class="gastromatlist">
                   <li class="gastromatlist__item">
                     <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/icon_chef.svg" alt="Koch"></div>
+                    <div class="gastromatlist__imageclip"><img class="" src="resources/img/icon_chef.svg" alt="Koch"></div>
                     <div class="gastromatlist__tooltip">Koch</div>
                   </li>
                   <li class="gastromatlist__item">
                     <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/icon_telemarketer.svg" alt="Hotelkaufffrau"></div>
+                    <div class="gastromatlist__imageclip"><img class="" src="resources/img/icon_telemarketer.svg" alt="Hotelkaufffrau"></div>
                     <div class="gastromatlist__tooltip">Hotelkaufffrau</div>
                   </li>
                   <li class="gastromatlist__item gastromatlist__item--fullwidth">
                     <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/icon_waiter.svg" alt="Restaurantfachkraft"></div>
+                    <div class="gastromatlist__imageclip"><img class="" src="resources/img/icon_waiter.svg" alt="Restaurantfachkraft"></div>
                     <div class="gastromatlist__tooltip">Restaurantfachkraft</div>
                   </li>
-                  <li class="gastromatlist__item">
+                  <li class="gastromatlist__item gastromatlist__item--desktop">
                     <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/icon_maid.svg" alt="Hotelfachkraft"></div>
+                    <div class="gastromatlist__imageclip"><img class="" src="resources/img/icon_maid.svg" alt="Hotelfachkraft"></div>
                     <div class="gastromatlist__tooltip">Hotelfachkraft</div>
                   </li>
                   <li class="gastromatlist__item">
                     <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/icon_bartender.svg" alt="Fachkraft im Gastgewerbe"></div>
+                    <div class="gastromatlist__imageclip"><img class="" src="resources/img/icon_bartender.svg" alt="Fachkraft im Gastgewerbe"></div>
                     <div class="gastromatlist__tooltip">Fachkraft im Gastgewerbe</div>
                   </li>
                 </ul>
-                <div class="center"><a class="btn js-start" href="javascript:;" title="Jetzt starten"><div class="btninner">Jetzt starten</div><span></span></a></div>
+                <div class="center"><a class="btn js-start" href="javascript:;" title="Schieß los!"><div class="btninner">Schieß los!</div><span></span></a></div>
 
                 <div class="row js-gastroburner-module" style="display: none">
                   <div class="col-12 col-lg-10 offset-lg-1">
-                    <!-- Step 1 -->
                     <div class="js-questions">
                         <?php foreach ($this->questions as $question): ?>
                             <div class="js-question" style="display: none;" data-type="<?php echo $question['type'] ?>">
@@ -64,10 +69,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- / Step 1 -->
 
-
-                    <!-- Step 2 -->
                     <br>
                     <div class="js-gastroburner-result" style="display: none;">
                     <h3>Ein Ergebnis, das sich sehen lassen kann!</h3>
