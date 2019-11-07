@@ -7,34 +7,39 @@
 <?php if ($this->thank_you): ?>
 
   <h1>Vielen Dank</h1>
-  <p>... für die Bewerbung! </p>
+  <p>... für die Bewerbung!</p>
 
 <?php else: ?>
 
   <h1>applyform</h1>
   <form method="POST" action="<?php echo $this->url ?>">
-    <input type="hidden" name="REQUEST_TOKEN" value="<?=REQUEST_TOKEN?>">
-    
-    <?php if (isset($this->errors['name'])): ?>
-      <p class="error">Bitte den Namen angeben.</p>
-    <?php endif;?>
-    <label>Name:</label><input type="text" name="name"><br>
-
-    <?php if (isset($this->errors['email'])): ?>
-      <p class="error">Bitte eine korrekte E-Mail-Adresse angeben.</p>
-    <?php endif;?>
-    <label>E-Mail-Adresse:</label><input type="text" name="email"><br>
-
-
     <?php if (isset($this->errors['jobs'])): ?>
-      <p class="error">Bitte mindestens einen Beruf auswählen.</p>
+    <p class="error">Bitte mindestens einen Beruf auswählen.</p>
     <?php endif;?>
     <?php foreach (['restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): ?>
       <br><input type="checkbox" name="<?php echo $strName ?>" <?php echo (($this->{$strName}) ? ' checked' : '') ?>><label><?php echo $GLOBALS['TL_LANG']['tl_apply'][$strName][0] ?></label>
     <?php endforeach?>
+
+    <input type="hidden" name="REQUEST_TOKEN" value="<?=REQUEST_TOKEN?>">
+    
+    <?php if (isset($this->errors['vorname'])): ?>
+    <p class="error">Bitte den Vornamen angeben.</p>
+    <?php endif;?>
+    <label>Vorname</label><input type="text" name="vorname"><br>
+
+    <?php if (isset($this->errors['name'])): ?>
+      <p class="error">Bitte den Namen angeben.</p>
+    <?php endif;?>
+    <label>Name</label><input type="text" name="name"><br>
+
+    <?php if (isset($this->errors['email'])): ?>
+      <p class="error">Bitte eine korrekte E-Mail-Adresse angeben.</p>
+    <?php endif;?>
+    <label>E-Mail-Adresse</label><input type="text" name="email"><br>
+
     <br>
 
-    <button type="submit" name="action" value="apply">submit</button>
+    <button class="btn btn--primary" type="submit" name="action" value="apply"><div class="btninner">Jetzt Ausbildung sichern</div><span></span></button>
   </form>
 <?php endif?>
 
