@@ -17,7 +17,7 @@
     <p class="error">Bitte mindestens einen Beruf auswählen.</p>
     <?php endif;?>
     <?php foreach (['restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): ?>
-      <br><input type="checkbox" name="<?php echo $strName ?>" <?php echo (($this->{$strName}) ? ' checked' : '') ?>><label><?php echo $GLOBALS['TL_LANG']['tl_apply'][$strName][0] ?></label>
+      <br><input type="checkbox" id="input_<?php echo $strName ?>" name="<?php echo $strName ?>" <?php echo (($this->{$strName}) ? ' checked' : '') ?>><label for="input_<?php echo $strName ?>"><?php echo $GLOBALS['TL_LANG']['tl_apply'][$strName][0] ?></label>
     <?php endforeach?>
 
     <input type="hidden" name="REQUEST_TOKEN" value="<?=REQUEST_TOKEN?>">
