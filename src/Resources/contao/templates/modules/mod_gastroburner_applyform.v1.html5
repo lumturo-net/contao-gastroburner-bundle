@@ -37,6 +37,7 @@
     <?php endif;?>
     <label>E-Mail-Adresse</label><input type="text" name="email"><br>
 
+    <label>Beschreibung</label><textarea name="beschreibung"><textarea>
     <br>
 
     <button class="btn btn--primary" type="submit" name="action" value="apply"><div class="btninner">Jetzt Ausbildung sichern</div><span></span></button>
