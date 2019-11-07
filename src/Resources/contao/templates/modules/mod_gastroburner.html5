@@ -73,27 +73,27 @@
                     <br>
                     <div class="js-gastroburner-result" style="display: none;">
                     <h3>Ein Ergebnis, das sich sehen lassen kann!</h3>
-                    <div class="result__item js-COOK">
+                    <div class="result__item js-COOK" data-type="cook">
                       <div class="result__checkbox"></div>
                       <div class="result__copy"><div class="result__indicator" style="width: 75%;"></div><span>Koch/in</span> <span class="js-value">75%</span></div>
                       <div class="result__info">i</div>
                     </div>
-                    <div class="result__item js-RESTAURANT">
+                    <div class="result__item js-RESTAURANT" data-type="restaurant">
                       <div class="result__checkbox"></div>
                       <div class="result__copy"><div class="result__indicator" style="width: 35%;"></div><span>Restaurant&shy;fach&shy;kraft</span> <span class="js-value">35%</span></div>
                       <div class="result__info">i</div>
                     </div>
-                    <div class="result__item js-HOTELCLEANER">
+                    <div class="result__item js-HOTELCLEANER" data-type="hotelcleaner">
                       <div class="result__checkbox"></div>
                       <div class="result__copy"><div class="result__indicator" style="width: 50%;"></div><span>Hotelfachkraft</span> <span class="js-value">50%</span></div>
                       <div class="result__info">i</div>
                     </div>
-                    <div class="result__item js-HOTELMANAGER">
+                    <div class="result__item js-HOTELMANAGER" data-type="hotelmanager">
                       <div class="result__checkbox"></div>
                       <div class="result__copy"><div class="result__indicator result__indicator--full" style="width: 100%;"></div><span>Hotelkaufmann/&shy;frau</span> <span class="js-value">100%</span></div>
                       <div class="result__info">i</div>
                     </div>
-                    <div class="result__item js-GASTRO">
+                    <div class="result__item js-GASTRO" data-type="gastro">
                       <div class="result__checkbox"></div>
                       <div class="result__copy"><div class="result__indicator" style="width: 80%;"></div><span>Fachkraft im Gastgewerbe</span> <span class="js-value">80%</span></div>
                       <div class="result__info">i</div>
