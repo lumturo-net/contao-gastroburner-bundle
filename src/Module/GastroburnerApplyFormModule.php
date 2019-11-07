@@ -2,6 +2,7 @@
 
 namespace Lumturo\ContaoGastroburnerBundle\Module;
 
+use Contao\Database;
 use Contao\Validator;
 
 class GastroburnerApplyFormModule extends \Module
@@ -28,6 +29,10 @@ class GastroburnerApplyFormModule extends \Module
             $template->href = 'contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->id;
 
             return $template->parse();
+        } else {
+            $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/require.js';
+            $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/map.js';
+            // $GLOBALS['TL_CSS'][] = '//unpkg.com/leaflet@1.5.1/dist/leaflet.css';
         }
 
         return parent::generate();
@@ -39,9 +44,17 @@ class GastroburnerApplyFormModule extends \Module
     protected function compile()
     {
         $arrErrors = [];
+        $arrPost = [
+            'companies' => [],
+            'hidden_companies' => [],
+        ];
         $boolThankyou = false;
 
         if ($this->Input->post('action') == 'apply') {
+            $arrPostKeys = array_keys($_POST);
+            foreach ($arrPostKeys as $strKey) {
+                $arrPost[$strKey] = $this->Input->post($strKey);
+            }
             $arrValues = [];
             if (!strlen($this->Input->post('name'))) {
                 $arrErrors['name'] = true;
@@ -67,6 +80,7 @@ class GastroburnerApplyFormModule extends \Module
             if (!count($arrErrors)) {
                 $arrValues['tstamp'] = time();
                 $this->Database->prepare('INSERT INTO tl_apply %s')->set($arrValues)->execute();
+                $this->sendMails($arrPost);
                 $boolThankyou = true;
             }
         }
@@ -74,9 +88,31 @@ class GastroburnerApplyFormModule extends \Module
         foreach (['restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName) {
             $this->Template->{$strName} = (($this->Input->post($strName)) ? true : false);
         }
+
+        $arrCompleteCompanies = Database::getInstance()->prepare('SELECT * FROM tl_company ORDER BY shortname;')->execute()->fetchAllAssoc();
+        $arrCompanies = array();
+        foreach ($arrCompleteCompanies as $arrCompany) {
+            unset($arrCompany['tstamp']);
+            $arrCompanies[$arrCompany['id']] = $arrCompany;
+        }
+
+        $this->Template->post = $arrPost;
+        $this->Template->companies = $arrCompanies;
         $this->Template->thank_you = $boolThankyou;
         $this->Template->errors = $arrErrors;
         $this->Template->url = $this->getApplyFormPageUrl();
+    }
+
+    /**
+     * sende Mails an alle angehakten Betriebe.
+     */
+    protected function sendMails($arrPost)
+    {
+        if (!count($arrPost['hidden_companies'])) {
+            return;
+        }
+
+        $arrCompanies = Database::getInstance()->prepare('SELECT * FROM tl_company WHERE  id in (?) ORDER BY shortname;')->execute(implode(',', $arrPost['hidden_companies']))->fetchAllAssoc();
     }
 
     protected function getApplyFormPageUrl()

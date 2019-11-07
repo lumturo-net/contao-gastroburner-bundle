@@ -14,27 +14,104 @@
   <h1>applyform</h1>
   <form method="POST" action="<?php echo $this->url ?>">
     <input type="hidden" name="REQUEST_TOKEN" value="<?=REQUEST_TOKEN?>">
-    
-    <?php if (isset($this->errors['name'])): ?>
-      <p class="error">Bitte den Namen angeben.</p>
-    <?php endif;?>
-    <label>Name:</label><input type="text" name="name"><br>
 
-    <?php if (isset($this->errors['email'])): ?>
-      <p class="error">Bitte eine korrekte E-Mail-Adresse angeben.</p>
-    <?php endif;?>
-    <label>E-Mail-Adresse:</label><input type="text" name="email"><br>
 
+    <!-- <button type="submit" name="action" value="apply">submit</button> -->
+  <!-- </form> -->
+
+<!-- Map -->
+<script type="text/javascript">
+  var companies = <?php echo json_encode($this->companies) ?>
+</script>
+
+<div class="row" style="margin-top: 200px;">
+    <div class="col-sm-2">
+<!-- Filter-Buttons -->
+        <button class="js-filter" data-type="restaurant">Restaurantfachkraft</button>
+        <button class="js-filter" data-type="cook">Koch</button>
+        <button class="js-filter" data-type="hotelmanager">Hotelkauf-mann/-frau</button>
+        <button class="js-filter" data-type="hotelcleaner">Hotelfachkraft</button>
+        <button class="js-filter" data-type="gastro">Fachkraft im Gastrogewerbe</button>
+
+      <div id="company_list">
+        <input class="search" />
+        <form id="js-dummy-form">
+          <ul class="list">
+            <?php foreach ($this->companies as $company): ?>
+
+            <li class="js_company_list_item" data-id="<?php echo $company['id'] ?>">
+              <span class="id" style="display:none;"><?php echo $company['id'] ?></span>
+              <h4 class="shortname"><?php echo $company['shortname'] ?></h4>
+              <h5 class="name"  style="display:none;"><?php echo $company['name'] ?></h5>
+              <input type="checkbox" id="company-<?php echo $company['id'] ?>" class="js-company" name="companies[]" value="<?php echo $company['id'] ?>" <?php echo ((in_array($company['id'], $this->post['companies'])) ? ' checked="checked"' : '') ?>/><label for="company-<?php echo $company['id'] ?>">Hier bewerben</label><br><br>
+            <!-- <p class="description"></p> -->
+            </li>
+            <?php endforeach;?>
+          </ul>
+        <!-- </form> -->
+        <ul class="pagination"></ul>
+      </div>
+    </div>
+    <div class="col-sm-10">
+      <input type="text" name="city" class="js-city" />
+      <button class="js-coordination">Los</button>
+      <select name="surrounding" class="js-surrounding">
+        <option value="5000">5km</option>
+        <option value="25000">25km</option>
+        <option value="50000">50km</option>
+      </select>
+      <div id="map" style="height: 400px; border: 1px black solid;"></div>
+    </div>
+</div>
+
+<!-- Overlay zur Anzeige der ausgewählten Ausbildungsunternehmen -->
+<div class="js-summary" style="<?php if (!count($this->post['companies'])) : ?>display: none;<?php endif; ?>border: 1px solid gray">
+  <h3>Overlay</h3>
 
     <?php if (isset($this->errors['jobs'])): ?>
       <p class="error">Bitte mindestens einen Beruf auswählen.</p>
     <?php endif;?>
     <?php foreach (['restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): ?>
-      <br><input type="checkbox" name="<?php echo $strName ?>" <?php echo (($this->{$strName}) ? ' checked' : '') ?>><label><?php echo $GLOBALS['TL_LANG']['tl_apply'][$strName][0] ?></label>
+      <br><input type="checkbox" name="<?php echo $strName ?>" <?php echo ((isset($this->post[$strName]) && (strlen(trim($this->post[$strName])))) ? ' checked' : '') ?>><label><?php echo $GLOBALS['TL_LANG']['tl_apply'][$strName][0] ?></label>
     <?php endforeach?>
     <br>
 
-    <button type="submit" name="action" value="apply">submit</button>
+  <!-- <form class="js-summary-form" method="POST" action=""> -->
+  <div class="row">
+    <div class="col-sm-2">Vorname</div>
+    <div class="col-sm-10">
+      <?php if (isset($this->errors['name'])): ?>
+        <p class="error">Bitte den Namen angeben.</p>
+      <?php endif;?>
+      <input type="text" name="firstname"> </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2">Nachname</div>
+    <div class="col-sm-10"> <input type="text" name="familyname"></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2">Telefon</div>
+    <div class="col-sm-10"><input type="text" name="phone"></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2">E-Mail-Adresse</div>
+    <div class="col-sm-10">
+      <?php if (isset($this->errors['email'])): ?>
+        <p class="error">Bitte eine korrekte E-Mail-Adresse angeben.</p>
+      <?php endif;?>
+      <input type="text" name="email"></div>
+  </div>
+
+  <?php foreach($this->post['hidden_companies'] as $company_id) : ?>
+    <input type="hidden" class="js-hidden-company" name="hidden-companies[]" value="<?php echo $company_id ?>">
+  <?php endforeach; ?>
+  
+  <!-- <button type="submit">Kontakt zu den Unternehmen aufnehmen</button> -->
+    <button type="submit" name="action" value="apply">Kontakt zu den Unternehmen aufnehmen</button>
+  <!-- </form> -->
+</div>
+
+
   </form>
 <?php endif?>
 

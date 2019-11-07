@@ -2,6 +2,7 @@
 
 $GLOBALS['TL_LANG']['MOD']['tl_question'][0] = 'Fragen';
 $GLOBALS['TL_LANG']['MOD']['tl_apply'][0] = 'Bewerbungen';
+$GLOBALS['TL_LANG']['MOD']['tl_company'][0] = 'Ausbildungsbetriebe';
 
 $GLOBALS['TL_LANG']['tl_settings']['gastroburner_config'] = 'Gastroburner-Config';
 $GLOBALS['TL_LANG']['tl_settings']['gastroburner_applyform_page'][0] = 'Zielseite für Bewerbungen';
@@ -25,3 +26,26 @@ $GLOBALS['TL_LANG']['tl_apply']['restaurant'] = array('Restaurantfachkraft');
 $GLOBALS['TL_LANG']['tl_apply']['hotelcleaner'] = array('Hotelfachkraft');
 $GLOBALS['TL_LANG']['tl_apply']['hotelmanager'] = array('Hotelkauf-mann/-frau');
 $GLOBALS['TL_LANG']['tl_apply']['gastro'] = array('Fachkraft im Gastrogewerbe');
+
+$GLOBALS['TL_LANG']['tl_company']['name_legend'] = 'Name';
+$GLOBALS['TL_LANG']['tl_company']['shortname'] = array('Kurzname');
+$GLOBALS['TL_LANG']['tl_company']['name'] = array('Name des Unternehmens');
+$GLOBALS['TL_LANG']['tl_company']['address_legend'] = 'Addressdaten';
+$GLOBALS['TL_LANG']['tl_company']['street'] = array('Strasse');
+$GLOBALS['TL_LANG']['tl_company']['number'] = array('Hausnummer');
+$GLOBALS['TL_LANG']['tl_company']['zip'] = array('Plz');
+$GLOBALS['TL_LANG']['tl_company']['city'] = array('Ort');
+$GLOBALS['TL_LANG']['tl_company']['lat'] = array('Latitude','Wenn leer, dann wird die Latitude automatisch von Google erfragt.');
+$GLOBALS['TL_LANG']['tl_company']['lon'] = array('Longitude','Wenn leer, dann wird die Longitude automatisch von Google erfragt.');
+$GLOBALS['TL_LANG']['tl_company']['contact_legend'] = 'Kontaktdaten';
+$GLOBALS['TL_LANG']['tl_company']['contact'] = array('Kontaktperson');
+$GLOBALS['TL_LANG']['tl_company']['email'] = array('E-Mail-Adresse');
+$GLOBALS['TL_LANG']['tl_company']['phone'] = array('Telefonnummer');
+$GLOBALS['TL_LANG']['tl_company']['job_legend'] = 'Ausbildungsstellen';
+$GLOBALS['TL_LANG']['tl_company']['restaurant'] = array('Restaurantfachkraft');
+$GLOBALS['TL_LANG']['tl_company']['cook'] = array('Koch');
+$GLOBALS['TL_LANG']['tl_company']['hotelcleaner'] = array('Hotelfachkraft');
+$GLOBALS['TL_LANG']['tl_company']['hotelmanager'] = array('Hotelkauf-mann/-frau');
+$GLOBALS['TL_LANG']['tl_company']['gastro'] = array('Fachkraft im Gastrogewerbe');
+$GLOBALS['TL_LANG']['tl_company']['description_legend'] = 'Beschreibung';
+$GLOBALS['TL_LANG']['tl_company']['description'] = array('Beschreibung');

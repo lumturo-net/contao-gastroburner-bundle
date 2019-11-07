@@ -21,3 +21,6 @@ $GLOBALS['BE_MOD']['gastroburner']['tl_apply'] = array(
 //    'icon' => 'system/modules/genius/assets/images/teacher.png',
 //    'stylesheet' => '/system/modules/genius/assets/css/backend/eval.css',
 );
+$GLOBALS['BE_MOD']['gastroburner']['tl_company'] = array(
+    'tables' => array('tl_company'),
+);
