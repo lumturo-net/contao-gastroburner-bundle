@@ -10,7 +10,7 @@ class GastroburnerApplyFormModule extends \Module
     /**
      * @var string
      */
-    protected $strTemplate = 'mod_gastroburner_applyform';
+    protected $strTemplate = 'mod_gastroburner_applyform.v1';
 
     /**
      * Displays a wildcard in the back end.
@@ -30,9 +30,9 @@ class GastroburnerApplyFormModule extends \Module
 
             return $template->parse();
         } else {
-            $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/require.js';
-            $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/map.js';
-            // $GLOBALS['TL_CSS'][] = '//unpkg.com/leaflet@1.5.1/dist/leaflet.css';
+            $GLOBALS['TL_JAVASCRIPT'][] = 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js';
+            // // $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/require.js';
+            // $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/map.js';
         }
 
         return parent::generate();
@@ -80,7 +80,7 @@ class GastroburnerApplyFormModule extends \Module
             if (!count($arrErrors)) {
                 $arrValues['tstamp'] = time();
                 $this->Database->prepare('INSERT INTO tl_apply %s')->set($arrValues)->execute();
-                $this->sendMails($arrPost);
+                // $this->sendMails($arrPost);
                 $boolThankyou = true;
             }
         }
@@ -89,15 +89,15 @@ class GastroburnerApplyFormModule extends \Module
             $this->Template->{$strName} = (($this->Input->post($strName)) ? true : false);
         }
 
-        $arrCompleteCompanies = Database::getInstance()->prepare('SELECT * FROM tl_company ORDER BY shortname;')->execute()->fetchAllAssoc();
-        $arrCompanies = array();
-        foreach ($arrCompleteCompanies as $arrCompany) {
-            unset($arrCompany['tstamp']);
-            $arrCompanies[$arrCompany['id']] = $arrCompany;
-        }
+        // $arrCompleteCompanies = Database::getInstance()->prepare('SELECT * FROM tl_company ORDER BY shortname;')->execute()->fetchAllAssoc();
+        // $arrCompanies = array();
+        // foreach ($arrCompleteCompanies as $arrCompany) {
+        //     unset($arrCompany['tstamp']);
+        //     $arrCompanies[$arrCompany['id']] = $arrCompany;
+        // }
 
         $this->Template->post = $arrPost;
-        $this->Template->companies = $arrCompanies;
+        // $this->Template->companies = $arrCompanies;
         $this->Template->thank_you = $boolThankyou;
         $this->Template->errors = $arrErrors;
         $this->Template->url = $this->getApplyFormPageUrl();
