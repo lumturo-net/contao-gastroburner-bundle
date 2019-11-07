@@ -37,6 +37,21 @@ window.onload = function () {
         }
     });
 
+    // click auf einen job
+    $('.result__checkbox,.result__copy').on('click', function () {
+        var $this = $(this);
+        var $parent = $this.parents('.result__item');
+        var type = $parent.data('type');
+        $parent.toggleClass('active');
+        if ($parent.hasClass('active')) {
+            $('input[type="hidden"][name="' + type + '"').val('1');
+        } else {
+            $('input[type="hidden"][name="' + type + '"').val('0');
+        }
+    })
+
+
+
     function calculateResults() {
         var result_points = { COOK: 0, RESTAURANT: 0, HOTELCLEANER: 0, HOTELMANAGER: 0, GASTRO: 0 };
         // var max_results = { COOK: 24, RESTAURANT: 24, HOTELCLEANER: 24, HOTELMANAGER: 21, GASTRO: 14 };
@@ -44,13 +59,13 @@ window.onload = function () {
 
         // berechne max_results anhand der vorhandenen Fragen
         var jobs = ['COOK', 'RESTAURANT', 'HOTELCLEANER', 'HOTELMANAGER', 'GASTRO'];
-        $('.js-question').each(function(index, question) {
+        $('.js-question').each(function (index, question) {
             var $question = $(question);
             var type = $question.data('type');
-            $(jobs).each(function(index, job) {
+            $(jobs).each(function (index, job) {
                 max_results[job] += points[job][type];
             });
-        }); 
+        });
         // console.log('max_results=' + max_results);
 
         $questions.each(function (index, question) {
