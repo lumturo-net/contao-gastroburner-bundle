@@ -88,7 +88,7 @@ $GLOBALS['TL_DCA']['tl_apply'] = array
     // Palettes
     'palettes' => array
     (
-        'default' => '{name_legend},name,email;{job_legend},restaurant,cook,hotelcleaner,hotelmanager,gastro',
+        'default' => '{name_legend},vorname,name,email;{job_legend},restaurant,cook,hotelcleaner,hotelmanager,gastro;{beschreibung_legend},beschreibung',
     ),
 
     // Subpalettes
@@ -110,6 +110,15 @@ $GLOBALS['TL_DCA']['tl_apply'] = array
             'label' => 'Anlage',
             'flag' => 5,
             'sql' => "int(10) unsigned NOT NULL default '0'",
+        ),
+        'vorname' => array
+        (
+            'sorting' => true,
+            'label' => &$GLOBALS['TL_LANG']['tl_apply']['vorname'],
+            'exclude' => false,
+            'inputType' => 'text',
+            'eval' => array('mandatory' => true, 'maxlength' => 255, 'tl_class' => 'w100'),
+            'sql' => "varchar(255) NOT NULL default ''",
         ),
         'name' => array
         (
@@ -173,6 +182,19 @@ $GLOBALS['TL_DCA']['tl_apply'] = array
             'eval' => array('mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'),
             'sql' => "char(1) NOT NULL default ''"
         ),
+        'beschreibung' => array(
+            'label' => &$GLOBALS['TL_LANG']['tl_company']['beschreibung'],
+            'exclude' => false,
+            'inputType' => 'textarea',
+            'eval' => array(
+                // 'rte' => 'tinyMCE',
+                'mandatory' => false,
+                'class' => 'noresize',
+            ),
+            'sql' => "text NULL default NULL",
+            // 'sql' => "text NOT NULL default ''",
+        ),
+
     ),
 );
 

@@ -19,6 +19,7 @@ $GLOBALS['TL_LANG']['tl_question']['answer3'] = array('Antwort 3', 'Wenn leer, w
 
 $GLOBALS['TL_LANG']['tl_apply']['name_legend'] = 'Name';
 $GLOBALS['TL_LANG']['tl_apply']['job_legend'] = 'Berufe';
+$GLOBALS['TL_LANG']['tl_apply']['vorname'] = array('Vorname');
 $GLOBALS['TL_LANG']['tl_apply']['name'] = array('Name');
 $GLOBALS['TL_LANG']['tl_apply']['email'] = array('E-Mail-Adresse');
 $GLOBALS['TL_LANG']['tl_apply']['cook'] = array('Koch');
@@ -26,6 +27,8 @@ $GLOBALS['TL_LANG']['tl_apply']['restaurant'] = array('Restaurantfachkraft');
 $GLOBALS['TL_LANG']['tl_apply']['hotelcleaner'] = array('Hotelfachkraft');
 $GLOBALS['TL_LANG']['tl_apply']['hotelmanager'] = array('Hotelkauf-mann/-frau');
 $GLOBALS['TL_LANG']['tl_apply']['gastro'] = array('Fachkraft im Gastrogewerbe');
+$GLOBALS['TL_LANG']['tl_apply']['beschreibung_legend'] = 'Beschreibung';
+$GLOBALS['TL_LANG']['tl_apply']['beschreibung'] = array('Beschreibung');
 
 $GLOBALS['TL_LANG']['tl_company']['name_legend'] = 'Name';
 $GLOBALS['TL_LANG']['tl_company']['shortname'] = array('Kurzname');
