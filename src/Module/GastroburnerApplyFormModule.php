@@ -61,12 +61,18 @@ class GastroburnerApplyFormModule extends \Module
             } else {
                 $arrValues['name'] = $this->Input->post('name');
             }
+            if (!strlen($this->Input->post('vorname'))) {
+                $arrErrors['vorname'] = true;
+            } else {
+                $arrValues['vorname'] = $this->Input->post('vorname');
+            }
             $strEmail = $this->Input->post('email');
             if (!strlen($strEmail) || !Validator::isEmail($strEmail)) {
                 $arrErrors['email'] = true;
             } else {
                 $arrValues['email'] = $this->Input->post('email');
             }
+            $arrValues['beschreibung'] = $arrPost['beschreibung'];
 
             $arrErrors['jobs'] = true;
             foreach (['restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName) {

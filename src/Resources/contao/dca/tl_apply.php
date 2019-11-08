@@ -43,7 +43,7 @@ $GLOBALS['TL_DCA']['tl_apply'] = array
         ),
         'label' => array
         (
-            'fields' => array('name', 'email','restaurant','cook','hotelcleaner','hotelmanager','gastro'),
+            'fields' => array('vorname', 'name', 'email','restaurant','cook','hotelcleaner','hotelmanager','gastro'),
 //            'format' => '%s (%d - %s)',
             // 'label_callback' => array('tl_question', 'listValues'),
             'showColumns' => true,
