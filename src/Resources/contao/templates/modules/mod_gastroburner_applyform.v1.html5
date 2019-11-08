@@ -11,34 +11,46 @@
 
 <?php else: ?>
 
-  <h1>applyform</h1>
   <form method="POST" action="<?php echo $this->url ?>">
     <?php if (isset($this->errors['jobs'])): ?>
     <p class="error">Bitte mindestens einen Beruf auswählen.</p>
     <?php endif;?>
     <?php foreach (['restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): ?>
-      <br><input type="checkbox" id="input_<?php echo $strName ?>" name="<?php echo $strName ?>" <?php echo (($this->{$strName}) ? ' checked' : '') ?>><label for="input_<?php echo $strName ?>"><?php echo $GLOBALS['TL_LANG']['tl_apply'][$strName][0] ?></label>
+      <div class="gastroform_wrapper"><input class="gastroform_checkbox" type="checkbox" id="input_<?php echo $strName ?>" name="<?php echo $strName ?>" <?php echo (($this->{$strName}) ? ' checked' : '') ?>><label class="gastroform_label js-toggle-label" for="input_<?php echo $strName ?>"><?php echo $GLOBALS['TL_LANG']['tl_apply'][$strName][0] ?></label></div>
     <?php endforeach?>
 
     <input type="hidden" name="REQUEST_TOKEN" value="<?=REQUEST_TOKEN?>">
     
-    <?php if (isset($this->errors['vorname'])): ?>
-    <p class="error">Bitte den Vornamen angeben.</p>
-    <?php endif;?>
-    <label>Vorname</label><input type="text" name="vorname"><br>
+    <div class="gastroform_wrapper">
+      <?php if (isset($this->errors['vorname'])): ?>
+      <p class="error">Bitte den Vornamen angeben.</p>
+      <?php endif;?>
+      <label class="gastroform_inputlabel">Vorname</label>
+      <input class="gastroform_input" type="text" name="vorname">
+    </div>
 
-    <?php if (isset($this->errors['name'])): ?>
-      <p class="error">Bitte den Namen angeben.</p>
-    <?php endif;?>
-    <label>Name</label><input type="text" name="name"><br>
+    <div class="gastroform_wrapper">
+      <?php if (isset($this->errors['name'])): ?>
+        <p class="error">Bitte den Namen angeben.</p>
+      <?php endif;?>
+      <label class="gastroform_inputlabel">Name</label>
+      <input class="gastroform_input" type="text" name="name">
+    </div>
 
-    <?php if (isset($this->errors['email'])): ?>
-      <p class="error">Bitte eine korrekte E-Mail-Adresse angeben.</p>
-    <?php endif;?>
-    <label>E-Mail-Adresse</label><input type="text" name="email"><br>
+    <div class="gastroform_wrapper">
+      <?php if (isset($this->errors['email'])): ?>
+        <p class="error">Bitte eine korrekte E-Mail-Adresse angeben.</p>
+      <?php endif;?>
+      <label class="gastroform_inputlabel">E-Mail-Adresse</label>
+      <input class="gastroform_input" type="text" name="email">
+    </div>
 
-    <label>Beschreibung</label><textarea name="beschreibung"><textarea>
-    <br>
+    <div class="gastroform_wrapper">
+      <label class="gastroform_inputlabel">Beschreibung</label>
+      <textarea class="gastroform_input" name="beschreibung"></textarea>
+    </div>
+
+    <div><div class="gastroform_inputcheckbox js-toggle-checkbox"></div> <p>Deine Daten werden in unserer Datenbank gesichert und an unsere Ausbildungsbildungbetriebe weitergegeben. Genaue Informationen findest du in unserer Datenschutzerklärung</p></div>
 
     <button class="btn btn--primary" type="submit" name="action" value="apply"><div class="btninner">Jetzt Ausbildung sichern</div><span></span></button>
   </form>
