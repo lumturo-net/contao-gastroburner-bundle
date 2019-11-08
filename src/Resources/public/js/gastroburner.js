@@ -92,4 +92,12 @@ window.onload = function () {
             // console.log(procent);
         })
     }
+
+    // Formular
+    $('.js-toggle-label').on('click', function () {
+        $(this).toggleClass('active');
+    })
+    $('.js-toggle-checkbox').on('click', function () {
+        $(this).toggleClass('active');
+    })
 };
