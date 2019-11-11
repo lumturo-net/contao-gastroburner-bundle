@@ -115,10 +115,10 @@ window.onload = function () {
     /* Gastroburner-Bewerb-Form
     --------------------------- */
     $('#apply_form').on('submit', function (e) {
-        e.preventDefault();
         if ($('.js-toggle-checkbox').hasClass('active')) {
             return true;
         }
+        e.preventDefault();
         $('.js-dataprivacy').addClass('error');
         return false;
     })
