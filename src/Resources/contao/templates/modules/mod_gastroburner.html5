@@ -102,12 +102,12 @@
               <div class="select_one_answer"><p class="color-black">Wähle die Berufe, die dir gefallen und starte jetzt deine Initiativ-Berwerbung.</p></div>
               <form method="POST" action="<?php echo $this->apply_form_url ?>">
                 <input type="hidden" name="REQUEST_TOKEN" value="<?= REQUEST_TOKEN ?>">
-                <input type="hidden" name="restaurant">
-                <input type="hidden" name="cook">
-                <input type="hidden" name="hotelcleaner">
-                <input type="hidden" name="hotelmanager">
-                <input type="hidden" name="gastro">
-                <button class="btn btn--primary" type="submit"><div class="btninner">Jetzt Ausbildung sichern</div><span></span></button>
+                <input class="hidden_job" type="hidden" name="restaurant">
+                <input class="hidden_job" type="hidden" name="cook">
+                <input class="hidden_job" type="hidden" name="hotelcleaner">
+                <input class="hidden_job" type="hidden" name="hotelmanager">
+                <input class="hidden_job" type="hidden" name="gastro">
+                <button class="btn btn--primary btn--disable js-submit-button" type="submit"><div class="btninner">Jetzt Ausbildung sichern</div><span></span></button>
               </form>
               </div>
             </div>

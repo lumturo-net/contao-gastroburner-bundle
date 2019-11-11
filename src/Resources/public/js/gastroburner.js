@@ -48,6 +48,13 @@ window.onload = function () {
         } else {
             $('input[type="hidden"][name="' + type + '"').val('0');
         }
+
+        // absenden-button enable/disable
+        if ($('input.hidden_job[value="1"]').length) {
+            $('.js-submit-button').removeClass('btn--disable');
+        } else {
+            $('.js-submit-button').addClass('btn--disable');
+        }
     })
 
 
@@ -86,7 +93,11 @@ window.onload = function () {
         $.each(result_points, function (index, val) {
             var procent = parseInt(result_points[index] * 100 / max_results[index]);
             var $div = $('.js-' + index);
-            $div.find('.result__indicator').width(procent + "%");
+            if (procent == 0) {
+                $div.find('.result__indicator').remove();
+            } else {
+                $div.find('.result__indicator').width(procent + "%");
+            }
             $div.find('.js-value').text(procent + "%");
 
             // console.log(procent);
