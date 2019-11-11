@@ -107,8 +107,19 @@ window.onload = function () {
     // Formular
     $('.js-toggle-label').on('click', function () {
         $(this).toggleClass('active');
-    })
+    });
     $('.js-toggle-checkbox').on('click', function () {
+        $('.js-submit-application').toggleClass('btn--disable');
         $(this).toggleClass('active');
+    });
+    /* Gastroburner-Bewerb-Form
+    --------------------------- */
+    $('#apply_form').on('submit', function (e) {
+        e.preventDefault();
+        if ($('.js-toggle-checkbox').hasClass('active')) {
+            return true;
+        }
+        $('.js-dataprivacy').addClass('error');
+        return false;
     })
 };

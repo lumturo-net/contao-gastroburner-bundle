@@ -11,7 +11,7 @@
 
 <?php else: ?>
 
-<form method="POST" action="<?php echo $this->url ?>">
+<form id="apply_form" method="POST" action="<?php echo $this->url ?>">
     <input type="hidden" name="REQUEST_TOKEN" value="<?=REQUEST_TOKEN?>">
 
     <?php if (isset($this->errors['jobs'])): ?>
@@ -50,9 +50,9 @@
       <textarea class="gastroform_input" name="beschreibung"></textarea>
     </div>
 
-    <div><div class="gastroform_inputcheckbox js-toggle-checkbox"></div> <p>Deine Daten werden in unserer Datenbank gesichert und an unsere Ausbildungsbildungbetriebe weitergegeben. Genaue Informationen findest du in unserer Datenschutzerklärung</p></div>
+    <div><div class="gastroform_inputcheckbox js-toggle-checkbox"></div> <p class="js-dataprivacy">Deine Daten werden in unserer Datenbank gesichert und an unsere Ausbildungsbildungbetriebe weitergegeben. Genaue Informationen findest du in unserer Datenschutzerklärung</p></div>
 
-    <button class="btn btn--primary" type="submit" name="action" value="apply"><div class="btninner">Jetzt Ausbildung sichern</div><span></span></button>
+    <button class="btn btn--primary btn--disable js-submit-application" type="submit" name="action" value="apply"><div class="btninner">Jetzt Ausbildung sichern</div><span></span></button>
   </form>
 <?php endif?>
 
