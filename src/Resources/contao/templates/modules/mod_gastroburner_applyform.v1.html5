@@ -11,17 +11,17 @@
 
 <?php else: ?>
 
-  <form method="POST" action="<?php echo $this->url ?>">
+<form method="POST" action="<?php echo $this->url ?>">
+    <input type="hidden" name="REQUEST_TOKEN" value="<?=REQUEST_TOKEN?>">
+
     <?php if (isset($this->errors['jobs'])): ?>
     <p class="error">Bitte mindestens einen Beruf auswählen.</p>
     <?php endif;?>
     <?php foreach (['restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): ?>
       <div class="gastroform_wrapper"><input class="gastroform_checkbox" type="checkbox" id="input_<?php echo $strName ?>" name="<?php echo $strName ?>" <?php echo (($this->{$strName}) ? ' checked' : '') ?>><label class="gastroform_label js-toggle-label" for="input_<?php echo $strName ?>"><?php echo $GLOBALS['TL_LANG']['tl_apply'][$strName][0] ?></label></div>
     <?php endforeach?>
-
-    <input type="hidden" name="REQUEST_TOKEN" value="<?=REQUEST_TOKEN?>">
-    
-    <div class="gastroform_wrapper">
+<br>
+    <div class="gastroform_wrapper gastroform_wrapper--vorname">
       <?php if (isset($this->errors['vorname'])): ?>
       <p class="error">Bitte den Vornamen angeben.</p>
       <?php endif;?>
@@ -29,7 +29,7 @@
       <input class="gastroform_input" type="text" name="vorname">
     </div>
 
-    <div class="gastroform_wrapper">
+    <div class="gastroform_wrapper gastroform_wrapper--name">
       <?php if (isset($this->errors['name'])): ?>
         <p class="error">Bitte den Namen angeben.</p>
       <?php endif;?>
@@ -37,7 +37,7 @@
       <input class="gastroform_input" type="text" name="name">
     </div>
 
-    <div class="gastroform_wrapper">
+    <div class="gastroform_wrapper gastroform_wrapper--email">
       <?php if (isset($this->errors['email'])): ?>
         <p class="error">Bitte eine korrekte E-Mail-Adresse angeben.</p>
       <?php endif;?>
@@ -45,7 +45,7 @@
       <input class="gastroform_input" type="text" name="email">
     </div>
 
-    <div class="gastroform_wrapper">
+    <div class="gastroform_wrapper gastroform_wrapper--texarea">
       <label class="gastroform_inputlabel">Beschreibung</label>
       <textarea class="gastroform_input" name="beschreibung"></textarea>
     </div>
