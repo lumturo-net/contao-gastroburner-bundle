@@ -74,27 +74,27 @@
               <br>
               <div class="js-gastroburner-result" style="display: none;">
               <h3>Frisch serviert: Dein Ergebnis</h3>
-              <div class="result__item js-COOK">
+              <div class="result__item js-COOK" data-type="cook">
                 <div class="result__checkbox"></div>
                 <div class="result__copy"><div class="result__indicator"></div><span>Koch/in</span> <span class="js-value">75%</span></div>
                 <div class="result__info"><a href="{{link_url::6}}" class="result__info__link" target="_blank" title="{{link_title::6}}">i</a></div>
               </div>
-              <div class="result__item js-RESTAURANT">
+              <div class="result__item js-RESTAURANT" data-type="restaurant">
                 <div class="result__checkbox"></div>
                 <div class="result__copy"><div class="result__indicator"></div><span>Restaurant&shy;fach&shy;kraft</span> <span class="js-value">35%</span></div>
                 <div class="result__info"><a href="{{link_url::7}}" class="result__info__link" target="_blank" title="{{link_title::7}}">i</a></div>
               </div>
-              <div class="result__item js-HOTELCLEANER">
+              <div class="result__item js-HOTELCLEANER" data-type="hotelcleaner">
                 <div class="result__checkbox"></div>
                 <div class="result__copy"><div class="result__indicator"></div><span>Hotelfachkraft</span> <span class="js-value">50%</span></div>
                 <div class="result__info"><a href="{{link_url::8}}" class="result__info__link" target="_blank" title="{{link_title::8}}">i</a></div>
               </div>
-              <div class="result__item js-HOTELMANAGER">
+              <div class="result__item js-HOTELMANAGER" data-type="hotelmanager">
                 <div class="result__checkbox"></div>
                 <div class="result__copy"><div class="result__indicator"></div><span>Hotelkaufmann/&shy;frau</span> <span class="js-value">100%</span></div>
                 <div class="result__info"><a href="{{link_url::9}}" class="result__info__link" target="_blank" title="{{link_title::9}}">i</a></div>
               </div>
-              <div class="result__item js-GASTRO">
+              <div class="result__item js-GASTRO" data-type="gastro">
                 <div class="result__checkbox"></div>
                 <div class="result__copy"><div class="result__indicator"></div><span>Fachkraft im Gastgewerbe</span> <span class="js-value">80%</span></div>
                 <div class="result__info"><a href="{{link_url::10}}" class="result__info__link" target="_blank" title="{{link_title::10}}">i</a></div>
@@ -103,7 +103,7 @@
               <form method="POST" action="<?php echo $this->apply_form_url ?>">
                 <input type="hidden" name="REQUEST_TOKEN" value="<?= REQUEST_TOKEN ?>">
                 <input type="hidden" name="restaurant">
-                <input type="hidden" name="cook" value="1">
+                <input type="hidden" name="cook">
                 <input type="hidden" name="hotelcleaner">
                 <input type="hidden" name="hotelmanager">
                 <input type="hidden" name="gastro">
