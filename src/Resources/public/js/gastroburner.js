@@ -55,7 +55,16 @@ window.onload = function () {
         } else {
             $('.js-submit-button').addClass('btn--disable');
         }
-    })
+    });
+    
+    // form nur schicken, wenn auch ein Job angehakt
+    $('#js_start_apply_form').on('submit', function(e) {
+        if ($('input.hidden_job[value="1"]').length) {
+            return true;
+        }
+        e.preventDefault();
+        return false;
+    });
 
 
 

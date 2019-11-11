@@ -100,7 +100,7 @@
                 <div class="result__info"><a href="{{link_url::10}}" class="result__info__link" target="_blank" title="{{link_title::10}}">i</a></div>
               </div>
               <div class="select_one_answer"><p class="color-black">Wähle die Berufe, die dir gefallen und starte jetzt deine Initiativ-Berwerbung.</p></div>
-              <form method="POST" action="<?php echo $this->apply_form_url ?>">
+              <form id="js_start_apply_form" method="POST" action="<?php echo $this->apply_form_url ?>">
                 <input type="hidden" name="REQUEST_TOKEN" value="<?= REQUEST_TOKEN ?>">
                 <input class="hidden_job" type="hidden" name="restaurant">
                 <input class="hidden_job" type="hidden" name="cook">
