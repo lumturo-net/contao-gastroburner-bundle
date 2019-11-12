@@ -41,6 +41,11 @@
               <div class="gastromatlist__tooltip">Fachkraft im Gastgewerbe</div>
             </li>
           </ul>
+          <div class="gastromat_steps">
+            <div class="gastromat_step gastromat_step--1">Fragen beantworten</div>
+            <div class="gastromat_step gastromat_step--2">Stellen auswählen</div>
+            <div class="gastromat_step gastromat_step--3">direkt bewerben</div>
+          </div>
           <div class="center"><a class="btn js-start" href="javascript:;" title="Schieß los!"><div class="btninner">Schieß los!</div><span></span></a></div>
 
           <div class="row js-gastroburner-module" style="display: none">

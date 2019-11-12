@@ -25,11 +25,11 @@
     <br>
 
     <h3>Deine Daten fürs Check-in.</h3>
-    <p>Verrate uns mehr über dich: wie du heißt, woher du kommst und was dich motiviert, einer von uns zu werden. Einfach Formular ausfüllen – und schon bist du am Start, sobald unsere Partnerunternehmen echte Gastroburner suchen. Deine Daten fürs Check-in.</p>
+    <p>Verrate uns mehr über dich: wie du heißt, woher du kommst und was dich motiviert, einer von uns zu werden. Einfach Formular ausfüllen – und schon bist du am Start, sobald unsere Partnerunternehmen echte Gastroburner suchen.</p>
 
     <div class="gastroform_wrapper gastroform_wrapper--vorname">
       <label class="gastroform_inputlabel">Vorname</label>
-      <input class="gastroform_input<?php echo ((isset($this->errors['vorname'])) ? ' error' : '') ?>" type="text" name="vorname">
+      <input class="gastroform_input" type="text" name="vorname">
       <?php if (isset($this->errors['vorname'])): ?>
       <p class="error">Bitte den Vornamen angeben.</p>
       <?php endif;?>
@@ -37,7 +37,7 @@
 
     <div class="gastroform_wrapper gastroform_wrapper--name">
       <label class="gastroform_inputlabel">Name</label>
-      <input class="gastroform_input<?php echo ((isset($this->errors['name'])) ? ' error' : '') ?>" type="text" name="name">
+      <input class="gastroform_input" type="text" name="name">
       <?php if (isset($this->errors['name'])): ?>
         <p class="error">Bitte den Namen angeben.</p>
       <?php endif;?>
@@ -45,7 +45,7 @@
 
     <div class="gastroform_wrapper gastroform_wrapper--email">
       <label class="gastroform_inputlabel">E-Mail-Adresse</label>
-      <input class="gastroform_input<?php echo ((isset($this->errors['email'])) ? ' error' : '') ?>" type="text" name="email">
+      <input class="gastroform_input" type="text" name="email">
       <?php if (isset($this->errors['email'])): ?>
         <p class="error">Bitte eine korrekte E-Mail-Adresse angeben.</p>
       <?php endif;?>
