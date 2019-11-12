@@ -48,7 +48,7 @@ class GastroburnerApplyFormModule extends \Module
             'companies' => [],
             'hidden_companies' => [],
         ];
-        $boolThankyou = false;
+        // $boolThankyou = false;
 
         if ($this->Input->post('action') == 'apply') {
             $arrPostKeys = array_keys($_POST);
@@ -87,7 +87,8 @@ class GastroburnerApplyFormModule extends \Module
                 $arrValues['tstamp'] = time();
                 $this->Database->prepare('INSERT INTO tl_apply %s')->set($arrValues)->execute();
                 // $this->sendMails($arrPost);
-                $boolThankyou = true;
+                $this->redirect('vielen-dank.html');
+                // $boolThankyou = true;
             }
         }
 
@@ -104,7 +105,7 @@ class GastroburnerApplyFormModule extends \Module
 
         $this->Template->post = $arrPost;
         // $this->Template->companies = $arrCompanies;
-        $this->Template->thank_you = $boolThankyou;
+        // $this->Template->thank_you = $boolThankyou;
         $this->Template->errors = $arrErrors;
         $this->Template->url = $this->getApplyFormPageUrl();
     }
