@@ -4,13 +4,6 @@
 
 <?php $this->block('content');?>
 
-<?php if ($this->thank_you): ?>
-
-  <h1>Vielen Dank</h1>
-  <p>... für die Bewerbung!</p>
-
-<?php else: ?>
-
 <form id="apply_form" method="POST" action="<?php echo $this->url ?>">
     <input type="hidden" name="REQUEST_TOKEN" value="<?=REQUEST_TOKEN?>">
 
@@ -60,6 +53,5 @@
     <button class="btn btn--primary btn--disable js-submit-application" type="submit" name="action" value="apply"><div class="btninner">Jetzt Ausbildung reservieren</div><span></span></button>
 
   </form>
-<?php endif?>
 
 <?php $this->endblock();?>
