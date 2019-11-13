@@ -22,7 +22,7 @@
 
     <div class="gastroform_wrapper gastroform_wrapper--vorname">
       <label class="gastroform_inputlabel">Vorname</label>
-      <input class="gastroform_input" type="text" name="vorname">
+      <input class="gastroform_input" type="text" name="vorname" <?php echo ((isset($this->post['vorname']) ? 'value="' . $this->post['vorname'] . '"' : '')) ?>>
       <?php if (isset($this->errors['vorname'])): ?>
       <p class="error">Bitte den Vornamen angeben.</p>
       <?php endif;?>
@@ -30,7 +30,7 @@
 
     <div class="gastroform_wrapper gastroform_wrapper--name">
       <label class="gastroform_inputlabel">Name</label>
-      <input class="gastroform_input" type="text" name="name">
+      <input class="gastroform_input" type="text" name="name" <?php echo ((isset($this->post['name']) ? 'value="' . $this->post['name'] . '"' : '')) ?>>
       <?php if (isset($this->errors['name'])): ?>
         <p class="error">Bitte den Namen angeben.</p>
       <?php endif;?>
@@ -38,7 +38,7 @@
 
     <div class="gastroform_wrapper gastroform_wrapper--email">
       <label class="gastroform_inputlabel">E-Mail-Adresse</label>
-      <input class="gastroform_input" type="text" name="email">
+      <input class="gastroform_input" type="text" name="email" <?php echo ((isset($this->post['email']) ? 'value="' . $this->post['email'] . '"' : '')) ?>>
       <?php if (isset($this->errors['email'])): ?>
         <p class="error">Bitte eine korrekte E-Mail-Adresse angeben.</p>
       <?php endif;?>
@@ -46,7 +46,7 @@
 
     <div class="gastroform_wrapper gastroform_wrapper--texarea">
       <label class="gastroform_inputlabel">Beschreibung</label>
-      <textarea class="gastroform_input" name="beschreibung" placeholder="Hier kannst du dich kurz beschreiben. Bist du noch Schüler? Wo kommst du her? Hast du Hobbys oder Erfahrungen die in deinem Gastro-Beruf hilfreich sein können?"></textarea>
+      <textarea class="gastroform_input" name="beschreibung" placeholder="Hier kannst du dich kurz beschreiben. Bist du noch Schüler? Wo kommst du her? Hast du Hobbys oder Erfahrungen die in deinem Gastro-Beruf hilfreich sein können?"> <?php echo ((isset($this->post['beschreibung']) ? $this->post['beschreibung'] : '')) ?></textarea>
     </div>
 
     <div><div class="gastroform_inputcheckbox js-toggle-checkbox"></div> <p class="js-dataprivacy dataprivacy">Deine Daten werden in unserer Datenbank gesichert und an unsere Ausbildungsbildungbetriebe weitergegeben. Genaue Informationen findest du in unserer <a href="{{link_url::19}}" target="_blank">Datenschutzerklärung</a></p></div>

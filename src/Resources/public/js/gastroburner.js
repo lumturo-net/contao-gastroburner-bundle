@@ -7,6 +7,7 @@ window.onload = function () {
 
     // start
     $('.js-start').on('click', function () {
+        $('.gastromatlist,.gastromat_steps').hide();
         $('.js-gastroburner-module').show();
         $('.js-question').first().show();
         $(this).hide();
@@ -56,9 +57,9 @@ window.onload = function () {
             $('.js-submit-button').addClass('btn--disable');
         }
     });
-    
+
     // form nur schicken, wenn auch ein Job angehakt
-    $('#js_start_apply_form').on('submit', function(e) {
+    $('#js_start_apply_form').on('submit', function (e) {
         if ($('input.hidden_job[value="1"]').length) {
             return true;
         }
@@ -121,8 +122,12 @@ window.onload = function () {
         $('.js-submit-application').toggleClass('btn--disable');
         $(this).toggleClass('active');
     });
-    /* Gastroburner-Bewerb-Form
+    /* Gastroburner-Bewerb-Form (2. Seite)
     --------------------------- */
+    if ($('p.error').length) {
+        $('body').scrollTo('#formularancor');
+    }
+    
     $('#apply_form').on('submit', function (e) {
         if ($('.js-toggle-checkbox').hasClass('active')) {
             return true;
