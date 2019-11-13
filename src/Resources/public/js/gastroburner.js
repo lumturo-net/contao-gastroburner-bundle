@@ -125,9 +125,9 @@ window.onload = function () {
     /* Gastroburner-Bewerb-Form (2. Seite)
     --------------------------- */
     if ($('p.error').length) {
-        $('body').scrollTo('#formularancor');
+        $(document).scrollTop($('#formularancor').offset().top);
     }
-    
+
     $('#apply_form').on('submit', function (e) {
         if ($('.js-toggle-checkbox').hasClass('active')) {
             return true;
