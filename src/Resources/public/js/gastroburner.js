@@ -8,9 +8,10 @@ window.onload = function () {
     // start
     $('.js-start').on('click', function () {
         $('.gastromatlist,.gastromat_steps').hide();
-        $('.js-gastroburner-module').show();
         $('.js-question').first().show();
         $(this).hide();
+        $('.js-gastroburner-module').show();
+        $(document).scrollTop($('.js-gastroburner-module').offset().top);
     })
 
     // antwort
