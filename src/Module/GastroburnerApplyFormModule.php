@@ -48,7 +48,11 @@ class GastroburnerApplyFormModule extends \Module
             'companies' => [],
             'hidden_companies' => [],
         ];
-        // $boolThankyou = false;
+
+        // Berufe kommen per GET und POST
+        foreach (['restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName) {
+            $this->Template->{$strName} = (($this->Input->post($strName) || ($this->Input->get($strName))) ? true : false);
+        }
 
         if ($this->Input->post('action') == 'apply') {
             $arrPostKeys = array_keys($_POST);
@@ -88,13 +92,9 @@ class GastroburnerApplyFormModule extends \Module
                 $this->Database->prepare('INSERT INTO tl_apply %s')->set($arrValues)->execute();
                 // $this->sendMails($arrPost);
                 $this->redirect('vielen-dank.html');
-                // $boolThankyou = true;
             }
         }
 
-        foreach (['restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName) {
-            $this->Template->{$strName} = (($this->Input->post($strName)) ? true : false);
-        }
 
         // $arrCompleteCompanies = Database::getInstance()->prepare('SELECT * FROM tl_company ORDER BY shortname;')->execute()->fetchAllAssoc();
         // $arrCompanies = array();
@@ -105,7 +105,6 @@ class GastroburnerApplyFormModule extends \Module
 
         $this->Template->post = $arrPost;
         // $this->Template->companies = $arrCompanies;
-        // $this->Template->thank_you = $boolThankyou;
         $this->Template->errors = $arrErrors;
         $this->Template->url = $this->getApplyFormPageUrl();
     }
