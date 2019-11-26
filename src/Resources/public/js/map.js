@@ -95,11 +95,11 @@ var gastroBurnerMap = function () {
      */
     function bootstrapList() {
         var listOptions = {
-            page: config.list.pagination.entries_per_page,
-            pagination: true,
+            // page: config.list.pagination.entries_per_page,
+            // pagination: true,
             valueNames: ['id', 'shortname', 'name']//, 'description']
         };
-        list = new List('company_list', listOptions);//, config.companies);
+        list = new List('js-company-list', listOptions);//, config.companies);
 
         /**
          * Listen-Update-Event: setzt / löscht die Marker
@@ -233,18 +233,24 @@ var gastroBurnerMap = function () {
             config = _config;
             var bsMap = bootstrapMap;
             var bsList = bootstrapList;
-            loadCss('//unpkg.com/leaflet@1.5.1/dist/leaflet.css');
+            // loadCss('//unpkg.com/leaflet@1.5.1/dist/leaflet.css');
+            loadCss('/bundles/contaogastroburner/css/leaflet.css');
+            /*
             require([
-                '//unpkg.com/leaflet@1.5.1/dist/leaflet.js',
-                '//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js'
+                // '//unpkg.com/leaflet@1.5.1/dist/leaflet.js',
+                '/bundles/contaogastroburner/js/leaflet.js',
+            //     '//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js'
             ], function () {
-                require([
-                    '//unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js'
-                ], function () {
+                // require([
+                    // '//unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js'
+                // ], function () {
                     bsMap();
-                    bsList();
-                });
+                    // bsList();
+                // });
             });
+            */
+           bsMap();
+           bsList();
         },
         // filterByLatLon(minLat, minLon, maxLat, maxLon) { },
         // filterByDistance(lat, lon, km) { },

@@ -1,0 +1,140 @@
+button.active
+    background-color: red
+
+@media only screen and (min-width: 768px)
+    .select_one_answer 
+        padding-top: 24px
+        padding-bottom: 47px
+    
+    .filter
+        .gastroform_wrapper
+            width: 100%
+
+            .gastroform_selectWrapper
+                position: relative
+                width: 100% 
+
+                &::before
+                    content: "\25BE"
+                    color: #D7D7D7
+                    font-size: 50px
+                    pointer-events: none
+                    position: absolute
+                    right: 25px
+                    top: 20px
+
+                select 
+                    font-family: 'Zilla Slab', 'Courier New', Arial
+                    font-size: 1.5em
+                    appearance: none
+                    -moz-appearance: none
+                    -webkit-appearance: none
+                    border: 4px solid #D7D7D7
+                    background-color: white 
+                    border-radius: 0px
+                    color: #D7D7D7
+                    cursor: pointer
+                    height: 65px
+                    outline: none
+                    padding-left: 10px
+                    width: 100%
+                      
+
+    .list-map
+        .list-column
+            width: 575px
+            padding: 0px 0px 0px 15px
+            
+            .hotel-list
+                label   
+                    margin-bottom: 20px
+                    
+                li
+                    input[type="checkbox"]
+                        display: none
+
+                    .list-column-checkbox
+                        & + label
+                            background-color: white
+                            display: block
+                            border: 3px solid #D7D7D7
+                            border-radius: 15px
+                            padding: 15px
+
+                            .hotel-list-row
+                                display: flex
+                                align-items: center
+
+                                .list-item-col-1
+                                    padding: 0px
+                                    width: 185px
+                                    min-width: 185px
+
+                                    img
+                                        padding: 0px
+                                        margin: 0px
+
+                                .list-item-col-3
+                                    padding: 0px
+
+                                .list-item-col-2
+                                    padding: 0px 10px
+
+                                    h4
+                                        font-size: 18px
+                                        line-height: 21px
+                                        margin-bottom: 0px
+                                    p
+                                        font-size: 12px
+                                        line-heigt: 16px        
+
+                                    .list-item-jobs
+                                        display: flex
+                                        justify-content: space-evenly
+                            
+                                        .list-item-job
+                                            font-size: 14px
+                                            background-color: #D7D7D7
+                                            color: white
+                                            transform: skewX(-12deg)
+
+                                            span
+                                                display: block
+                                                padding: 0px 5px
+                                                transform: skewX(12deg)
+
+
+                        /* styles für checked */
+                        &:checked + label
+                            background-color: #FFD500
+                            border-color: #FFD500
+
+                            .list-item-col-2
+                                .list-item-jobs
+                                    .list-item-job
+                                        background-color: white
+                                        color: #8c8c8c
+
+                            .list-item-col-3
+                                .gastroform_inputcheckbox
+                                    &:after
+                                        content: ''
+                                        display: block
+                                        width: 17px
+                                        height: 27px
+                                        background-color: #ffffff
+                                        border: solid #000000
+                                        border-width: 0 6px 6px 0
+                                        -webkit-transform: rotate(45deg)
+                                        -moz-transform: rotate(45deg)
+                                        -o-transform: rotate(45deg)
+                                        transform: rotate(45deg)
+                                        margin-top: 5px
+                                        margin-left: 16px
+
+
+
+            
+    
+
+
