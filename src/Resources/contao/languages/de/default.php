@@ -52,3 +52,6 @@ $GLOBALS['TL_LANG']['tl_company']['hotelmanager'] = array('Hotelkaufmann/-frau')
 $GLOBALS['TL_LANG']['tl_company']['gastro'] = array('Fachkraft im Gastrogewerbe');
 $GLOBALS['TL_LANG']['tl_company']['description_legend'] = 'Beschreibung';
 $GLOBALS['TL_LANG']['tl_company']['description'] = array('Beschreibung');
+        
+$GLOBALS['TL_LANG']['tl_member']['job_legend'] = 'Gastroburner / Ausbildungsstellen';
+$GLOBALS['TL_LANG']['tl_member']['companyLogo'] = ['Firmen-Logo'];

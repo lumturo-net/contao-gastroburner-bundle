@@ -1,5 +1,157 @@
+$map_height : 400px
+
 button.active
     background-color: red
+
+/* button-gruppe über der suchliste copy von bootstrap */
+.fa-search
+    &::before  
+        content: "\f002"
+
+.search
+    width: 100%
+    padding: 20px 80px
+    display: block
+
+    &::before
+        content: "L"
+
+.gb-input-group
+    position: relative
+    display: -ms-flexbox
+    display: flex
+    -ms-flex-wrap: wrap
+    flex-wrap: wrap
+    align-items: stretch
+    width: 100%
+
+    & .gb-input-group-prepend
+        position: absolute
+        top: 0
+        left: 0
+        z-index: 2
+        display: -ms-flexbox
+        display: flex
+
+        & .gb-input-group-text
+            display: -ms-flexbox
+            display: flex
+            -ms-flex-align: center
+            align-items: center
+            padding: .8rem 0rem 0rem 1.2rem
+            margin-bottom: 0
+            font-size: 1rem
+            font-weight: 400
+            line-height: 1.5
+            color: #D7D7D7
+            text-align: center
+            white-space: nowrap
+            // background-color: #e9ecef
+            // border: 1px solid #ced4da
+            // border-radius: .25rem
+
+            & img
+                margin: 0
+        
+    &>.form-control
+        position: relative
+        flex: 1 1 0%
+        min-width: 0,
+        margin-bottom: 0
+        display: block
+        width: 100%
+        height: calc(1.5em + .75rem + 2px)
+        padding: 1.4rem 3.1rem
+        // padding-left: 2.5em
+        // padding-right: 2.5em
+        font-size: 1.1rem
+        font-weight: 400
+        line-height: 1.5
+        border: 3px solid #D7D7D7
+        color: #D7D7D7
+        background-color: #fff
+        background-clip: padding-box
+        // border: 1px solid #ced4da
+        // border-radius: .25rem
+        // transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out
+
+    // &>.form-control:not(:last-child)
+    //     border-top-right-radius: 0
+    //     border-bottom-right-radius: 0
+
+
+
+    & .gb-input-group-append
+        margin-left: -1px
+        display: flex
+        position: absolute
+        right: 0
+
+    .btn
+        display: flex 
+        align-items: center
+        text-indent: -999em
+        border-top-left-radius: 0
+        border-bottom-left-radius: 0
+        position: relative
+        z-index: 2
+        cursor: pointer
+        padding: 0px
+        background: initial
+        transform: initial
+        text-transform: initial
+        font-weight: 400
+        color: #D7D7D7
+        text-align: center
+        vertical-align: middle
+        cursor: pointer
+        -webkit-user-select: none
+        -moz-user-select: none
+        -ms-user-select: none
+        user-select: none
+        background-color: transparent
+        border: 1px solid transparent
+        padding: .8rem 1.4rem
+        font-size: 1rem
+        line-height: 1.5
+        border-radius: .25rem
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out
+
+        &>.search_cross
+            position: relative
+            height: 1.2em /* this can be anything */
+            width: 1.2em  /* ...but maintain 1:1 aspect ratio */
+            display: flex
+            flex-direction: column
+            justify-content: center
+
+            &::before, &::after
+                position: absolute
+                content: ''
+                width: 100%
+                height: 2px /* cross thickness */
+                background-color: #d7d7d7
+
+            &::before
+                transform: rotate(45deg)  
+            &::after
+                transform: rotate(-45deg)
+
+
+
+
+
+
+
+
+            // &> .line 
+            //     border-radius: initial
+            //     display: block
+            //     width: 30px
+            //     height: 5px
+            //     background-color: #000000
+
+
 
 @media only screen and (min-width: 768px)
     .select_one_answer 
@@ -7,8 +159,11 @@ button.active
         padding-bottom: 47px
     
     .filter
+        margin-top: 1.5em
+
         .gastroform_wrapper
             width: 100%
+            margin-bottom: 0px
 
             .gastroform_selectWrapper
                 position: relative
@@ -42,10 +197,14 @@ button.active
 
     .list-map
         .list-column
+            // height: $map_height + 187
             width: 575px
             padding: 0px 0px 0px 15px
             
             .hotel-list
+                overflow-y: hidden
+                // max-height: $map_height + 61
+
                 label   
                     margin-bottom: 20px
                     
@@ -66,6 +225,7 @@ button.active
                                 align-items: center
 
                                 .list-item-col-1
+                                    flex-grow: 0
                                     padding: 0px
                                     width: 185px
                                     min-width: 185px
@@ -75,9 +235,20 @@ button.active
                                         margin: 0px
 
                                 .list-item-col-3
+                                    flex-grow: 0
                                     padding: 0px
 
+                                    .hotellist_inputcheckbox
+                                        background-color: #ffffff
+                                        margin: 0
+                                        border: 3px solid #d7d7d7
+                                        border-radius: 10px
+                                        display: inline-block
+                                        height: 30px
+                                        width: 30px
+
                                 .list-item-col-2
+                                    flex-grow: 1 
                                     padding: 0px 10px
 
                                     h4
@@ -90,18 +261,30 @@ button.active
 
                                     .list-item-jobs
                                         display: flex
-                                        justify-content: space-evenly
+                                        justify-content: flex-start 
                             
                                         .list-item-job
-                                            font-size: 14px
+                                            height: 36px
+                                            width: 36px
                                             background-color: #D7D7D7
-                                            color: white
-                                            transform: skewX(-12deg)
+                                            border-radius: 50%
+                                            background-size: 85%
+                                            background-repeat: no-repeat, repeat
+                                            background-position: center 0px 
+                                            background-image: url('../images/berufe.svg')
+                                            margin-right: 20px
 
-                                            span
-                                                display: block
-                                                padding: 0px 5px
-                                                transform: skewX(12deg)
+                                            &.cook
+                                                // background-image: url('../images/cook.svg')
+                                                background-position: center -119px
+                                            &.gastro
+                                                background-position: center 3px
+                                            &.hotelcleaner
+                                                background-position: center -58px
+                                            &.hotelmanager
+                                                background-position: center -89px
+                                            &.restaurant
+                                                background-position: center -28px
 
 
                         /* styles für checked */
@@ -116,21 +299,35 @@ button.active
                                         color: #8c8c8c
 
                             .list-item-col-3
-                                .gastroform_inputcheckbox
+                                .hotellist_inputcheckbox
+                                    border: 0px none
+
                                     &:after
                                         content: ''
                                         display: block
-                                        width: 17px
-                                        height: 27px
+                                        width: 10px
+                                        height: 18px
                                         background-color: #ffffff
                                         border: solid #000000
-                                        border-width: 0 6px 6px 0
+                                        border-width: 0 4px 4px 0
                                         -webkit-transform: rotate(45deg)
                                         -moz-transform: rotate(45deg)
                                         -o-transform: rotate(45deg)
                                         transform: rotate(45deg)
-                                        margin-top: 5px
-                                        margin-left: 16px
+                                        margin-top: 4px
+                                        margin-left: 10px
+
+                            .hotel-list-row
+                                .list-item-col-2
+                                    .list-item-jobs
+                                        .list-item-job
+                                            background-color: white
+
+    .form-div
+        // display: none
+
+#map
+    height: $map_height
 
 
 

@@ -4,56 +4,46 @@
 
 <?php $this->block('content');?>
 
-<form id="apply_form" method="POST" action="<?php echo $this->url ?>">
-  <input type="hidden" name="REQUEST_TOKEN" value="<?=REQUEST_TOKEN?>">
+<div class="js-apply-form-wrapper">
+  <form id="apply_form" method="POST" action="<?php echo $this->url ?>">
+    <input type="hidden" name="REQUEST_TOKEN" value="<?=REQUEST_TOKEN?>">
 
-  <div class="error_box">
-    <?php if (isset($this->errors['jobs'])): ?>
-    <p class="error">Bitte mindestens einen Beruf auswählen.</p>
-    <?php endif;?>
-  </div>
-  <?php foreach (['restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): ?>
-  <div class="gastroform_wrapper"><input class="gastroform_checkbox" type="checkbox" id="input_<?php echo $strName ?>" name="<?php echo $strName ?>" <?php echo (($this->{$strName}) ? ' checked' : '') ?>><label class="gastroform_label js-toggle-label<?php echo (($this->{$strName}) ? ' active' : '') ?>" for="input_<?php echo $strName ?>"><?php echo $GLOBALS['TL_LANG']['tl_apply'][$strName][0] ?></label></div>
-  <?php endforeach?>
-  <br>
-
-  <!-- Suchformular-->
-  <h3>Integer legentibus erat a ante historiarum dapibus.</h3>
-  <div class="row filter">
-    <div class="col-12 col-md-4">
-      <div class="gastroform_wrapper gastroform_wrapper--vorname">
-        <label class="gastroform_inputlabel">Postleitzahl</label>
-        <input class="gastroform_input" type="text" name="zip">
-      </div>
+    <div class="error_box">
+      <?php if (isset($this->errors['jobs'])): ?>
+      <p class="error">Bitte mindestens einen Beruf auswählen.</p>
+      <?php endif;?>
     </div>
-    <div class="col-12 col-md-3">
-      <div class="gastroform_wrapper gastroform_wrapper--vorname">
-        <label class="gastroform_inputlabel">Umkreis</label>
-        <div class="gastroform_selectWrapper">
-          <select class="js-surrounding">
-            <option>Bitte wählen</option>
-          </select>
+    <?php foreach (['restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): ?>
+    <div class="gastroform_wrapper"><input class="gastroform_checkbox js-job-filter" type="checkbox" id="input_<?php echo $strName ?>" name="<?php echo $strName ?>" <?php echo (($this->{$strName}) ? ' checked' : '') ?> data-type="<?php echo $strName ?>"><label class="gastroform_label js-toggle-label<?php echo (($this->{$strName}) ? ' active' : '') ?>" for="input_<?php echo $strName ?>"><?php echo $GLOBALS['TL_LANG']['tl_apply'][$strName][0] ?></label></div>
+    <?php endforeach?>
+    <br>
+
+
+    <!-- Liste / Formular-->
+    <div class="row list-map js-list-map">
+      <div class="col-12 col-md-5 list-column" id="js-company-list">
+        <h3>Liste</h3>
+
+        <div class="gb-input-group mb-3">
+          <div class="gb-input-group-prepend">
+            <span class="gb-input-group-text">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#d7d7d7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="10.5" cy="10.5" r="7.5" />
+                <line x1="21" y1="21" x2="15.8" y2="15.8" />
+              </svg></span>
+          </div>
+          <input id="js-search" type="text" class="form-control gastroform-input" aria-label="Suche in der Liste" placeholder="Suche in der Liste">
+          <div class="gb-input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="js-clear-search">
+              Suche löschen
+              <div class="search_cross"></div>
+            </button>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="col-12 col-md-5">
-      <div class="gastroform_wrapper gastroform_wrapper--vorname">
-        <label class="gastroform_inputlabel">Suchbegriff</label>
-        <input class="gastroform_input" type="text" name="zip">
-      </div>
-    </div>
-  </div>
-  <p>totius Galliae. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Tu quoque, Brute, fili mi, nihil timor populi, nihil! Curabitur est gravida et libero vitae dictum. Sed haec quis possit intrepidus aestimare tellus. totius Galliae.s</p>
-  <button class="btn btn--primary js-submit-search" type="button">
-    <div class="btninner">Jetzt suchen<span></span></div>
-  </button>
-
-  <!-- Liste / Formular-->
-  <div class="row list-map">
-    <div class="col-12 col-lg-5 list-column">
-      <h3>Liste</h3>
-      <ul class="hotel-list">
-        <li>
+        <!-- <div class="ul-wrapper js-ul-wrapper"> -->
+          <ul class="hotel-list list">
+            <!-- <li>
+          <span class="id" style="display:none;"><?php echo $company['id'] ?></span>
           <input type="checkbox" id="id_test" class="list-column-checkbox">
           <label for="id_test">
             <div class="hotel-list-row">
@@ -64,107 +54,132 @@
                 <h4>Quae vero fiducia dicuntur.</h3>
                   <p>Salutantibus vitae elit libero, a pharetra Laugue. Pellentesque habitant morbi a pharetra habitant tristique morbi senectus et netus.</p>
                   <div class="list-item-jobs">
-                    <div class="list-item-job">
-                      <span>Koch</span>
-                    </div>
-                    <div class="list-item-job">
-                      <span>Fachkraft</span>
-                    </div>
-                    <div class="list-item-job">
-                      <span>Kaufmann</span>
-                    </div>
+                    <div class="list-item-job cook"> </div>
+                    <div class="list-item-job gastro"></div>
+                    <div class="list-item-job hotelcleaner"></div>
+                    <div class="list-item-job hotelmanager"></div>
+                    <div class="list-item-job restaurant"></div>
                   </div>
               </div>
               <div class="list-item-col-3">
-                <div class="gastroform_inputcheckbox"></div>
+                <div class="hotellist_inputcheckbox"></div>
               </div>
             </div>
           </label>
-        </li>
-        <?php foreach($this->companies as $company): ?>
-        <li>
-          <input type="checkbox" id="company-<?php echo $company['id'] ?>" class="list-column-checkbox">
-          <label for="company-<?php echo $company['id'] ?>">
-            <span class="id" style="display:none;"><?php echo $company['id'] ?></span>
-            <div class="hotel-list-row">
-              <div class="list-item-col-1">
-                <img src="https://via.placeholder.com/170x100.png&text=Hotel-Logo">
-              </div>
-              <div class="list-item-col-2">
-                <h4><?php echo $company['shortname'] ?></h3>
-                  <p><?php echo $company['description'] ?></p>
-                  <div class="list-item-jobs">
-                    <?php foreach(array('restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro') as $strKey) : ?>
-                      <?php if ($company[$strKey] > 0) : ?>
-                    <div class="list-item-job">
-                      <span><?php echo $GLOBALS['TL_LANG']['tl_company'][$strKey][0] ?></span>
-                    </div>
-                      <?php endif; ?>
-                    <?php endforeach; ?>
+        </li> -->
+            <?php foreach($this->companies as $company): ?>
+            <li>
+              <input type="checkbox" id="company-<?php echo $company['id'] ?>" value="<?php echo $company['id'] ?>" class="list-column-checkbox js-list-column-checkbox" <?php echo ((in_array($company['id'], $this->post['hidden_companies']) ? 'checked="checked"' : '')) ?>>
+              <label for="company-<?php echo $company['id'] ?>" class="js_company_list_item" data-id="<?php echo $company['id'] ?>">
+                <span class="id" style="display:none;"><?php echo $company['id'] ?></span>
+                <span class="name" style="display:none;"><?php echo $company['name'] ?></span>
+                <div class="hotel-list-row">
+                  <div class="list-item-col-1">
+                    <img src="https://via.placeholder.com/170x100.png&text=Hotel-Logo">
                   </div>
-              </div>
-              <div class="list-item-col-3">
-                <div class="gastroform_inputcheckbox"></div>
+                  <div class="list-item-col-2">
+                    <h4><?php echo $company['shortname'] ?></h3>
+                      <p><?php echo $company['description'] ?></p>
+                      <div class="list-item-jobs">
+                        <?php foreach(array('restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro') as $strKey) : ?>
+                        <?php if ($company[$strKey] > 0) : ?>
+                        <div class="list-item-job <?php echo $strKey ?>"></div>
+                        <?php endif; ?>
+                        <?php endforeach; ?>
+                      </div>
+                  </div>
+                  <div class="list-item-col-3">
+                    <div class="hotellist_inputcheckbox"></div>
+                  </div>
+                </div>
+              </label>
+            </li>
+            <?php endforeach; ?>
+          </ul>
+        <!-- </div> -->
+      </div>
+      <!-- Map -->
+      <div class="col-12 col-md-7">
+
+        <script type="text/javascript">
+          var companies = JSON.parse('<?php echo json_encode($this->companies) ?>');
+        </script>
+        <h3>Karte</h3>
+        <div id="map"></div>
+
+        <!-- Suchformular-->
+        <div class="row filter">
+          <div class="col-12 col-md-7">
+            <div class="gastroform_wrapper gastroform_wrapper--vorname">
+              <label class="gastroform_inputlabel">Postleitzahl</label>
+              <input class="js-filter-zip gastroform_input" type="text" name="zip">
+            </div>
+          </div>
+          <div class="col-12 col-md-5">
+            <div class="gastroform_wrapper gastroform_wrapper--vorname">
+              <label class="gastroform_inputlabel">Umkreis</label>
+              <div class="gastroform_selectWrapper">
+                <select class="js-surrounding">
+                  <option>Bitte wählen</option>
+                  <option value="5000">5km</option>
+                  <option value="15000">15km</option>
+                  <option value="50000">50km</option>
+                  <option value="100000">100km</option>
+                </select>
               </div>
             </div>
-          </label>
-        </li>
-        <?php endforeach; ?>
-      </ul>
+          </div>
+
+        </div>
+
+      </div>
     </div>
-    <!-- Map -->
-    <div class="col-12 col-lg-7">
+    <div class="form-div js-form-div" <?php echo ((count($this->errors) ? '' : 'style="display: none;"')) ?>>
+      <h3 id="formularancor">Deine Daten fürs Check-in.</h3>
+      <p>Verrate uns mehr über dich: wie du heißt, woher du kommst und was dich motiviert, einer von uns zu werden. Einfach Formular ausfüllen – und schon bist du am Start, sobald unsere Partnerunternehmen echte Gastroburner suchen.</p>
 
-      <script type="text/javascript">
-        var companies = <?php echo json_encode($this->companies) ?>;
-      </script>
-      <h3>Karte</h3>
-      <div id="map" style="height: 400px;"></div>
+      <div class="gastroform_wrapper gastroform_wrapper--vorname">
+        <label class="gastroform_inputlabel">Vorname</label>
+        <input class="gastroform_input<?php echo ((isset($this->errors['vorname'])) ? ' error' : '') ?>" type="text" name="vorname" <?php echo ((isset($this->post['vorname']) ? 'value="' . $this->post['vorname'] . '"' : '')) ?>>
+        <?php if (isset($this->errors['vorname'])): ?>
+        <p class="error">Bitte den Vornamen angeben.</p>
+        <?php endif;?>
+      </div>
+
+      <div class="gastroform_wrapper gastroform_wrapper--name">
+        <label class="gastroform_inputlabel">Name</label>
+        <input class="gastroform_input<?php echo ((isset($this->errors['name'])) ? ' error' : '') ?>" type="text" name="name" <?php echo ((isset($this->post['name']) ? 'value="' . $this->post['name'] . '"' : '')) ?>>
+        <?php if (isset($this->errors['name'])): ?>
+        <p class="error">Bitte den Namen angeben.</p>
+        <?php endif;?>
+      </div>
+
+      <div class="gastroform_wrapper gastroform_wrapper--email">
+        <label class="gastroform_inputlabel">E-Mail-Adresse</label>
+        <input class="gastroform_input<?php echo ((isset($this->errors['email'])) ? ' error' : '') ?>" type="text" name="email" <?php echo ((isset($this->post['email']) ? 'value="' . $this->post['email'] . '"' : '')) ?>>
+        <?php if (isset($this->errors['email'])): ?>
+        <p class="error">Bitte eine korrekte E-Mail-Adresse angeben.</p>
+        <?php endif;?>
+      </div>
+
+      <div class="gastroform_wrapper gastroform_wrapper--texarea">
+        <label class="gastroform_inputlabel">Beschreibung</label>
+        <textarea class="gastroform_input<?php echo ((isset($this->errors['beschreibung'])) ? ' error' : '') ?>" name="beschreibung" placeholder="Hier kannst du dich kurz beschreiben. Bist du noch Schüler? Wo kommst du her? Hast du Hobbys oder Erfahrungen die in deinem Gastro-Beruf hilfreich sein können?"> <?php echo ((isset($this->post['beschreibung']) ? $this->post['beschreibung'] : '')) ?></textarea>
+      </div>
+
+      <div>
+        <div class="gastroform_inputcheckbox js-toggle-checkbox"></div>
+        <p class="js-dataprivacy dataprivacy">Deine Daten nicht an Dritte weitergegeben. Sie werden ausschließlich für die Übersendung möglicher Ausbildungsangebote an dich in unserer Datenbank gesichert. Genaue Informationen findest du in unserer <a href="{{link_url::19}}" target="_blank">Datenschutzerklärung</a></p>
+      </div>
+      <button class="btn btn--primary btn--disable js-submit-application" type="submit" name="action" value="apply">
+        <div class="btninner">Jetzt Ausbildung reservieren</div><span></span>
+      </button>
     </div>
 
-  </div>
+    <?php foreach($this->post['hidden_companies'] as $strId) : ?>
+    <input type="hidden" class="js-hidden-company" name="hidden_companies[]" value="<?php echo $strId ?>">
+    <?php endforeach; ?>
 
-
-  <h3 id="formularancor">Deine Daten fürs Check-in.</h3>
-  <p>Verrate uns mehr über dich: wie du heißt, woher du kommst und was dich motiviert, einer von uns zu werden. Einfach Formular ausfüllen – und schon bist du am Start, sobald unsere Partnerunternehmen echte Gastroburner suchen.</p>
-
-  <div class="gastroform_wrapper gastroform_wrapper--vorname">
-    <label class="gastroform_inputlabel">Vorname</label>
-    <input class="gastroform_input<?php echo ((isset($this->errors['vorname'])) ? ' error' : '') ?>" type="text" name="vorname" <?php echo ((isset($this->post['vorname']) ? 'value="' . $this->post['vorname'] . '"' : '')) ?>>
-    <?php if (isset($this->errors['vorname'])): ?>
-    <p class="error">Bitte den Vornamen angeben.</p>
-    <?php endif;?>
-  </div>
-
-  <div class="gastroform_wrapper gastroform_wrapper--name">
-    <label class="gastroform_inputlabel">Name</label>
-    <input class="gastroform_input<?php echo ((isset($this->errors['name'])) ? ' error' : '') ?>" type="text" name="name" <?php echo ((isset($this->post['name']) ? 'value="' . $this->post['name'] . '"' : '')) ?>>
-    <?php if (isset($this->errors['name'])): ?>
-    <p class="error">Bitte den Namen angeben.</p>
-    <?php endif;?>
-  </div>
-
-  <div class="gastroform_wrapper gastroform_wrapper--email">
-    <label class="gastroform_inputlabel">E-Mail-Adresse</label>
-    <input class="gastroform_input<?php echo ((isset($this->errors['email'])) ? ' error' : '') ?>" type="text" name="email" <?php echo ((isset($this->post['email']) ? 'value="' . $this->post['email'] . '"' : '')) ?>>
-    <?php if (isset($this->errors['email'])): ?>
-    <p class="error">Bitte eine korrekte E-Mail-Adresse angeben.</p>
-    <?php endif;?>
-  </div>
-
-  <div class="gastroform_wrapper gastroform_wrapper--texarea">
-    <label class="gastroform_inputlabel">Beschreibung</label>
-    <textarea class="gastroform_input<?php echo ((isset($this->errors['beschreibung'])) ? ' error' : '') ?>" name="beschreibung" placeholder="Hier kannst du dich kurz beschreiben. Bist du noch Schüler? Wo kommst du her? Hast du Hobbys oder Erfahrungen die in deinem Gastro-Beruf hilfreich sein können?"> <?php echo ((isset($this->post['beschreibung']) ? $this->post['beschreibung'] : '')) ?></textarea>
-  </div>
-
-  <div>
-    <div class="gastroform_inputcheckbox js-toggle-checkbox"></div>
-    <p class="js-dataprivacy dataprivacy">Deine Daten nicht an Dritte weitergegeben. Sie werden ausschließlich für die Übersendung möglicher Ausbildungsangebote an dich in unserer Datenbank gesichert. Genaue Informationen findest du in unserer <a href="{{link_url::19}}" target="_blank">Datenschutzerklärung</a></p>
-  </div>
-  <button class="btn btn--primary btn--disable js-submit-application" type="submit" name="action" value="apply">
-    <div class="btninner">Jetzt Ausbildung reservieren</div><span></span>
-  </button>
-
-</form>
-
+  </form>
+</div>
 <?php $this->endblock();?>

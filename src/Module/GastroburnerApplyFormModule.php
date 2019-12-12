@@ -34,8 +34,11 @@ class GastroburnerApplyFormModule extends \Module
             // $GLOBALS['TL_JAVASCRIPT'][] = 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js';
             // // $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/require.js';
             $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/leaflet.js';
-            $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/list.min.js';
+            // $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/list.min.js';
+            $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/list.js';
             $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/map.js';
+            $GLOBALS['TL_JAVASCRIPT'][] = 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.js';
+            $GLOBALS['TL_JAVASCRIPT'][] = 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js';
         }
 
         return parent::generate();
@@ -46,6 +49,7 @@ class GastroburnerApplyFormModule extends \Module
      */
     protected function compile()
     {
+        global $objPage;
         $arrErrors = [];
         $arrPost = [
             'companies' => [],
@@ -109,7 +113,7 @@ class GastroburnerApplyFormModule extends \Module
         $this->Template->post = $arrPost;
         $this->Template->companies = $arrCompanies;
         $this->Template->errors = $arrErrors;
-        $this->Template->url = $this->getApplyFormPageUrl();
+        $this->Template->url = \Controller::generateFrontendUrl($objPage->row());//$this->getApplyFormPageUrl();
     }
 
     /**
@@ -124,7 +128,7 @@ class GastroburnerApplyFormModule extends \Module
         $arrCompanies = Database::getInstance()->prepare('SELECT * FROM tl_company WHERE  id in (?) ORDER BY shortname;')->execute(implode(',', $arrPost['hidden_companies']))->fetchAllAssoc();
     }
 
-    protected function getApplyFormPageUrl()
+    protected function getThankyouFormPageUrl()
     {
         $intPageId = $GLOBALS['TL_CONFIG']['gastroburner_applyform_page'];
 
