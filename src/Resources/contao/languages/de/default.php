@@ -25,7 +25,7 @@ $GLOBALS['TL_LANG']['tl_apply']['email'] = array('E-Mail-Adresse');
 $GLOBALS['TL_LANG']['tl_apply']['cook'] = array('Koch');
 $GLOBALS['TL_LANG']['tl_apply']['restaurant'] = array('Restaurantfachkraft');
 $GLOBALS['TL_LANG']['tl_apply']['hotelcleaner'] = array('Hotelfachkraft');
-$GLOBALS['TL_LANG']['tl_apply']['hotelmanager'] = array('Hotelkauf-mann/-frau');
+$GLOBALS['TL_LANG']['tl_apply']['hotelmanager'] = array('Hotelkaufmann/-frau');
 $GLOBALS['TL_LANG']['tl_apply']['gastro'] = array('Fachkraft im Gastrogewerbe');
 $GLOBALS['TL_LANG']['tl_apply']['beschreibung_legend'] = 'Beschreibung';
 $GLOBALS['TL_LANG']['tl_apply']['beschreibung'] = array('Beschreibung');
@@ -52,6 +52,5 @@ $GLOBALS['TL_LANG']['tl_company']['hotelmanager'] = array('Hotelkaufmann/-frau')
 $GLOBALS['TL_LANG']['tl_company']['gastro'] = array('Fachkraft im Gastrogewerbe');
 $GLOBALS['TL_LANG']['tl_company']['description_legend'] = 'Beschreibung';
 $GLOBALS['TL_LANG']['tl_company']['description'] = array('Beschreibung');
-        
 $GLOBALS['TL_LANG']['tl_member']['job_legend'] = 'Gastroburner / Ausbildungsstellen';
 $GLOBALS['TL_LANG']['tl_member']['companyLogo'] = ['Firmen-Logo'];
