@@ -1,0 +1,15 @@
+<?php $this->loadLanguageFile('tl_apply');?>
+<p>Sehr geehrte Damen und Herren,</p>
+<p>Ein Bewerber interessiert sich für Ihre freien Stellen.</p>
+<p>Details:</p>
+<p>Name: <?php echo $this->post['vorname'] ?> <?php echo $this->post['name'] ?></p>
+<p>E-Mail: <?php echo $this->post['email'] ?></p>
+<p>zusätzliche Info: <?php echo $this->post['beschreibung'] ?></p>
+<h3>Folgende Jobs sind von Interesse:</h3>
+<?php foreach(['restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strKey) : ?>
+    <?php if (isset($this->post[$strKey]) && ($this->post[$strKey]) && $this->company[$strKey] > 0) : ?>
+<p><?php echo $GLOBALS['TL_LANG']['tl_apply'][$strKey][0] ?></p>
+    <?php endif ?>
+<?php endforeach ?>
+<p>Mit freundl. Grüßen,<br>
+Ihre Webseite</p>

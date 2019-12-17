@@ -3,6 +3,7 @@
 namespace Lumturo\ContaoGastroburnerBundle\Module;
 
 use Contao\Database;
+use Contao\Email;
 use Contao\Validator;
 
 class GastroburnerApplyFormModule extends \Module
@@ -50,6 +51,7 @@ class GastroburnerApplyFormModule extends \Module
     protected function compile()
     {
         global $objPage;
+
         $arrErrors = [];
         $arrPost = [
             'companies' => [],
@@ -97,23 +99,29 @@ class GastroburnerApplyFormModule extends \Module
             if (!count($arrErrors)) {
                 $arrValues['tstamp'] = time();
                 $this->Database->prepare('INSERT INTO tl_apply %s')->set($arrValues)->execute();
-                // $this->sendMails($arrPost);
+                $this->sendMails($arrPost);
                 $this->redirect('vielen-dank.html');
             }
         }
 
 
-        $arrCompleteCompanies = Database::getInstance()->prepare('SELECT * FROM tl_company ORDER BY shortname;')->execute()->fetchAllAssoc();
+        $arrFields = ['id', 'company', 'street', 'postal', 'city', 'lat', 'lon', 'email', 'shortname', 'description', 'restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro', 'companyLogo'];
+        $arrDbCompanies= Database::getInstance()->prepare('SELECT ' . implode(', ', $arrFields) . ' FROM tl_member ORDER BY shortname;')->execute()->fetchAllAssoc();
         $arrCompanies = array();
-        foreach ($arrCompleteCompanies as $arrCompany) {
-            unset($arrCompany['tstamp']);
+        foreach ($arrDbCompanies as $arrCompany) {
+            $objLogo = \FilesModel::findOneBy('uuid', $arrCompany['companyLogo']);
+            if ($objLogo) {
+                $arrCompany['companyLogo'] = $objLogo->path;
+            } else {
+                $arrCompany['companyLogo'] = 'https://via.placeholder.com/170x100.png&text=Hotel-Logo';
+            }
             $arrCompanies[$arrCompany['id']] = $arrCompany;
         }
 
         $this->Template->post = $arrPost;
         $this->Template->companies = $arrCompanies;
         $this->Template->errors = $arrErrors;
-        $this->Template->url = \Controller::generateFrontendUrl($objPage->row());//$this->getApplyFormPageUrl();
+        $this->Template->url = \Controller::generateFrontendUrl($objPage->row()); //$this->getApplyFormPageUrl();
     }
 
     /**
@@ -125,7 +133,19 @@ class GastroburnerApplyFormModule extends \Module
             return;
         }
 
-        $arrCompanies = Database::getInstance()->prepare('SELECT * FROM tl_company WHERE  id in (?) ORDER BY shortname;')->execute(implode(',', $arrPost['hidden_companies']))->fetchAllAssoc();
+        $arrCompanies = Database::getInstance()->prepare('SELECT * FROM tl_member WHERE  id in (?) ORDER BY shortname;')->execute(implode(',', $arrPost['hidden_companies']))->fetchAllAssoc();
+
+        foreach ($arrCompanies as $arrCompany) {
+            $objEmail = new Email();
+            $objEmail->charset = 'utf-8';
+            $objEmail->subject = 'Bewerber von der Webseite Gastroburner.de';
+            $objEmail->from = 'no-reply@gastroburner.de';
+            $objHtmlMailTemplate = new \Contao\FrontendTemplate('mail_gastroburner_application');
+            $objHtmlMailTemplate->post = $arrPost;
+            $objHtmlMailTemplate->company = $arrCompany;
+            $objEmail->html = $objHtmlMailTemplate->parse();
+            $objEmail->sendTo($arrCompany['email']);
+        }
     }
 
     protected function getThankyouFormPageUrl()

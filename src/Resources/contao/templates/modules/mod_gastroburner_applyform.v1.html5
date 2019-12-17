@@ -72,14 +72,14 @@
               <input type="checkbox" id="company-<?php echo $company['id'] ?>" value="<?php echo $company['id'] ?>" class="list-column-checkbox js-list-column-checkbox" <?php echo ((in_array($company['id'], $this->post['hidden_companies']) ? 'checked="checked"' : '')) ?>>
               <label for="company-<?php echo $company['id'] ?>" class="js_company_list_item" data-id="<?php echo $company['id'] ?>">
                 <span class="id" style="display:none;"><?php echo $company['id'] ?></span>
-                <span class="name" style="display:none;"><?php echo $company['name'] ?></span>
+                <span class="name" style="display:none;"><?php echo $company['company'] ?></span>
                 <div class="hotel-list-row">
                   <div class="list-item-col-1">
-                    <img src="https://via.placeholder.com/170x100.png&text=Hotel-Logo">
+                    <img src="<?php echo $company['companyLogo'] ?>">
                   </div>
                   <div class="list-item-col-2">
                     <h4><?php echo $company['shortname'] ?></h3>
-                      <p><?php echo $company['description'] ?></p>
+                      <p><?php echo $company['description'] ?> description</p>
                       <div class="list-item-jobs">
                         <?php foreach(array('restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro') as $strKey) : ?>
                         <?php if ($company[$strKey] > 0) : ?>

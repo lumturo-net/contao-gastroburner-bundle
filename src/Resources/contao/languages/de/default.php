@@ -52,5 +52,14 @@ $GLOBALS['TL_LANG']['tl_company']['hotelmanager'] = array('Hotelkaufmann/-frau')
 $GLOBALS['TL_LANG']['tl_company']['gastro'] = array('Fachkraft im Gastrogewerbe');
 $GLOBALS['TL_LANG']['tl_company']['description_legend'] = 'Beschreibung';
 $GLOBALS['TL_LANG']['tl_company']['description'] = array('Beschreibung');
+
 $GLOBALS['TL_LANG']['tl_member']['job_legend'] = 'Gastroburner / Ausbildungsstellen';
 $GLOBALS['TL_LANG']['tl_member']['companyLogo'] = ['Firmen-Logo'];
+$GLOBALS['TL_LANG']['tl_member']['lat'] = array('Latitude','Wenn leer, dann wird die Latitude automatisch von Google erfragt.');
+$GLOBALS['TL_LANG']['tl_member']['lon'] = array('Longitude','Wenn leer, dann wird die Longitude automatisch von Google erfragt.');
+$GLOBALS['TL_LANG']['tl_member']['shortname'] = array('Kurzname', 'Kurzname der Firma');
+$GLOBALS['TL_LANG']['tl_member']['restaurant'] = array('Restaurantfachkraft');
+$GLOBALS['TL_LANG']['tl_member']['cook'] = array('Koch');
+$GLOBALS['TL_LANG']['tl_member']['hotelcleaner'] = array('Hotelfachkraft');
+$GLOBALS['TL_LANG']['tl_member']['hotelmanager'] = array('Hotelkaufmann/-frau');
+$GLOBALS['TL_LANG']['tl_member']['gastro'] = array('Fachkraft im Gastrogewerbe');

@@ -43,16 +43,16 @@ var gastroBurnerMap = function () {
         }).addTo(map);
         // https://github.com/pointhi/leaflet-color-markers
         icon = new L.Icon({
-            iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
-            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconUrl: 'bundles/contaogastroburner/images/marker.png',
             iconSize: [25, 41],
             iconAnchor: [12, 41],
             popupAnchor: [1, -34],
             shadowSize: [41, 41]
         });
         hoverIcon = new L.Icon({
-            iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconUrl: 'bundles/contaogastroburner/images/marker-sel.png',
+            // iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+            // shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
             iconSize: [25, 41],
             iconAnchor: [12, 41],
             popupAnchor: [1, -34],
@@ -302,10 +302,23 @@ var gastroBurnerMap = function () {
             if (zip.length < 5) {
                 return;
             }
+            // frage https://nominatim.openstreetmap.org/search/?q=Germany,18146&format=json an
+            var location = 'Germany,' + zip;
+            // var geocode = 'https://open.mapquestapi.com/search?format=json&q=' + location;
+            var geocode = 'https://nominatim.openstreetmap.org/search?format=json&q=' + location;
+            $.getJSON(geocode, function (data) {
+                // get lat + lon from first match
+                map.panTo(new L.LatLng(data[0].lat, data[0].lon));
+                var latlng = [data[0].lat, data[0].lon]
 
-            // google anfragen
-            var lat = '54.0887', lon = '12.14049';
-            map.panTo(new L.LatLng(lat, lon));
+                if (surroundingCircle) {
+                    map.removeLayer(surroundingCircle);
+                    surroundingCircle = null;
+                    $(".js-surrounding").val($(".js-surrounding option:first").val());
+                }
+                // console.log(latlng);
+            });
+
         });
 
         adaptListHeight();
