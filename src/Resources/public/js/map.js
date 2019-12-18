@@ -453,7 +453,6 @@ window.onload = function () {
             $map = $('#map');
         return function () {
             if ($(window).width() < 1200) {
-                console.log('small')
                 $map.css({
                     'position': 'absolute',
                     'left': '-' + ($map.offset().left -15) + 'px',
