@@ -21,9 +21,9 @@
 
     <!-- Liste / Formular-->
     <div class="row list-map js-list-map">
-      <div class="col-12 col-md-5 list-column" id="js-company-list">
-        <h3>Liste</h3>
 
+      <div class="col-12 col-xl-5 list-column order-last order-xl-first" id="js-company-list">
+        <h3 class="d-none d-xl-block">Liste</h3>
         <div class="gb-input-group mb-3">
           <div class="gb-input-group-prepend">
             <span class="gb-input-group-text">
@@ -40,33 +40,7 @@
             </button>
           </div>
         </div>
-        <!-- <div class="ul-wrapper js-ul-wrapper"> -->
           <ul class="hotel-list list">
-            <!-- <li>
-          <span class="id" style="display:none;"><?php echo $company['id'] ?></span>
-          <input type="checkbox" id="id_test" class="list-column-checkbox">
-          <label for="id_test">
-            <div class="hotel-list-row">
-              <div class="list-item-col-1">
-                <img src="https://via.placeholder.com/170x100.png&text=Hotel-Logo">
-              </div>
-              <div class="list-item-col-2">
-                <h4>Quae vero fiducia dicuntur.</h3>
-                  <p>Salutantibus vitae elit libero, a pharetra Laugue. Pellentesque habitant morbi a pharetra habitant tristique morbi senectus et netus.</p>
-                  <div class="list-item-jobs">
-                    <div class="list-item-job cook"> </div>
-                    <div class="list-item-job gastro"></div>
-                    <div class="list-item-job hotelcleaner"></div>
-                    <div class="list-item-job hotelmanager"></div>
-                    <div class="list-item-job restaurant"></div>
-                  </div>
-              </div>
-              <div class="list-item-col-3">
-                <div class="hotellist_inputcheckbox"></div>
-              </div>
-            </div>
-          </label>
-        </li> -->
             <?php foreach($this->companies as $company): ?>
             <li>
               <input type="checkbox" id="company-<?php echo $company['id'] ?>" value="<?php echo $company['id'] ?>" class="list-column-checkbox js-list-column-checkbox" <?php echo ((in_array($company['id'], $this->post['hidden_companies']) ? 'checked="checked"' : '')) ?>>
@@ -99,16 +73,16 @@
         <!-- </div> -->
       </div>
       <!-- Map -->
-      <div class="col-12 col-md-7">
+      <div class="col-12 col-xl-7 order-first order-xl-last">
 
         <script type="text/javascript">
           var companies = JSON.parse('<?php echo json_encode($this->companies) ?>');
         </script>
-        <h3>Karte</h3>
+        <h3 class="d-none d-xl-block">Karte</h3>
         <div id="map"></div>
 
         <!-- Suchformular-->
-        <div class="row filter">
+        <div class="row filter d-none d-xl-flex">
           <div class="col-12 col-md-7">
             <div class="gastroform_wrapper gastroform_wrapper--vorname">
               <label class="gastroform_inputlabel">Postleitzahl</label>
@@ -134,8 +108,10 @@
 
       </div>
     </div>
-    <div class="form-div js-form-div" <?php echo ((count($this->errors) ? '' : 'style="display: none;"')) ?>>
-      <h3 id="formularancor">Deine Daten fürs Check-in.</h3>
+
+    <!-- Kontaktform -->
+    <div class="form-div js-form-div <?php echo ((count($this->errors) ? '' : 'd-xl-none')) ?>">
+      <h3 id="formularancor" class="d-none d-xl-block">Deine Daten fürs Check-in.</h3>
       <p>Verrate uns mehr über dich: wie du heißt, woher du kommst und was dich motiviert, einer von uns zu werden. Einfach Formular ausfüllen – und schon bist du am Start, sobald unsere Partnerunternehmen echte Gastroburner suchen.</p>
 
       <div class="gastroform_wrapper gastroform_wrapper--vorname">

@@ -171,9 +171,10 @@ button.active {
             .list-map .list-column .hotel-list li .list-column-checkbox + label .hotel-list-row .list-item-col-1 {
               flex-grow: 0;
               padding: 0px;
-              width: 185px;
-              min-width: 185px; }
+              width: 170px;
+              min-width: 170px; }
               .list-map .list-column .hotel-list li .list-column-checkbox + label .hotel-list-row .list-item-col-1 img {
+                max-height: 100px;
                 padding: 0px;
                 margin: 0px; }
             .list-map .list-column .hotel-list li .list-column-checkbox + label .hotel-list-row .list-item-col-3 {

@@ -287,11 +287,11 @@ var gastroBurnerMap = function () {
             var $this = $(this);
             if ($this.prop('checked')) {
                 $('form').append('<input type="hidden" class="js-hidden-company" name="hidden_companies[]" value="' + $this.val() + '">');
-                $('.js-form-div').show();
+                $('.js-form-div').removeClass('d-xl-none');
             } else {
                 $('.js-hidden-company[value="' + $this.val() + '"]').remove();
                 if (!$('.js-hidden-company').length) {
-                    $('.js-form-div').hide();
+                    $('.js-form-div').addClass('d-xl-none');
                 }
             }
         });
@@ -452,6 +452,18 @@ window.onload = function () {
             $container = $('.container'),
             $map = $('#map');
         return function () {
+            if ($(window).width() < 1200) {
+                console.log('small')
+                $map.css({
+                    'position': 'absolute',
+                    'left': '-' + ($map.offset().left -15) + 'px',
+                    'width': $(window).width()
+                });
+                $('#js-company-list').css({
+                    'margin-top': $map.height() + 20
+                })
+                return;
+            }
             $list.width(parseInt($container.width()) + parseInt($container.css('margin-right')) + 45); // + 3xmargin
             // setze höhe der karte: laut layout 1060x680
             // breite ist automatisch
