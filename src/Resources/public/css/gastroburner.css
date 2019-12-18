@@ -189,9 +189,13 @@ button.active {
                 height: 30px;
                 width: 30px; }
             .list-map .list-column .hotel-list li .list-column-checkbox + label .hotel-list-row .list-item-col-2 {
+              position: relative;
+              height: 100px;
               flex-grow: 1;
               padding: 0px 10px; }
               .list-map .list-column .hotel-list li .list-column-checkbox + label .hotel-list-row .list-item-col-2 h4 {
+                position: relative;
+                top: 0;
                 font-size: 18px;
                 line-height: 21px;
                 margin-bottom: 0px; }
@@ -199,6 +203,8 @@ button.active {
                 font-size: 12px;
                 line-heigt: 16px; }
               .list-map .list-column .hotel-list li .list-column-checkbox + label .hotel-list-row .list-item-col-2 .list-item-jobs {
+                position: absolute;
+                bottom: 4px;
                 display: flex;
                 justify-content: flex-start; }
                 .list-map .list-column .hotel-list li .list-column-checkbox + label .hotel-list-row .list-item-col-2 .list-item-jobs .list-item-job {

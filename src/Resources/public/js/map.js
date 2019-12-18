@@ -102,6 +102,9 @@ var gastroBurnerMap = function () {
          * + scrolling
          */
         adaptListHeight = (function () {
+            if ($(window).width() < 1200) {
+                return function(){};
+            }
             // var maxHeight = parseInt($('#map').css('height')) + 61;
             var $ul = $('.hotel-list'),
                 $map = $('#map'),
