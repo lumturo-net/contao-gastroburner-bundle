@@ -171,7 +171,7 @@ var gastroBurnerMap = function () {
                         triggerHook: 0,
                         duration: duration
                     })
-                        .addIndicators({ name: 'pin' })
+                        // .addIndicators({ name: 'pin' })
                         .on('start', function (e) {
                             var dir = e.target.controller().info("scrollDirection");
                             var duration = this.duration();
