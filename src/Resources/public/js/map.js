@@ -143,7 +143,7 @@ var gastroBurnerMap = function () {
                     if (scene) {
                         var state = scene.state();
                         // console.log(state);
-                        if (cene.duration() != duration) {
+                        if (scene.duration() != duration) {
                             if (state == "BEFORE") {
                                 // nur länge anpassen, rest dann in der szene
                                 scene.duration(duration);
