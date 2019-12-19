@@ -253,3 +253,6 @@ button.active {
             background-color: white; } }
 #map {
   height: 400px; }
+
+.spacer {
+  background-color: white; }

@@ -103,60 +103,155 @@ var gastroBurnerMap = function () {
          */
         adaptListHeight = (function () {
             if ($(window).width() < 1200) {
-                return function(){};
+                // mobile --> raus
+                return function () { }
             }
+
             // var maxHeight = parseInt($('#map').css('height')) + 61;
             var $ul = $('.hotel-list'),
                 $map = $('#map'),
-                itemCount = $ul.find('li').length;
-            var scene = null, controller = new ScrollMagic.Controller();
+                // maxHeight = $map.height() + $('.filter').height() - $('.gb-input-group.mb-3').height(),//+ 61;
+                itemHeight = $ul.find('li').first().height(),
+                $mod_gastroburnerapplyform = $('.mod_gastroburnerapplyform'),
+                modHeight = $mod_gastroburnerapplyform.height(),
+                $spacer = $('.js-spacer'),
+                scene = null, controller = new ScrollMagic.Controller();
 
 
             return function () {
-                // Höhe der Karte 
-                var maxHeight = $map.height() + 61;
                 var $newItems = $ul.find('li'),
-                    newItemCount = $newItems.length;
-                // var ulHeight = $ul.height();
-                var ulHeight = newItemCount * $newItems.eq(0).height();
-                if (itemCount == newItemCount && scene != null && maxHeight == ulHeight) {
-                    // if (maxHeight == ulHeight) {
-                    // bleibt alles wie bisher; filter haben keine Anpassung bedingt
-                    return;
-                }
-                if (ulHeight > maxHeight) {
-                    // if (newItemCount > itemCount) {
-                    if (scene) {
-                        scene.removePin(true);
-                        scene.remove();
-                        scene = null;
-                    }
+                    newItemCount = $newItems.length,
+                    maxHeight = $map.height() + $('.filter').height() - $('.gb-input-group.mb-3').height() + 7,//+ 61;
+                    ulHeight = newItemCount * itemHeight;//$newItems.eq(0).height();
+
+                // if (/*itemCount == newItemCount && scene != null &&*/ maxHeight == ulHeight) {
+                // if (maxHeight == ulHeight) {
+                // bleibt alles wie bisher; filter haben keine Anpassung bedingt
+                // return;
+                // }
+
+                // var progress = 0, scrollTop = 0;
+                // var diff = ulHeight - maxHeight - 7;
+                var duration = Math.max(1, ulHeight - maxHeight);
+                // console.log('duration=' + duration);
+
+                if (true){// || ulHeight > maxHeight) {
                     $ul.css({
                         'overflow': 'hidden',
                         'height': maxHeight
                     })
-                    var progress = 0, scrollTop = 0;
-                    var diff = ulHeight - maxHeight;
-                    var duration = ulHeight - maxHeight;
+                    if (scene) {
+                        var state = scene.state();
+                        console.log(state);
+                        if (scene.duration() != duration) {
+                            if (state == "BEFORE") {
+                                // nur länge anpassen, rest dann in der szene
+                                scene.duration(duration);
+                                scene.update(true);
+                                return;
+                            }
+                            if (state == "DURING") {
+                                // länge anpassen und an den Anfang springen
+                                scene.duration(duration);
+                                scene.update(true);
+                                $spacer.css('height', modHeight + duration);
+                                $(window).scrollTop(scene.triggerPosition());
+                            }
+                            return;
+                        }
+                        if (state == "AFTER") {
+                            // Länge anpassen
+                            console.log('AFTER')
+                            scene.duration(duration);
+                            scene.update(true);
+                            return;
+                        }
+                        return;
+                    }
+                    // if (scene) {
+                    //     scene.removePin(true);
+                    //     scene.remove();
+                    //     scene = null;
+                    // }
+                    // $ul.css({
+                    //     'overflow': 'hidden',
+                    //     'height': maxHeight
+                    // })
 
-                    // console.log('scene neu: duration = ' + duration)
-                    // console.log('anz = ' + newItemCount + "; height=" + $newItems.first().height());
+
                     scene = new ScrollMagic.Scene({
-                        triggerElement: '.mod_gastroburnerapplyform',
+                        triggerElement: '.js-spacer',//'.mod_gastroburnerapplyform',
                         triggerHook: 0,
                         duration: duration
                     })
-                        .setPin('.js-apply-form-wrapper')
-                        // .addIndicators({ name: 'pin' })
+                        .addIndicators({ name: 'pin' })
+                        .on('start', function (e) {
+                            var dir = e.target.controller().info("scrollDirection");
+                            var duration = this.duration();
+                            if (dir == 'FORWARD') {
+                                $spacer.css('height', modHeight + duration);
+                                $mod_gastroburnerapplyform.css({
+                                    position: 'fixed',
+                                    top: 0,
+                                    'z-index': 2
+                                });
+                            } else {
+                                $spacer.css('height', 0);
+                                $mod_gastroburnerapplyform.css({
+                                    position: 'initial',
+                                    top: 0
+                                });
+                                $(window).scrollTop($mod_gastroburnerapplyform.offset().top);
+                            }
+                        })
                         .on('progress', function (e) {
-                            progress = e.progress.toFixed(3);
-                            scrollTop = progress * diff;
+                            var progress = e.progress.toFixed(3);
+                            var scrollTop = progress * duration;
                             $ul.scrollTop(scrollTop);
                         })
+                        .on('end', function (e) {
+                            var dir = e.target.controller().info("scrollDirection");
+                            var duration = this.duration();
+                            if (dir == 'FORWARD') {
+                                $spacer.css('height', duration)
+                                $mod_gastroburnerapplyform.css({
+                                    position: 'initial',//'relative',
+                                    top: duration
+                                })
+                                $(window).scrollTop(scene.triggerPosition())// + duration);
+                                // $(window).scrollTop($mod_gastroburnerapplyform.offset().top);
+                            } else {
+                                $spacer.css('height', modHeight + duration);
+                                $mod_gastroburnerapplyform.css({
+                                    position: 'fixed',
+                                    top: 0
+                                });
+
+                                $(window).scrollTop($mod_gastroburnerapplyform.offset().top);
+                            }
+
+                        })
                         .addTo(controller);
+
+                    // console.log('scene neu: duration = ' + duration)
+                    // console.log('anz = ' + newItemCount + "; height=" + $newItems.first().height());
+                    // scene = new ScrollMagic.Scene({
+                    //     triggerElement: '.mod_gastroburnerapplyform',
+                    //     triggerHook: 0,
+                    //     duration: duration
+                    // })
+                    //     .setPin('.js-apply-form-wrapper')
+                    //     // .addIndicators({ name: 'pin' })
+                    //     .on('progress', function (e) {
+                    //         progress = e.progress.toFixed(3);
+                    //         scrollTop = progress * diff;
+                    //         $ul.scrollTop(scrollTop);
+                    //     })
+                    //     .addTo(controller);
                 }
                 else {
-                    // console.log('scene wech')
+                    console.log('scene wech')
+                    /*
                     $ul.css({
                         'overflow': 'initial',
                         'height': 'initial'
@@ -198,6 +293,7 @@ var gastroBurnerMap = function () {
                             })
                         }
                     }
+                    */
                 }
                 itemCount = newItemCount;
             }
@@ -372,7 +468,7 @@ var gastroBurnerMap = function () {
             return true;
         }
         var regexp = new RegExp(filter.job.search, 'i');
-        return company.shortname.search(regexp) != -1 || company.name.search(regexp) != -1 || company.description.search(regexp) != -1;
+        return company.shortname.search(regexp) != -1 || company.company.search(regexp) != -1 || company.description.search(regexp) != -1;
     }
 
     function _filterByJob(company) {
@@ -418,8 +514,10 @@ var gastroBurnerMap = function () {
                 // });
             });
             */
+            $('<div class="js-spacer spacer"></div>').insertBefore('.mod_gastroburnerapplyform');
             bsMap();
             bsList();
+            // brauche den Spacer ausserhalb dieses Modul-HTML-Snippets
         },
         getMap() {
             return map;
@@ -458,7 +556,7 @@ window.onload = function () {
             if ($(window).width() < 1200) {
                 $map.css({
                     'position': 'absolute',
-                    'left': '-' + ($map.offset().left -15) + 'px',
+                    'left': '-' + ($map.offset().left - 15) + 'px',
                     'width': $(window).width()
                 });
                 $('#js-company-list').css({
