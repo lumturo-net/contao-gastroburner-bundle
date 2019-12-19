@@ -135,49 +135,36 @@ var gastroBurnerMap = function () {
                 var duration = Math.max(1, ulHeight - maxHeight);
                 // console.log('duration=' + duration);
 
-                if (true){// || ulHeight > maxHeight) {
+                if (true) {// || ulHeight > maxHeight) {
                     $ul.css({
                         'overflow': 'hidden',
                         'height': maxHeight
                     })
                     if (scene) {
                         var state = scene.state();
-                        console.log(state);
-                        if (scene.duration() != duration) {
+                        // console.log(state);
+                        if (cene.duration() != duration) {
                             if (state == "BEFORE") {
                                 // nur länge anpassen, rest dann in der szene
                                 scene.duration(duration);
                                 scene.update(true);
-                                return;
                             }
                             if (state == "DURING") {
                                 // länge anpassen und an den Anfang springen
-                                scene.duration(duration);
-                                scene.update(true);
                                 $spacer.css('height', modHeight + duration);
                                 $(window).scrollTop(scene.triggerPosition());
+                                scene.duration(duration);
+                                scene.update(true);
+                            }
+                            if (state == "AFTER") {
+                                // Länge anpassen
+                                // console.log('AFTER: duration=' + duration)
+                                scene.duration(duration);
+                                // scene.update(true);
                             }
                             return;
                         }
-                        if (state == "AFTER") {
-                            // Länge anpassen
-                            console.log('AFTER')
-                            scene.duration(duration);
-                            scene.update(true);
-                            return;
-                        }
-                        return;
                     }
-                    // if (scene) {
-                    //     scene.removePin(true);
-                    //     scene.remove();
-                    //     scene = null;
-                    // }
-                    // $ul.css({
-                    //     'overflow': 'hidden',
-                    //     'height': maxHeight
-                    // })
-
 
                     scene = new ScrollMagic.Scene({
                         triggerElement: '.js-spacer',//'.mod_gastroburnerapplyform',
