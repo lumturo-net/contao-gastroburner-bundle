@@ -106,7 +106,7 @@ class GastroburnerApplyFormModule extends \Module
 
 
         $arrFields = ['id', 'company', 'street', 'postal', 'city', 'lat', 'lon', 'email', 'shortname', 'description', 'restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro', 'companyLogo'];
-        $arrDbCompanies= Database::getInstance()->prepare('SELECT ' . implode(', ', $arrFields) . ' FROM tl_member ORDER BY shortname;')->execute()->fetchAllAssoc();
+        $arrDbCompanies= Database::getInstance()->prepare('SELECT ' . implode(', ', $arrFields) . ' FROM tl_member WHERE disable=\'\' AND show_in_frontend=\'1\' ORDER BY shortname;')->execute()->fetchAllAssoc();
         $arrCompanies = array();
         foreach ($arrDbCompanies as $arrCompany) {
             $objLogo = \FilesModel::findOneBy('uuid', $arrCompany['companyLogo']);

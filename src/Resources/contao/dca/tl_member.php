@@ -9,9 +9,15 @@
  */
 
 // Add palette
+
+use Contao\StringUtil;
+
+$GLOBALS['TL_DCA']['tl_member']['list']['label']['fields'] = array(/*'icon',*/'companyLogo', 'shortname', 'username', 'dateAdded');
+$GLOBALS['TL_DCA']['tl_member']['list']['label']['label_callback'] = array('tl_gb_member', 'addIcon');
+
 $GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace('company,', 'company,shortname,companyLogo,description,', $GLOBALS['TL_DCA']['tl_member']['palettes']['default']);
 $GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace('country;', 'country,lat,lon;', $GLOBALS['TL_DCA']['tl_member']['palettes']['default']);
-$GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace('newsletter;', 'newsletter;{job_legend},restaurant,cook,hotelcleaner,hotelmanager,gastro;', $GLOBALS['TL_DCA']['tl_member']['palettes']['default']);
+$GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace('newsletter;', 'newsletter;{job_legend},show_in_frontend,restaurant,cook,hotelcleaner,hotelmanager,gastro;', $GLOBALS['TL_DCA']['tl_member']['palettes']['default']);
 
 // Add load callback
 // $GLOBALS['TL_DCA']['tl_member']['config']['onload_callback'][] = array('Newsletter', 'updateAccount');
@@ -26,9 +32,9 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['companyLogo'] = array(
     'label' => &$GLOBALS['TL_LANG']['tl_member']['companyLogo'],
     'exclude'                 => false,
     'inputType'               => 'fileTree',
-    // 'save_callback' => array(
-    //     array('tl_gb_member', 'uploadLogo')
-    // ),
+    'save_callback' => array(
+        array('tl_gb_member', 'uploadLogo')
+    ),
     'eval'                    => array(
         'files' => true,
         'filesOnly' => true,
@@ -161,6 +167,16 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['lon'] = array(
 );
 
 
+$GLOBALS['TL_DCA']['tl_member']['fields']['show_in_frontend'] = array(
+    'label' => &$GLOBALS['TL_LANG']['tl_member']['show_in_frontend'],
+    'exclude'                 => true,
+    'filter'                  => true,
+    'inputType'               => 'checkbox',
+    // 'eval'                    => array('submitOnChange' => true),
+    'sql'                     => "char(1) NOT NULL default ''"
+);
+
+
 
 
 
@@ -176,6 +192,60 @@ class tl_gb_member extends Contao\Backend
     {
         parent::__construct();
         $this->import('Contao\BackendUser', 'User');
+    }
+
+    /**
+     * Add an image to each record
+     *
+     * @param array                $row
+     * @param string               $label
+     * @param Contao\DataContainer $dc
+     * @param array                $args
+     *
+     * @return array
+     */
+    public function addIcon($row, $label, Contao\DataContainer $dc, $args)
+    {
+        /*
+        $image = 'member';
+        $time = Contao\Date::floorToMinute();
+
+        $disabled = ($row['start'] !== '' && $row['start'] > $time) || ($row['stop'] !== '' && $row['stop'] < $time);
+
+        if ($row['useTwoFactor']) {
+            $image .= '_two_factor';
+        }
+
+        if ($row['disable'] || $disabled) {
+            $image .= '_';
+        }
+
+        $args[0] = sprintf('<div class="list_icon_new" style="background-image:url(\'%ssystem/themes/%s/icons/%s.svg\')" data-icon="%s.svg" data-icon-disabled="%s.svg">&nbsp;</div>', Contao\System::getContainer()->get('contao.assets.assets_context')->getStaticUrl(), Contao\Backend::getTheme(), $image, $disabled ? $image : rtrim($image, '_'), rtrim($image, '_') . '_');
+        */
+
+        // companyLogo
+        $objLogo = \Contao\FilesModel::findBy('uuid', $row['companyLogo']);
+        if ($objLogo) {
+            $args[0] = '<img style="width: 15px; height: 15px;" src="/' . $objLogo->path . '">';
+        } else {
+            $args[0] = '';
+        }
+
+        return $args;
+    }
+
+    /**
+     * Warum auch immer: muss selbständig den Wert für das Upload-Feld korrekt holen und setzen :-(
+     * 
+     *
+     */
+    public function uploadLogo($value, $null)
+    {
+        $arrSession = $_SESSION['FILES'];
+        if ($arrSession && isset($arrSession['companyLogo'])) {
+            return StringUtil::uuidToBin($arrSession['companyLogo']['uuid']);
+        }
+        return $value;
     }
 
     public function saveLon($value, $objDca)

@@ -22,5 +22,5 @@ $GLOBALS['BE_MOD']['gastroburner']['tl_apply'] = array(
 //    'stylesheet' => '/system/modules/genius/assets/css/backend/eval.css',
 );
 $GLOBALS['BE_MOD']['gastroburner']['tl_company'] = array(
-    'tables' => array('tl_company'),
+    'tables' => array('tl_member'),
 );
