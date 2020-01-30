@@ -48,9 +48,15 @@
                 <span class="id" style="display:none;"><?php echo $company['id'] ?></span>
                 <span class="name" style="display:none;"><?php echo $company['company'] ?></span>
                 <div class="hotel-list-row">
+                  <?php if ($company['companyLogo']) : ?>
+                  <div class="list-item-col-1" 
+                    style="background-image: url(<?php echo $company['companyLogo'] ?>); background-repeat: no-repeat; background-size: contain; background-position: center;">
+                  </div>
+                  <?php else : ?>
                   <div class="list-item-col-1">
                     <img src="<?php echo $company['companyLogo'] ?>">
                   </div>
+                  <?php endif ?>
                   <div class="list-item-col-2">
                     <h4><?php echo $company['shortname'] ?></h3>
                       <p class="d-none d-xl-block"><?php echo $company['description'] ?> description</p>

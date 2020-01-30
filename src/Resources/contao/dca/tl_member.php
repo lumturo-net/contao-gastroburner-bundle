@@ -13,8 +13,10 @@
 use Contao\StringUtil;
 
 // Listen-Anzeige
-$GLOBALS['TL_DCA']['tl_member']['list']['label']['fields'] = array(/*'icon',*/'companyLogo', 'shortname', 'username', 'dateAdded');
+$GLOBALS['TL_DCA']['tl_member']['list']['label']['fields'] = array('companyLogo', 'shortname', 'username', 'dateAdded', 'show_in_frontend');
+
 $GLOBALS['TL_DCA']['tl_member']['list']['label']['label_callback'] = array('tl_gb_member', 'addIcon');
+// $GLOBALS['TL_DCA']['tl_member']['list']['sorting']['header_callback'] = array('tl_gb_member', 'header');
 
 $GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace('company,', 'company,shortname,companyLogo,description,', $GLOBALS['TL_DCA']['tl_member']['palettes']['default']);
 $GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace('country;', 'country,lat,lon;', $GLOBALS['TL_DCA']['tl_member']['palettes']['default']);
@@ -27,7 +29,7 @@ $GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace('newsletter
 // $GLOBALS['TL_DCA']['tl_member']['fields']['disable']['save_callback'][] = array('Newsletter', 'onToggleVisibility');
 
 
-$GLOBALS['TL_DCA']['tl_member']['fields']['company']['eval']['mandatory'] = true;
+// $GLOBALS['TL_DCA']['tl_member']['fields']['company']['eval']['mandatory'] = true;
 // Add field
 $GLOBALS['TL_DCA']['tl_member']['fields']['companyLogo'] = array(
     'label' => &$GLOBALS['TL_LANG']['tl_member']['companyLogo'],
@@ -44,7 +46,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['companyLogo'] = array(
         'readonly' => false,
         'uploadFolder' => \FilesModel::findByPath($GLOBALS['TL_CONFIG']['uploadPath'] . '/companyLogos')->uuid,
         'extensions' => Contao\Config::get('validImageTypes'),
-        'mandatory' => true,
+        'mandatory' => false,
         'feEditable' => true,
     ),
     'sql'                     => "binary(16) NULL"
@@ -203,9 +205,14 @@ class tl_gb_member extends Contao\Backend
         $this->import('Contao\BackendUser', 'User');
     }
 
+
+    public function header($a, $b = 1, $c = 1, $d = 1) {
+        return $a;
+    }
+
     /**
-     * Add an image to each record
-     *
+     * Listenanzeige im Backend anpassen
+     * 
      * @param array                $row
      * @param string               $label
      * @param Contao\DataContainer $dc
@@ -215,22 +222,25 @@ class tl_gb_member extends Contao\Backend
      */
     public function addIcon($row, $label, Contao\DataContainer $dc, $args)
     {
-        /*
-        $image = 'member';
-        $time = Contao\Date::floorToMinute();
+        // /*
+        $image = 'ok';
+        // $time = Contao\Date::floorToMinute();
 
-        $disabled = ($row['start'] !== '' && $row['start'] > $time) || ($row['stop'] !== '' && $row['stop'] < $time);
+        // $disabled = ($row['start'] !== '' && $row['start'] > $time) || ($row['stop'] !== '' && $row['stop'] < $time);
 
-        if ($row['useTwoFactor']) {
-            $image .= '_two_factor';
+        // if ($row['useTwoFactor']) {
+        //     $image .= '_two_factor';
+        // }
+
+        // if ($row['disable'] || $disabled) {
+        //     $image .= '_';
+        // }
+        if ($row['show_in_frontend'] == '') {
+            $image = 'delete';
         }
 
-        if ($row['disable'] || $disabled) {
-            $image .= '_';
-        }
-
-        $args[0] = sprintf('<div class="list_icon_new" style="background-image:url(\'%ssystem/themes/%s/icons/%s.svg\')" data-icon="%s.svg" data-icon-disabled="%s.svg">&nbsp;</div>', Contao\System::getContainer()->get('contao.assets.assets_context')->getStaticUrl(), Contao\Backend::getTheme(), $image, $disabled ? $image : rtrim($image, '_'), rtrim($image, '_') . '_');
-        */
+        $args[4] = sprintf('<div class="list_icon_new" style="background-image:url(\'%ssystem/themes/%s/icons/%s.svg\')" data-icon="%s.svg" data-icon-disabled="%s.svg">&nbsp;</div>', Contao\System::getContainer()->get('contao.assets.assets_context')->getStaticUrl(), Contao\Backend::getTheme(), $image, $disabled ? $image : rtrim($image, '_'), rtrim($image, '_') . '_');
+        // */
 
         // companyLogo
         $objLogo = \Contao\FilesModel::findBy('uuid', $row['companyLogo']);
