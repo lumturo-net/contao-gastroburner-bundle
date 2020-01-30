@@ -3,14 +3,16 @@
 namespace Lumturo\ContaoGastroburnerBundle\Module;
 
 use Contao\Database;
+use Contao\Email;
 use Contao\Validator;
 
-class GastroburnerApplyFormModule extends \Module
+class GastroburnerApplyFormMapModule extends \Contao\Module
 {
     /**
      * @var string
      */
-    protected $strTemplate = 'mod_gastroburner_applyform.v1';
+    // protected $strTemplate = 'mod_gastroburner_applyform';
+    protected $strTemplate = 'mod_gastroburner_applyformmap';
 
     /**
      * Displays a wildcard in the back end.
@@ -22,7 +24,7 @@ class GastroburnerApplyFormModule extends \Module
         if (TL_MODE == 'BE') {
             $template = new \BackendTemplate('be_wildcard');
 
-            $template->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['gastroburnerapplyform'][0]) . ' ###';
+            $template->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['gastroburnerapplyformmap'][0]) . ' ###';
             $template->title = $this->headline;
             $template->id = $this->id;
             $template->link = $this->name;
@@ -30,9 +32,14 @@ class GastroburnerApplyFormModule extends \Module
 
             return $template->parse();
         } else {
-            $GLOBALS['TL_JAVASCRIPT'][] = 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js';
+            // $GLOBALS['TL_JAVASCRIPT'][] = 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js';
             // // $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/require.js';
-            // $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/map.js';
+            $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/leaflet.js';
+            // $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/list.min.js';
+            $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/list.js';
+            $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/map.js';
+            $GLOBALS['TL_JAVASCRIPT'][] = 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.js';
+            $GLOBALS['TL_JAVASCRIPT'][] = 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js';
         }
 
         return parent::generate();
@@ -43,6 +50,8 @@ class GastroburnerApplyFormModule extends \Module
      */
     protected function compile()
     {
+        global $objPage;
+
         $arrErrors = [];
         $arrPost = [
             'companies' => [],
@@ -90,23 +99,29 @@ class GastroburnerApplyFormModule extends \Module
             if (!count($arrErrors)) {
                 $arrValues['tstamp'] = time();
                 $this->Database->prepare('INSERT INTO tl_apply %s')->set($arrValues)->execute();
-                // $this->sendMails($arrPost);
+                $this->sendMails($arrPost);
                 $this->redirect('vielen-dank.html');
             }
         }
 
 
-        // $arrCompleteCompanies = Database::getInstance()->prepare('SELECT * FROM tl_company ORDER BY shortname;')->execute()->fetchAllAssoc();
-        // $arrCompanies = array();
-        // foreach ($arrCompleteCompanies as $arrCompany) {
-        //     unset($arrCompany['tstamp']);
-        //     $arrCompanies[$arrCompany['id']] = $arrCompany;
-        // }
+        $arrFields = ['id', 'company', 'street', 'postal', 'city', 'lat', 'lon', 'email', 'shortname', 'description', 'restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro', 'companyLogo'];
+        $arrDbCompanies= Database::getInstance()->prepare('SELECT ' . implode(', ', $arrFields) . ' FROM tl_member WHERE disable=\'\' AND show_in_frontend=\'1\' ORDER BY shortname;')->execute()->fetchAllAssoc();
+        $arrCompanies = array();
+        foreach ($arrDbCompanies as $arrCompany) {
+            $objLogo = \FilesModel::findOneBy('uuid', $arrCompany['companyLogo']);
+            if ($objLogo) {
+                $arrCompany['companyLogo'] = $objLogo->path;
+            } else {
+                $arrCompany['companyLogo'] = 'https://via.placeholder.com/170x100.png&text=Hotel-Logo';
+            }
+            $arrCompanies[$arrCompany['id']] = $arrCompany;
+        }
 
         $this->Template->post = $arrPost;
-        // $this->Template->companies = $arrCompanies;
+        $this->Template->companies = $arrCompanies;
         $this->Template->errors = $arrErrors;
-        $this->Template->url = $this->getApplyFormPageUrl();
+        $this->Template->url = \Controller::generateFrontendUrl($objPage->row()); //$this->getApplyFormPageUrl();
     }
 
     /**
@@ -118,10 +133,22 @@ class GastroburnerApplyFormModule extends \Module
             return;
         }
 
-        $arrCompanies = Database::getInstance()->prepare('SELECT * FROM tl_company WHERE  id in (?) ORDER BY shortname;')->execute(implode(',', $arrPost['hidden_companies']))->fetchAllAssoc();
+        $arrCompanies = Database::getInstance()->prepare('SELECT * FROM tl_member WHERE  id in (?) ORDER BY shortname;')->execute(implode(',', $arrPost['hidden_companies']))->fetchAllAssoc();
+
+        foreach ($arrCompanies as $arrCompany) {
+            $objEmail = new Email();
+            $objEmail->charset = 'utf-8';
+            $objEmail->subject = 'Bewerber von der Webseite Gastroburner.de';
+            $objEmail->from = 'no-reply@gastroburner.de';
+            $objHtmlMailTemplate = new \Contao\FrontendTemplate('mail_gastroburner_application');
+            $objHtmlMailTemplate->post = $arrPost;
+            $objHtmlMailTemplate->company = $arrCompany;
+            $objEmail->html = $objHtmlMailTemplate->parse();
+            $objEmail->sendTo($arrCompany['email']);
+        }
     }
 
-    protected function getApplyFormPageUrl()
+    protected function getThankyouFormPageUrl()
     {
         $intPageId = $GLOBALS['TL_CONFIG']['gastroburner_applyform_page'];
 
