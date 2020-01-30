@@ -124,164 +124,98 @@ var gastroBurnerMap = function () {
                     maxHeight = $map.height() + $('.filter').height() - $('.gb-input-group.mb-3').height() + 7,//+ 61;
                     ulHeight = newItemCount * itemHeight;//$newItems.eq(0).height();
 
-                // if (/*itemCount == newItemCount && scene != null &&*/ maxHeight == ulHeight) {
-                // if (maxHeight == ulHeight) {
-                // bleibt alles wie bisher; filter haben keine Anpassung bedingt
-                // return;
-                // }
+                // var duration = Math.max(1, ulHeight - maxHeight);
 
-                // var progress = 0, scrollTop = 0;
-                // var diff = ulHeight - maxHeight - 7;
-                var duration = Math.max(1, ulHeight - maxHeight);
-                // console.log('duration=' + duration);
-
-                if (true) {// || ulHeight > maxHeight) {
+                // if (true) {// || ulHeight > maxHeight) {
                     $ul.css({
-                        'overflow': 'hidden',
+                        'overflow-y': 'auto',
+                        'overflow-x': 'hidden',
                         'height': maxHeight
                     })
-                    if (scene) {
-                        var state = scene.state();
-                        // console.log(state);
-                        if (scene.duration() != duration) {
-                            if (state == "BEFORE") {
-                                // nur länge anpassen, rest dann in der szene
-                                scene.duration(duration);
-                                scene.update(true);
-                            }
-                            if (state == "DURING") {
-                                // länge anpassen und an den Anfang springen
-                                $spacer.css('height', modHeight + duration);
-                                $(window).scrollTop(scene.triggerPosition());
-                                scene.duration(duration);
-                                scene.update(true);
-                            }
-                            if (state == "AFTER") {
-                                // Länge anpassen
-                                // console.log('AFTER: duration=' + duration)
-                                scene.duration(duration);
-                                // scene.update(true);
-                            }
-                            return;
-                        }
-                    }
+                    // if (scene) {
+                    //     var state = scene.state();
+                    //     // console.log(state);
+                    //     if (scene.duration() != duration) {
+                    //         if (state == "BEFORE") {
+                    //             // nur länge anpassen, rest dann in der szene
+                    //             scene.duration(duration);
+                    //             scene.update(true);
+                    //         }
+                    //         if (state == "DURING") {
+                    //             // länge anpassen und an den Anfang springen
+                    //             $spacer.css('height', modHeight + duration);
+                    //             $(window).scrollTop(scene.triggerPosition());
+                    //             scene.duration(duration);
+                    //             scene.update(true);
+                    //         }
+                    //         if (state == "AFTER") {
+                    //             // Länge anpassen
+                    //             // console.log('AFTER: duration=' + duration)
+                    //             scene.duration(duration);
+                    //             // scene.update(true);
+                    //         }
+                    //         return;
+                    //     }
+                    // }
 
-                    scene = new ScrollMagic.Scene({
-                        triggerElement: '.js-spacer',//'.mod_gastroburnerapplyform',
-                        triggerHook: 0,
-                        duration: duration
-                    })
-                        // .addIndicators({ name: 'pin' })
-                        .on('start', function (e) {
-                            var dir = e.target.controller().info("scrollDirection");
-                            var duration = this.duration();
-                            if (dir == 'FORWARD') {
-                                $spacer.css('height', modHeight + duration);
-                                $mod_gastroburnerapplyform.css({
-                                    position: 'fixed',
-                                    top: 0,
-                                    'z-index': 2
-                                });
-                            } else {
-                                $spacer.css('height', 0);
-                                $mod_gastroburnerapplyform.css({
-                                    position: 'initial',
-                                    top: 0
-                                });
-                                $(window).scrollTop($mod_gastroburnerapplyform.offset().top);
-                            }
-                        })
-                        .on('progress', function (e) {
-                            var progress = e.progress.toFixed(3);
-                            var scrollTop = progress * duration;
-                            $ul.scrollTop(scrollTop);
-                        })
-                        .on('end', function (e) {
-                            var dir = e.target.controller().info("scrollDirection");
-                            var duration = this.duration();
-                            if (dir == 'FORWARD') {
-                                $spacer.css('height', duration)
-                                $mod_gastroburnerapplyform.css({
-                                    position: 'initial',//'relative',
-                                    top: duration
-                                })
-                                $(window).scrollTop(scene.triggerPosition())// + duration);
-                                // $(window).scrollTop($mod_gastroburnerapplyform.offset().top);
-                            } else {
-                                $spacer.css('height', modHeight + duration);
-                                $mod_gastroburnerapplyform.css({
-                                    position: 'fixed',
-                                    top: 0
-                                });
-
-                                $(window).scrollTop($mod_gastroburnerapplyform.offset().top);
-                            }
-
-                        })
-                        .addTo(controller);
-
-                    // console.log('scene neu: duration = ' + duration)
-                    // console.log('anz = ' + newItemCount + "; height=" + $newItems.first().height());
                     // scene = new ScrollMagic.Scene({
-                    //     triggerElement: '.mod_gastroburnerapplyform',
+                    //     triggerElement: '.js-spacer',//'.mod_gastroburnerapplyform',
                     //     triggerHook: 0,
                     //     duration: duration
                     // })
-                    //     .setPin('.js-apply-form-wrapper')
                     //     // .addIndicators({ name: 'pin' })
+                    //     .on('start', function (e) {
+                    //         var dir = e.target.controller().info("scrollDirection");
+                    //         var duration = this.duration();
+                    //         if (dir == 'FORWARD') {
+                    //             $spacer.css('height', modHeight + duration);
+                    //             $mod_gastroburnerapplyform.css({
+                    //                 position: 'fixed',
+                    //                 top: 0,
+                    //                 'z-index': 2
+                    //             });
+                    //         } else {
+                    //             $spacer.css('height', 0);
+                    //             $mod_gastroburnerapplyform.css({
+                    //                 position: 'initial',
+                    //                 top: 0
+                    //             });
+                    //             $(window).scrollTop($mod_gastroburnerapplyform.offset().top);
+                    //         }
+                    //     })
                     //     .on('progress', function (e) {
-                    //         progress = e.progress.toFixed(3);
-                    //         scrollTop = progress * diff;
+                    //         var progress = e.progress.toFixed(3);
+                    //         var scrollTop = progress * duration;
                     //         $ul.scrollTop(scrollTop);
                     //     })
+                    //     .on('end', function (e) {
+                    //         var dir = e.target.controller().info("scrollDirection");
+                    //         var duration = this.duration();
+                    //         if (dir == 'FORWARD') {
+                    //             $spacer.css('height', duration)
+                    //             $mod_gastroburnerapplyform.css({
+                    //                 position: 'initial',//'relative',
+                    //                 top: duration
+                    //             })
+                    //             $(window).scrollTop(scene.triggerPosition())// + duration);
+                    //             // $(window).scrollTop($mod_gastroburnerapplyform.offset().top);
+                    //         } else {
+                    //             $spacer.css('height', modHeight + duration);
+                    //             $mod_gastroburnerapplyform.css({
+                    //                 position: 'fixed',
+                    //                 top: 0
+                    //             });
+
+                    //             $(window).scrollTop($mod_gastroburnerapplyform.offset().top);
+                    //         }
+
+                    //     })
                     //     .addTo(controller);
-                }
-                else {
-                    console.log('scene wech')
-                    /*
-                    $ul.css({
-                        'overflow': 'initial',
-                        'height': 'initial'
-                    }).scrollTop(0);
-                    if (scene) {
-                        // scene.removePin(true);
-                        // lasse die szene so stehen, allerdings länge 1 und trigger = akt.Position
-                        // damit es kein springen in der seite gibt, falls ich mitten in szene bind
-                        // und der filter die liste aber einkürzt, so dass kein scrolling mehr nötig wäre
-                        // scene.remove();
-                        // scene = null;
-                        var newDuration = $(window).scrollTop() - scene.scrollOffset() + 1;
-                        if (newDuration < 0 || scene.state() != 'DURING') {
-                            // noch gar nicht gestartet
-                            if (scene) {
-                                scene.remove();
-                                scene = null;
-                                $('.scrollmagic-pin-spacer').css({
-                                    'padding-top': '0px',
-                                    'min-height': '0px'
-                                })
-                            }
-                        } else {
-                            // mittendrin --> hier beenden (duration verkürzen)
-                            scene.duration(newDuration)
-                            scene.on('end', function (e) {
-                                if (scene) {
-                                    scene.remove();
-                                    scene = null;
-                                    // manuell: pin-spacer höhe auf 0
-                                    // var scrollDiff = parseInt($('.scrollmagic-pin-spacer').css('padding-top')) + parseInt($('.scrollmagic-pin-spacer').css('min-height'));
-                                    $('.scrollmagic-pin-spacer').css({
-                                        'padding-top': '0px',
-                                        'min-height': '0px'
-                                    })
-                                    // scrollversatz ausgleichen
-                                    // $(window).scrollTop($(window).scrollTop() + scrollDiff + 10);
-                                }
-                            })
-                        }
-                    }
-                    */
-                }
+
+                // }
+                // else {
+                //     console.log('scene wech')
+                // }
                 itemCount = newItemCount;
             }
         })();
