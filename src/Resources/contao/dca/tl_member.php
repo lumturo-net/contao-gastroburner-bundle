@@ -12,6 +12,7 @@
 
 use Contao\StringUtil;
 
+// Listen-Anzeige
 $GLOBALS['TL_DCA']['tl_member']['list']['label']['fields'] = array(/*'icon',*/'companyLogo', 'shortname', 'username', 'dateAdded');
 $GLOBALS['TL_DCA']['tl_member']['list']['label']['label_callback'] = array('tl_gb_member', 'addIcon');
 
@@ -54,7 +55,10 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['shortname'] = array(
     'label' => &$GLOBALS['TL_LANG']['tl_member']['shortname'],
     'exclude' => false,
     'inputType' => 'text',
-    'eval' => array('mandatory' => true, 'maxlength' => 255, 'tl_class' => 'w50'),
+    'eval' => array(
+        'mandatory' => true, 'maxlength' => 255, 'tl_class' => 'w50',
+        'feEditable' => true,
+    ),
     'sql' => "varchar(255) NOT NULL default ''",
 );
 
@@ -122,9 +126,11 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['description'] = array(
     'exclude' => false,
     'inputType' => 'textarea',
     'eval' => array(
+        'feEditable' => true,
         // 'rte' => 'tinyMCE',
         'mandatory' => true,
         'class' => 'noresize',
+
     ),
     'sql' => "text NULL default NULL",
     // 'sql' => "text NOT NULL default ''",
@@ -173,6 +179,9 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['show_in_frontend'] = array(
     'filter'                  => true,
     'inputType'               => 'checkbox',
     // 'eval'                    => array('submitOnChange' => true),
+    'eval' => [
+        'feEditable' => true,
+    ],
     'sql'                     => "char(1) NOT NULL default ''"
 );
 
