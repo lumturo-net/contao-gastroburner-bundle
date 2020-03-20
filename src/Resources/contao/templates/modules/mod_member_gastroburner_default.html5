@@ -1,0 +1,56 @@
+<!-- indexer::stop -->
+<div class="<?= $this->class ?> block" <?= $this->cssID ?><?php if ($this->style): ?> style="<?= $this->style ?>" <?php endif; ?>>
+
+    <?php if ($this->headline): ?>
+    <<?= $this->hl ?>><?= $this->headline ?></<?= $this->hl ?>>
+    <?php endif; ?>
+
+    <?php if ($this->message): ?>
+    <p class="tl_confirm"><?= $this->message ?></p>
+    <?php endif; ?>
+
+    <form<?php if ($this->action): ?> action="<?= $this->action ?>" <?php endif; ?> id="<?= $this->formId ?>" class="gastroburner-form" method="post" enctype="<?= $this->enctype ?>">
+        <div class="formbody">
+            <input type="hidden" name="FORM_SUBMIT" value="<?= $this->formId ?>">
+            <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
+            <div class="fields">
+                <h2>Firmendaten</h2>
+                <?php $arrFields = $this->named_fields ?>
+                <?php echo $arrFields['company']; unset($arrFields['company']); ?>
+                <?php echo $arrFields['shortname']; unset($arrFields['shortname']) ?>
+                <?php echo $arrFields['companyLogo']; unset($arrFields['companyLogo']) ?>
+                <?php echo $arrFields['description']; unset($arrFields['description']) ?>
+                <h2>Ansprechpartner</h2>
+                <?php foreach($arrFields as $strField) : ?>
+                    <?php echo $strField ?>
+                <?php endforeach ?>
+                <h2>Wir bieten folgende Anzahl an Ausbildungsplätzen an</h2>
+                <?php echo $this->named_job_fields['restaurant'] ?>
+                <?php echo $this->named_job_fields['cook'] ?>
+                <?php echo $this->named_job_fields['hotelcleaner'] ?>
+                <?php echo $this->named_job_fields['hotelmanager'] ?>
+                <?php echo $this->named_job_fields['gastro'] ?>
+            </div>
+            <div class="widget widget-submit">
+
+                <button class="btn btn--primary" type="submit">
+                    <div class="btninner"><?= $this->slabel ?></div><span style="top: 183.375px; left: 390.396px;"></span>
+                </button>
+
+            </div>
+        </div>
+        </form>
+        <script type="text/javascript">
+            window.onload = function () {
+                var $logo = $('#company-logo');
+                if ($logo) {
+                    $logo.show();
+                    var $widget = $('.widget-upload');
+                    var $fileUpload = $widget.find('input[type="file"]');
+                    $fileUpload.css('width', '75%');
+                    $fileUpload.prop('required', false);
+                }
+            };
+        </script>
+</div>
+<!-- indexer::continue -->
