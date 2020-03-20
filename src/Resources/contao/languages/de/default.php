@@ -64,4 +64,4 @@ $GLOBALS['TL_LANG']['tl_member']['hotelcleaner'] = array('Hotelfachkraft');
 $GLOBALS['TL_LANG']['tl_member']['hotelmanager'] = array('Hotelkaufmann/-frau');
 $GLOBALS['TL_LANG']['tl_member']['gastro'] = array('Fachkraft im Gastrogewerbe');
 $GLOBALS['TL_LANG']['tl_member']['show_in_frontend'] = array('ausgeben');
-$GLOBALS['TL_LANG']['tl_member']['description'] = array('Beschreibung');
+$GLOBALS['TL_LANG']['tl_member']['description'] = array('Beschreibung der Firma');
