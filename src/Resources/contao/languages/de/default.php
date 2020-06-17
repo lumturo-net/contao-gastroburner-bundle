@@ -26,7 +26,7 @@ $GLOBALS['TL_LANG']['tl_apply']['cook'] = array('Koch');
 $GLOBALS['TL_LANG']['tl_apply']['restaurant'] = array('Restaurantfachkraft');
 $GLOBALS['TL_LANG']['tl_apply']['hotelcleaner'] = array('Hotelfachkraft');
 $GLOBALS['TL_LANG']['tl_apply']['hotelmanager'] = array('Hotelkaufmann/-frau');
-$GLOBALS['TL_LANG']['tl_apply']['gastro'] = array('Fachkraft im Gastrogewerbe');
+$GLOBALS['TL_LANG']['tl_apply']['gastro'] = array('Fachkraft im Gastgewerbe');
 $GLOBALS['TL_LANG']['tl_apply']['beschreibung_legend'] = 'Beschreibung';
 $GLOBALS['TL_LANG']['tl_apply']['beschreibung'] = array('Beschreibung');
 
@@ -49,7 +49,7 @@ $GLOBALS['TL_LANG']['tl_company']['restaurant'] = array('Restaurantfachkraft');
 $GLOBALS['TL_LANG']['tl_company']['cook'] = array('Koch');
 $GLOBALS['TL_LANG']['tl_company']['hotelcleaner'] = array('Hotelfachkraft');
 $GLOBALS['TL_LANG']['tl_company']['hotelmanager'] = array('Hotelkaufmann/-frau');
-$GLOBALS['TL_LANG']['tl_company']['gastro'] = array('Fachkraft im Gastrogewerbe');
+$GLOBALS['TL_LANG']['tl_company']['gastro'] = array('Fachkraft im Gastgewerbe');
 $GLOBALS['TL_LANG']['tl_company']['description_legend'] = 'Beschreibung';
 $GLOBALS['TL_LANG']['tl_company']['description'] = array('Beschreibung');
 
@@ -62,6 +62,6 @@ $GLOBALS['TL_LANG']['tl_member']['restaurant'] = array('Restaurantfachkraft');
 $GLOBALS['TL_LANG']['tl_member']['cook'] = array('Koch');
 $GLOBALS['TL_LANG']['tl_member']['hotelcleaner'] = array('Hotelfachkraft');
 $GLOBALS['TL_LANG']['tl_member']['hotelmanager'] = array('Hotelkaufmann/-frau');
-$GLOBALS['TL_LANG']['tl_member']['gastro'] = array('Fachkraft im Gastrogewerbe');
+$GLOBALS['TL_LANG']['tl_member']['gastro'] = array('Fachkraft im Gastgewerbe');
 $GLOBALS['TL_LANG']['tl_member']['show_in_frontend'] = array('ausgeben');
 $GLOBALS['TL_LANG']['tl_member']['description'] = array('Beschreibung der Firma');
