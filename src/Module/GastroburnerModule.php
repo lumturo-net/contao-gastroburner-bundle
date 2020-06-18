@@ -26,7 +26,7 @@ class GastroburnerModule extends \Module
         'COOK' => 'Koch',
         'HOTELCLEANER' => 'Hotelfachkraft',
         'HOTELMANAGER' => 'Hotelkauf-mann/-frau',
-        'GASTRO' => 'Fachkraft im Gastrogewerbe',
+        'GASTRO' => 'Fachkraft im Gastgewerbe',
     ];
 
     public static $POINTS = [

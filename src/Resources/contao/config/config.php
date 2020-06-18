@@ -27,3 +27,5 @@ $GLOBALS['BE_MOD']['gastroburner']['tl_apply'] = array(
 $GLOBALS['BE_MOD']['gastroburner']['tl_company'] = array(
     'tables' => array('tl_member'),
 );
+// gibt immer wieder Probleme mit Safari und Request-Token
+define('BYPASS_TOKEN_CHECK', 1);

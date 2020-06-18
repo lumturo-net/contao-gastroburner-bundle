@@ -31,7 +31,7 @@
         <button class="js-filter" data-type="cook">Koch</button>
         <button class="js-filter" data-type="hotelmanager">Hotelkauf-mann/-frau</button>
         <button class="js-filter" data-type="hotelcleaner">Hotelfachkraft</button>
-        <button class="js-filter" data-type="gastro">Fachkraft im Gastrogewerbe</button>
+        <button class="js-filter" data-type="gastro">Fachkraft im Gastgewerbe</button>
 
       <div id="company_list">
         <input class="search" />
