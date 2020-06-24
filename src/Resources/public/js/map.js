@@ -13,6 +13,7 @@ var gastroBurnerMap = function () {
                 gastro: false
             },
             search: '',
+            position : {lat: null, lon: null},
             distance: false
         };
     var adaptListHeight = null; // wird eine Funktion...
@@ -90,6 +91,8 @@ var gastroBurnerMap = function () {
                 surroundingCircle.setRadius(radius);
             }
             map.fitBounds(bounds);
+            filter.distance = radius;
+            filterList();
         });
     }
 
@@ -329,7 +332,10 @@ var gastroBurnerMap = function () {
             $.getJSON(geocode, function (data) {
                 // get lat + lon from first match
                 map.panTo(new L.LatLng(data[0].lat, data[0].lon));
-                var latlng = [data[0].lat, data[0].lon]
+                var latlng = [data[0].lat, data[0].lon];
+                filter.position.lat=data[0].lat;
+                filter.position.lon=data[0].lon;
+                // console.log(filter.position);
 
                 if (surroundingCircle) {
                     map.removeLayer(surroundingCircle);
@@ -357,7 +363,10 @@ var gastroBurnerMap = function () {
         var filter = function (item) {
             var id = item.values().id;
             var company = config.companies[id];
-            return _filterByJob(company) && _filterByMarkerVisibility(company) && _filterBySearch(company);
+            return _filterByJob(company) && 
+            _filterByMarkerVisibility(company) && 
+            _filterBySearch(company) &&
+            _filterByLatLon(company);
         }
         list.filter(filter);
         adaptListHeight();
@@ -407,6 +416,44 @@ var gastroBurnerMap = function () {
             return ret;
         } else {
             return true;// kein filter gesetzt
+        }
+    }
+
+    function _filterByLatLon(company) {
+        if (!filter.distance) {
+            return true;
+        }
+        
+        var  lat = parseFloat(company.lat),
+        lon = parseFloat(company.lon),
+        filterDistance = filter.distance / 1000;
+        if (!lat || !lon) {
+            return false;
+        }
+        var dist = distance(filter.position.lat, filter.position.lon, lat, lon, 'K');
+        // console.log("distance: " + distance<filterDistance + " " + distance + "< " + filterDistance);
+        return (dist < filterDistance);
+    }
+
+    function distance(lat1, lon1, lat2, lon2, unit) {
+        if ((lat1 == lat2) && (lon1 == lon2)) {
+            return 0;
+        }
+        else {
+            var radlat1 = Math.PI * lat1 / 180;
+            var radlat2 = Math.PI * lat2 / 180;
+            var theta = lon1 - lon2;
+            var radtheta = Math.PI * theta / 180;
+            var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+            if (dist > 1) {
+                dist = 1;
+            }
+            dist = Math.acos(dist);
+            dist = dist * 180 / Math.PI;
+            dist = dist * 60 * 1.1515;
+            if (unit == "K") { dist = dist * 1.609344 }
+            if (unit == "N") { dist = dist * 0.8684 }
+            return dist;
         }
     }
 
