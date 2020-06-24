@@ -82,7 +82,7 @@
       <div class="col-12 col-xl-7 order-first order-xl-last">
 
         <script type="text/javascript">
-          var companies = JSON.parse('<?php echo json_encode($this->companies, JSON_HEX_APOS) ?>');
+          var companies = JSON.parse('<?php echo json_encode($this->companies, JSON_HEX_APOS | JSON_PARTIAL_OUTPUT_ON_ERROR | JSON_INVALID_UTF8_IGNORE | JSON_INVALID_UTF8_SUBSTITUTE) ?>');
         </script>
         <h3 class="d-none d-xl-block">Karte</h3>
         <div id="map"></div>
