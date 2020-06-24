@@ -110,6 +110,7 @@ class GastroburnerApplyFormMapModule extends \Contao\Module
         $arrCompanies = array();
         foreach ($arrDbCompanies as $arrCompany) {
             $objLogo = \FilesModel::findOneBy('uuid', $arrCompany['companyLogo']);
+            $arrCompany['description'] = preg_replace("!([\b\t\n\r\f\"\\'])!", "\\\\\\1", $arrCompany['description']);
             if ($objLogo) {
                 $arrCompany['companyLogo'] = $objLogo->path;
             } else {
