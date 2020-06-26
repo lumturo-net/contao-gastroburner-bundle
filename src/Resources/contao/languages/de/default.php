@@ -51,6 +51,7 @@ $GLOBALS['TL_LANG']['tl_company']['hotelcleaner'] = array('Hotelfachkraft');
 $GLOBALS['TL_LANG']['tl_company']['hotelmanager'] = array('Hotelkaufmann/-frau');
 $GLOBALS['TL_LANG']['tl_company']['gastro'] = array('Fachkraft im Gastgewerbe');
 $GLOBALS['TL_LANG']['tl_company']['description_legend'] = 'Beschreibung';
+$GLOBALS['TL_LANG']['tl_company']['shortdesc'] = array('Kurzbeschreibung');
 $GLOBALS['TL_LANG']['tl_company']['description'] = array('Beschreibung');
 
 $GLOBALS['TL_LANG']['tl_member']['job_legend'] = 'Gastroburner / Ausbildungsstellen';
@@ -63,5 +64,6 @@ $GLOBALS['TL_LANG']['tl_member']['cook'] = array('Koch');
 $GLOBALS['TL_LANG']['tl_member']['hotelcleaner'] = array('Hotelfachkraft');
 $GLOBALS['TL_LANG']['tl_member']['hotelmanager'] = array('Hotelkaufmann/-frau');
 $GLOBALS['TL_LANG']['tl_member']['gastro'] = array('Fachkraft im Gastgewerbe');
-$GLOBALS['TL_LANG']['tl_member']['show_in_frontend'] = array('ausgeben');
+$GLOBALS['TL_LANG']['tl_member']['show_in_frontend'] = array('Auf der Webseite ausgeben');
 $GLOBALS['TL_LANG']['tl_member']['description'] = array('Beschreibung der Firma');
+$GLOBALS['TL_LANG']['tl_member']['shortdesc'] = array('Kurzbeschreibung');

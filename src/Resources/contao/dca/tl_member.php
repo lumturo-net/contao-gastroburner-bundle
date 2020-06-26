@@ -18,7 +18,7 @@ $GLOBALS['TL_DCA']['tl_member']['list']['label']['fields'] = array('companyLogo'
 $GLOBALS['TL_DCA']['tl_member']['list']['label']['label_callback'] = array('tl_gb_member', 'addIcon');
 // $GLOBALS['TL_DCA']['tl_member']['list']['sorting']['header_callback'] = array('tl_gb_member', 'header');
 
-$GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace('company,', 'company,shortname,companyLogo,description,', $GLOBALS['TL_DCA']['tl_member']['palettes']['default']);
+$GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace('company,', 'company,shortname,companyLogo,description,shortdesc,', $GLOBALS['TL_DCA']['tl_member']['palettes']['default']);
 $GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace('country;', 'country,lat,lon;', $GLOBALS['TL_DCA']['tl_member']['palettes']['default']);
 $GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace('newsletter;', 'newsletter;{job_legend},show_in_frontend,restaurant,cook,hotelcleaner,hotelmanager,gastro;', $GLOBALS['TL_DCA']['tl_member']['palettes']['default']);
 
@@ -28,17 +28,16 @@ $GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace('newsletter
 // Add save callback
 // $GLOBALS['TL_DCA']['tl_member']['fields']['disable']['save_callback'][] = array('Newsletter', 'onToggleVisibility');
 
-
 // $GLOBALS['TL_DCA']['tl_member']['fields']['company']['eval']['mandatory'] = true;
 // Add field
 $GLOBALS['TL_DCA']['tl_member']['fields']['companyLogo'] = array(
     'label' => &$GLOBALS['TL_LANG']['tl_member']['companyLogo'],
-    'exclude'                 => false,
-    'inputType'               => 'fileTree',
+    'exclude' => false,
+    'inputType' => 'fileTree',
     'save_callback' => array(
-        array('tl_gb_member', 'uploadLogo')
+        array('tl_gb_member', 'uploadLogo'),
     ),
-    'eval'                    => array(
+    'eval' => array(
         'files' => true,
         'filesOnly' => true,
         'fieldType' => 'radio',
@@ -49,7 +48,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['companyLogo'] = array(
         'mandatory' => false,
         'feEditable' => true,
     ),
-    'sql'                     => "binary(16) NULL"
+    'sql' => "binary(16) NULL",
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['shortname'] = array(
@@ -64,64 +63,78 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['shortname'] = array(
     'sql' => "varchar(255) NOT NULL default ''",
 );
 
-
 $GLOBALS['TL_DCA']['tl_member']['fields']['restaurant'] = array(
     'label' => &$GLOBALS['TL_LANG']['tl_member']['restaurant'],
-    'exclude'                 => true,
-    'inputType'               => 'text',
-    'eval'                    => array(
+    'exclude' => true,
+    'inputType' => 'text',
+    'eval' => array(
         'rgxp' => 'natural',
         'mandatory' => true,
         'feEditable' => true,
     ),
-    'sql'                     => "INT(10) unsigned NOT NULL default '0'"
+    'sql' => "INT(10) unsigned NOT NULL default '0'",
 );
 $GLOBALS['TL_DCA']['tl_member']['fields']['cook'] = array(
     'label' => &$GLOBALS['TL_LANG']['tl_member']['cook'],
-    'exclude'                 => true,
-    'inputType'               => 'text',
-    'eval'                    => array(
+    'exclude' => true,
+    'inputType' => 'text',
+    'eval' => array(
         'rgxp' => 'natural',
         'mandatory' => true,
         'feEditable' => true,
     ),
-    'sql'                     => "INT(10) unsigned NOT NULL default '0'"
+    'sql' => "INT(10) unsigned NOT NULL default '0'",
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['hotelcleaner'] = array(
     'label' => &$GLOBALS['TL_LANG']['tl_member']['hotelcleaner'],
-    'exclude'                 => true,
-    'inputType'               => 'text',
-    'eval'                    => array(
+    'exclude' => true,
+    'inputType' => 'text',
+    'eval' => array(
         'rgxp' => 'natural',
         'mandatory' => true,
         'feEditable' => true,
     ),
-    'sql'                     => "INT(10) unsigned NOT NULL default '0'"
+    'sql' => "INT(10) unsigned NOT NULL default '0'",
 );
 $GLOBALS['TL_DCA']['tl_member']['fields']['gastro'] = array(
     'label' => &$GLOBALS['TL_LANG']['tl_member']['gastro'],
-    'exclude'                 => true,
-    'inputType'               => 'text',
-    'eval'                    => array(
+    'exclude' => true,
+    'inputType' => 'text',
+    'eval' => array(
         'rgxp' => 'natural',
         'mandatory' => true,
         'feEditable' => true,
     ),
-    'sql'                     => "INT(10) unsigned NOT NULL default '0'"
+    'sql' => "INT(10) unsigned NOT NULL default '0'",
 );
-
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['hotelmanager'] = array(
     'filter' => true,
     'label' => &$GLOBALS['TL_LANG']['tl_member']['hotelmanager'],
     'inputType' => 'text',
-    'eval'                    => array(
+    'eval' => array(
         'rgxp' => 'natural',
         'mandatory' => true,
         'feEditable' => true,
     ),
     'sql' => "int(10) unsigned NOT NULL default '0'",
+);
+$GLOBALS['TL_DCA']['tl_member']['fields']['shortdesc'] = array(
+    'label' => &$GLOBALS['TL_LANG']['tl_member']['shortdesc'],
+    'exclude' => false,
+    'inputType' => 'textarea',
+    'eval' => array(
+        'maxlength' => 60,
+        'minlength' => 1,
+        'feEditable' => true,
+        // 'rte' => 'tinyMCE',
+        'mandatory' => true,
+        'class' => 'noresize',
+
+    ),
+    'sql' => "text NULL default NULL",
+    // 'sql' => "text NOT NULL default ''",
 );
 $GLOBALS['TL_DCA']['tl_member']['fields']['description'] = array(
     'label' => &$GLOBALS['TL_LANG']['tl_member']['description'],
@@ -145,13 +158,13 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['lat'] = array(
     'save_callback' => array(
         array(
             'tl_gb_member',
-            'saveLat'
-        )
+            'saveLat',
+        ),
     ),
     'eval' => array(
         'mandatory' => false,
         'maxlength' => 255,
-        'tl_class' => 'w50'
+        'tl_class' => 'w50',
     ),
     'sql' => "varchar(255) NOT NULL default ''",
 );
@@ -163,8 +176,8 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['lon'] = array(
     'save_callback' => array(
         array(
             'tl_gb_member',
-            'saveLon'
-        )
+            'saveLon',
+        ),
     ),
     'eval' => array(
         'mandatory' => false,
@@ -174,27 +187,22 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['lon'] = array(
     'sql' => "varchar(255) NOT NULL default ''",
 );
 
-
 $GLOBALS['TL_DCA']['tl_member']['fields']['show_in_frontend'] = array(
     'label' => &$GLOBALS['TL_LANG']['tl_member']['show_in_frontend'],
-    'exclude'                 => true,
-    'filter'                  => true,
-    'inputType'               => 'checkbox',
+    'exclude' => true,
+    'filter' => true,
+    'inputType' => 'checkbox',
     // 'eval'                    => array('submitOnChange' => true),
     'eval' => [
         'feEditable' => true,
     ],
-    'sql'                     => "char(1) NOT NULL default ''"
+    'sql' => "char(1) NOT NULL default ''",
 );
-
-
-
-
 
 class tl_gb_member extends Contao\Backend
 {
 
-    protected $objNominatimResponse = NULL;
+    protected $objNominatimResponse = null;
 
     /**
      * Import the back end user object
@@ -205,14 +213,14 @@ class tl_gb_member extends Contao\Backend
         $this->import('Contao\BackendUser', 'User');
     }
 
-
-    public function header($a, $b = 1, $c = 1, $d = 1) {
+    public function header($a, $b = 1, $c = 1, $d = 1)
+    {
         return $a;
     }
 
     /**
      * Listenanzeige im Backend anpassen
-     * 
+     *
      * @param array                $row
      * @param string               $label
      * @param Contao\DataContainer $dc
@@ -255,7 +263,7 @@ class tl_gb_member extends Contao\Backend
 
     /**
      * Warum auch immer: muss selbständig den Wert für das Upload-Feld korrekt holen und setzen :-(
-     * 
+     *
      *
      */
     public function uploadLogo($value, $null)
@@ -288,13 +296,13 @@ class tl_gb_member extends Contao\Backend
 
         $arrQueryValues = [
             trim($this->Input->post('postal') . ' ' . $this->Input->post('city')),
-            str_replace(',', '', $this->Input->post('street'))
+            str_replace(',', '', $this->Input->post('street')),
         ];
         $headers = [];
         // $headers = array('Accept' => 'application/json');
         $query = array(
             'q' => urldecode(implode(',', $arrQueryValues)),
-            'format' => 'json'
+            'format' => 'json',
         );
 
         $response = Unirest\Request::get('https://nominatim.openstreetmap.org/search', $headers, $query);

@@ -59,7 +59,7 @@
                   <?php endif ?>
                   <div class="list-item-col-2">
                     <h4><?php echo $company['shortname'] ?></h3>
-                      <p class="d-none d-xl-block"><?php echo $company['description'] ?> description</p>
+                      <p class="d-none d-xl-block"><?php echo $company['shortdesc'] ?></p>
                       <div class="list-item-jobs">
                         <?php foreach(array('restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro') as $strKey) : ?>
                         <?php if ($company[$strKey] > 0) : ?>

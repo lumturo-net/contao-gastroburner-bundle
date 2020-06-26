@@ -88,7 +88,7 @@ $GLOBALS['TL_DCA']['tl_company'] = array
     // Palettes
     'palettes' => array
     (
-        'default' => '{name_legend},shortname,name;{address_legend},street,number,zip,city,lat,lon;{contact_legend},contact,email;{job_legend},restaurant,cook,hotelcleaner,hotelmanager,gastro;{description_legend},description',
+        'default' => '{name_legend},shortname,name;{address_legend},street,number,zip,city,lat,lon;{contact_legend},contact,email;{job_legend},restaurant,cook,hotelcleaner,hotelmanager,gastro;{description_legend},shortdesc,description',
     ),
 
     // Subpalettes
@@ -209,6 +209,22 @@ $GLOBALS['TL_DCA']['tl_company'] = array
             'inputType' => 'text',
             'eval' => array('mandatory' => true, 'maxlength' => 255, 'tl_class' => 'w100', 'rgxp' => 'phone'),
             'sql' => "varchar(255) NOT NULL default ''",
+        ),
+        'shortdesc' => array(
+            'label' => &$GLOBALS['TL_LANG']['tl_company']['shortdesc'],
+            'exclude' => false,
+            'inputType' => 'textarea',
+            // 'maxlength' => 300,
+            // 'minlength' => 1,
+            'eval' => array(
+                'maxlength' => 60,
+                'minlength' => 1,
+                // 'rte' => 'tinyMCE',
+                'mandatory' => true,
+                'class' => 'noresize',
+            ),
+            'sql' => "text NULL default NULL",
+            // 'sql' => "text NOT NULL default ''",
         ),
         'description' => array(
             'label' => &$GLOBALS['TL_LANG']['tl_company']['description'],

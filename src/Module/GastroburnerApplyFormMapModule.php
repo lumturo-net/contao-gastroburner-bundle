@@ -105,12 +105,12 @@ class GastroburnerApplyFormMapModule extends \Contao\Module
         }
 
 
-        $arrFields = ['id', 'company', 'street', 'postal', 'city', 'lat', 'lon', 'email', 'shortname', 'description', 'restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro', 'companyLogo'];
+        $arrFields = ['id', 'company', 'street', 'postal', 'city', 'lat', 'lon', 'email', 'shortname', 'shortdesc', 'restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro', 'companyLogo'];
         $arrDbCompanies= Database::getInstance()->prepare('SELECT ' . implode(', ', $arrFields) . ' FROM tl_member WHERE disable=\'\' AND show_in_frontend=\'1\' ORDER BY shortname;')->execute()->fetchAllAssoc();
         $arrCompanies = array();
         foreach ($arrDbCompanies as $arrCompany) {
             $objLogo = \FilesModel::findOneBy('uuid', $arrCompany['companyLogo']);
-            $arrCompany['description'] = preg_replace("!([\b\t\n\r\f\"\\'])!", "", $arrCompany['description']);
+            $arrCompany['shortdesc'] = preg_replace("!([\b\t\n\r\f\"\\'])!", "", $arrCompany['shortdesc']);
             if ($objLogo) {
                 $arrCompany['companyLogo'] = $objLogo->path;
             } else {
