@@ -16,8 +16,8 @@
         <div class="gastromat">
           <ul class="gastromatlist">
             <li class="gastromatlist__item js-gastromatlist__item">
-              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/icon_chef.svg" alt="Koch"></div>
-              <div class="gastromatlist__imageclip"><img class="" src="resources/img/icon_chef.svg" alt="Koch"></div>
+              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/chef.png" alt="Koch"></div>
+              <div class="gastromatlist__imageclip"><img class="" src="resources/img/chef.png" alt="Koch"></div>
               <div class="gastromatlist__tooltip">Koch</div>
               <div class="gastromatlist__copy">
                   <span class="gastromatlist__copyheadline">Koch/Köchin</span>
@@ -26,8 +26,8 @@
               </div>
             </li>
             <li class="gastromatlist__item js-gastromatlist__item">
-              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/icon_telemarketer.svg" alt="Hotelkaufffrau"></div>
-              <div class="gastromatlist__imageclip"><img class="" src="resources/img/icon_telemarketer.svg" alt="Hotelkaufffrau"></div>
+              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/receptionist.png" alt="Hotelkaufffrau"></div>
+              <div class="gastromatlist__imageclip"><img class="" src="resources/img/receptionist.png" alt="Hotelkaufffrau"></div>
               <div class="gastromatlist__tooltip">Hotelkaufmann/-frau</div>
               <div class="gastromatlist__copy">
                   <span class="gastromatlist__copyheadline">Hotelkauf-<br>mann/-frau</span>
@@ -36,8 +36,8 @@
               </div>
             </li>
             <li class="gastromatlist__item gastromatlist__item--fullwidth js-gastromatlist__item">
-              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/icon_waiter.svg" alt="Restaurantfachkraft"></div>
-              <div class="gastromatlist__imageclip"><img class="" src="resources/img/icon_waiter.svg" alt="Restaurantfachkraft"></div>
+              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/waiter.png" alt="Restaurantfachkraft"></div>
+              <div class="gastromatlist__imageclip"><img class="" src="resources/img/waiter.png" alt="Restaurantfachkraft"></div>
               <div class="gastromatlist__tooltip">Restaurantfachkraft</div>
               <div class="gastromatlist__copy">
                 <span class="gastromatlist__copyheadline">Restaurant-<br>fachkraft</span>
@@ -46,8 +46,8 @@
               </div>
             </li>
             <li class="gastromatlist__item gastromatlist__item--desktop js-gastromatlist__item">
-              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/icon_maid.svg" alt="Hotelfachkraft"></div>
-              <div class="gastromatlist__imageclip"><img class="" src="resources/img/icon_maid.svg" alt="Hotelfachkraft"></div>
+              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/maid.png" alt="Hotelfachkraft"></div>
+              <div class="gastromatlist__imageclip"><img class="" src="resources/img/maid.png" alt="Hotelfachkraft"></div>
               <div class="gastromatlist__tooltip">Hotelfachkraft</div>
               <div class="gastromatlist__copy">
                 <span class="gastromatlist__copyheadline">Hotelfachkraft</span>
@@ -56,8 +56,8 @@
               </div>
             </li>
             <li class="gastromatlist__item js-gastromatlist__item">
-              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/icon_bartender.svg" alt="Fachkraft im Gastgewerbe"></div>
-              <div class="gastromatlist__imageclip"><img class="" src="resources/img/icon_bartender.svg" alt="Fachkraft im Gastgewerbe"></div>
+              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/bartender.png" alt="Fachkraft im Gastgewerbe"></div>
+              <div class="gastromatlist__imageclip"><img class="" src="resources/img/bartender.png" alt="Fachkraft im Gastgewerbe"></div>
               <div class="gastromatlist__tooltip">Fachkraft im Gastgewerbe</div>
               <div class="gastromatlist__copy">
                 <span class="gastromatlist__copyheadline">Fachkraft im Gastgewerbe</span>
