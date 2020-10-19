@@ -1,11 +1,8 @@
 <?php $this->extend('block_searchable');?>
-
 <?php $this->block('content');?>
-
 <script type="text/javascript">
     var points = <?php echo json_encode($this->points) ?>
 </script>
-
 <section class="section section--yellow">
   <div class="container">
     <div class="row">
@@ -147,9 +144,5 @@
     </div>
   </div>
 </section>
-
-
 <br>
-
-
 <?php $this->endblock();?>

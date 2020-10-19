@@ -120,7 +120,8 @@ button.active {
     margin-top: 1.5em; }
     .filter .gastroform_wrapper {
       width: 100%;
-      margin-bottom: 0px; }
+      margin-bottom: 0px;
+      margin-top: 30px; }
       .filter .gastroform_wrapper .gastroform_selectWrapper {
         position: relative;
         width: 100%; }
@@ -152,7 +153,9 @@ button.active {
     width: 575px;
     padding: 0px 0px 0px 15px; }
     .list-map .list-column .hotel-list {
-      overflow-y: hidden; }
+      overflow-y: hidden;
+      border: 3px solid #d7d7d7;
+      padding: 15px; }
       .list-map .list-column .hotel-list label {
         margin-bottom: 20px; }
       .list-map .list-column .hotel-list li input[type="checkbox"] {
@@ -247,7 +250,10 @@ button.active {
               margin-top: 4px;
               margin-left: 10px; }
           .list-map .list-column .hotel-list li .list-column-checkbox:checked + label .hotel-list-row .list-item-col-2 .list-item-jobs .list-item-job {
-            background-color: white; } }
+            background-color: white; }
+
+  .form-div {
+    margin-top: 60px; } }
 #map {
   height: 400px; }
 
