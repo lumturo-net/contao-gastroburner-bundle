@@ -65,5 +65,6 @@ $GLOBALS['TL_LANG']['tl_member']['hotelcleaner'] = array('Hotelfachkraft');
 $GLOBALS['TL_LANG']['tl_member']['hotelmanager'] = array('Hotelkaufmann/-frau');
 $GLOBALS['TL_LANG']['tl_member']['gastro'] = array('Fachkraft im Gastgewerbe');
 $GLOBALS['TL_LANG']['tl_member']['show_in_frontend'] = array('Auf der Webseite ausgeben');
+$GLOBALS['TL_LANG']['tl_member']['website'] = array('Internet-Adresse (http://www.beispiel.de)');
 $GLOBALS['TL_LANG']['tl_member']['description'] = array('Beschreibung der Firma');
 $GLOBALS['TL_LANG']['tl_member']['shortdesc'] = array('Kurzbeschreibung');
