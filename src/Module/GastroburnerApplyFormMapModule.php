@@ -142,7 +142,7 @@ class GastroburnerApplyFormMapModule extends \Contao\Module
             $objEmail = new Email();
             $objEmail->charset = 'utf-8';
             $objEmail->subject = 'Bewerber von der Webseite Gastroburner.de';
-            $objEmail->from = 'no-reply@gastroburner.de';
+            $objEmail->from = 'service@gastroburner.de';
             $objHtmlMailTemplate = new \Contao\FrontendTemplate('mail_gastroburner_application');
             $objHtmlMailTemplate->post = $arrPost;
             $objHtmlMailTemplate->company = $arrCompany;
