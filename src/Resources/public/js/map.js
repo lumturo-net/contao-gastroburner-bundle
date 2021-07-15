@@ -20,8 +20,8 @@ var gastroBurnerMap = function () {
 
 
     /**
-     *  css wird von requirejs nicht unterstützt 
-     * @param {*} url 
+     *  css wird von requirejs nicht unterstützt
+     * @param {*} url
      */
     function loadCss(url) {
         var link = document.createElement("link");
@@ -358,13 +358,13 @@ var gastroBurnerMap = function () {
         list.filter(); // alle Filter löschen
         /**
          * Filter-Funktion für Liste
-         * @param {*} item 
+         * @param {*} item
          */
         var filter = function (item) {
             var id = item.values().id;
             var company = config.companies[id];
-            return _filterByJob(company) && 
-            _filterByMarkerVisibility(company) && 
+            return _filterByJob(company) &&
+            _filterByMarkerVisibility(company) &&
             _filterBySearch(company) &&
             _filterByLatLon(company);
         }
@@ -373,8 +373,8 @@ var gastroBurnerMap = function () {
     }
 
     /**
-     * @param {Object} company - kompl. JS Object 
-     * @param {Icon} icon 
+     * @param {Object} company - kompl. JS Object
+     * @param {Icon} icon
      */
     function _addMarker(company, icon) {
         var id = company.id;
@@ -423,7 +423,7 @@ var gastroBurnerMap = function () {
         if (!filter.distance) {
             return true;
         }
-        
+
         var  lat = parseFloat(company.lat),
         lon = parseFloat(company.lon),
         filterDistance = filter.distance / 1000;
@@ -500,67 +500,79 @@ var gastroBurnerMap = function () {
 }();
 
 window.onload = function () {
-    gastroBurnerMap.bootstrap({
-        map: {
-            center: [54.0887, 12.14049],
-            zoom: 8
-        },
-        list: {
-            pagination: {
-                entries_per_page: 3
+    if($('.js-list-map').length > 0) {
+        gastroBurnerMap.bootstrap({
+            map: {
+                center: [54.0887, 12.14049],
+                zoom: 8
+            },
+            list: {
+                pagination: {
+                    entries_per_page: 3
+                }
+            },
+            companies: companies
+        });
+
+        /**
+         * Breite von Karte / Liste anpassen
+         */
+        var resize = debounce((function (api) {
+            var $list = $('.list-map'),
+                $container = $('.container'),
+                $map = $('#map');
+            return function () {
+                if ($(window).width() < 1200) {
+                    $map.css({
+                        'position': 'absolute',
+                        'left': '-' + ($map.offset().left - 15) + 'px',
+                        'width': $(window).width()
+                    });
+                    $('#js-company-list').css({
+                        'margin-top': $map.height() + 20
+                    })
+                    return;
+                }
+                $list.width(parseInt($container.width()) + parseInt($container.css('margin-right')) + 45); // + 3xmargin
+                // setze höhe der karte: laut layout 1060x680
+                // breite ist automatisch
+                $map.height($map.width() * 680 / 1060);
+                api.getMap().invalidateSize(); // Karte neu zeichnen
+
             }
-        },
-        companies: companies
-    });
+        })(gastroBurnerMap), 500);
 
-    /**
-     * Breite von Karte / Liste anpassen
-     */
-    var resize = debounce((function (api) {
-        var $list = $('.list-map'),
-            $container = $('.container'),
-            $map = $('#map');
-        return function () {
-            if ($(window).width() < 1200) {
-                $map.css({
-                    'position': 'absolute',
-                    'left': '-' + ($map.offset().left - 15) + 'px',
-                    'width': $(window).width()
-                });
-                $('#js-company-list').css({
-                    'margin-top': $map.height() + 20
-                })
-                return;
-            }
-            $list.width(parseInt($container.width()) + parseInt($container.css('margin-right')) + 45); // + 3xmargin
-            // setze höhe der karte: laut layout 1060x680
-            // breite ist automatisch
-            $map.height($map.width() * 680 / 1060);
-            api.getMap().invalidateSize(); // Karte neu zeichnen
-
-        }
-    })(gastroBurnerMap), 500);
-
-    $(window).resize(function () {
+        $(window).resize(function () { resize(); });
         resize();
-    });
-    resize();
+    }
 
-    // $('.js-toggle-label').on('click', function () {
-    //     $(this).toggleClass('active');
-    // });
     $('.js-toggle-checkbox').on('click', function () {
         $('.js-submit-application').toggleClass('btn--disable');
         $(this).toggleClass('active');
     });
-    $('#apply_form').on('submit', function (e) {
-        if ($('.js-toggle-checkbox').hasClass('active')) {
-            return true;
-        }
-        e.preventDefault();
-        $('.js-dataprivacy').addClass('error');
-        return false;
-    })
+
+    $('.js-list-column-checkbox').on('change', function() {
+        $('.js-continue-application').toggleClass('btn--disable', !$('.js-list-column-checkbox:checked').length > 0);
+        $('.js-continue-application').find('strong').text($('.js-list-column-checkbox:checked').length);
+    });
+
+    if($('.js-toggle-checkbox').length > 0) {
+        $('#apply_form').on('submit', function (e) {
+            if ($('.js-toggle-checkbox').hasClass('active')) {
+                //$('#apply_form').unbind('submit');
+                //$('.js-submit-application').trigger('click');
+                return true;
+            } else {
+                $('.js-dataprivacy').addClass('error');
+                return false;
+            }
+        });
+    }
+
+    $('.btn-remove-company').on('click', function() {
+        $('.js-hidden-company[value="' + $(this).data('id') + '"]').remove();
+        $(this).parents('.company').remove();
+    });
 }
 // Returns a function, that, as long as it continues to be invoked, will not
 // be triggered. The function will be called after it stops being called for

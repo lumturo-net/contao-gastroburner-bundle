@@ -1,0 +1,37 @@
+<div class="companies">
+    <?php foreach($this->companies as $company): ?>
+    <label for="company-<?= $company['id']; ?>" class="company">
+        <input type="checkbox" id="company-<?= $company['id']; ?>" class="company-checkbox">
+        <div class="company-inner">
+            <?php if($company['companyLogo']) : ?>
+                <div class="company-logo" style="background:transparent url(<?= $company['companyLogo'] ?>) center center/contain no-repeat;"></div>
+            <?php endif; ?>
+            <h4><?= $company['shortname'] ?></h4>
+            <p><?= $company['shortdesc'] ?></p>
+            <div class="company-jobs">
+                <?php foreach(['restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strKey) : if($company[$strKey] > 0): ?>
+                    <div class="company-job <?= $strKey ?>"></div>
+                <?php endif; endforeach; ?>
+            </div>
+            <div class="company-detail">
+                <div class="company-map-address">
+                    <a href="https://www.google.com/maps/search/?api=1&query=<?= $company['lat']; ?>%2C<?= $company['lon']; ?>" target="_blank" title="In Google Maps anzeigen">
+                        <img src="/bundles/contaogastroburner/images/map.png">
+                    </a>
+                    <address class="company-address">
+                        <strong><?= $company['company']; ?></strong><br>
+                        <?= $company['street']; ?><br>
+                        <?= $company['postal'] . ' ' . $company['city']; ?>
+                    </address>
+                </div>
+                <nav>
+                    <?php if(!empty($company['website'])): ?>
+                    <a href="<?= $company['website']; ?>" target="_blank" title="Zur Website: <?= $company['website']; ?>">Zur Website ➔</a>
+                    <?php endif; ?>
+                    <a href="{{link_url::ausbildung-sichern}}">Direkt bewerben ➔</a>
+                </nav>
+            </div>
+        </div>
+    </label>
+    <?php endforeach; ?>
+</div>
