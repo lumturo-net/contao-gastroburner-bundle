@@ -297,11 +297,23 @@ var gastroBurnerMap = function () {
             return function (e) {
                 var id = $(this).data('id');
                 var marker = companies[id].marker;
-                if (marker) {
+                if (marker && !$(this).prev('input[type="checkbox"]').prop('checked')) {
                     marker.setIcon(icon);
                 }
             }
         }(companies, icon));
+
+        $('.js_company_list_item').on('click', function() {
+            var id = $(this).data('id');
+            var marker = config.companies[id].marker;
+            if (marker) {
+                if(!$(this).prev('input[type="checkbox"]').prop('checked')) {
+                    marker.setIcon(hoverIcon);
+                } else {
+                    marker.setIcon(icon);
+                }
+            }
+        });
 
         // Click auf Ausbildungsbetriebe in der Liste
         // Da sie durch die Pagination versteckt und nicht mehr gezählt werden können,
@@ -379,10 +391,22 @@ var gastroBurnerMap = function () {
     function _addMarker(company, icon) {
         var id = company.id;
         var marker = L.marker([config.companies[id].lat, config.companies[id].lon]);
+            marker['companyId'] = id;
         if (icon) {
             marker.setIcon(icon);
         }
         marker.addTo(map);
+        marker.on('click', function() {
+            var checkbox =  $('[id="company-' + marker.companyId + '"]');
+                checkbox.prop('checked', true);
+
+            var scrollTop = checkbox.parent().offset().top;
+            var container = $('.hotel-list')
+            $('.hotel-list').animate({
+                scrollTop: scrollTop  -container.offset().top + container.scrollTop()
+            }, 2000);
+        });
+
         config.companies[id].marker = marker;
     }
 
