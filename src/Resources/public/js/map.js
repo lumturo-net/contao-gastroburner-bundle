@@ -397,14 +397,17 @@ var gastroBurnerMap = function () {
         }
         marker.addTo(map);
         marker.on('click', function() {
+
             var checkbox =  $('[id="company-' + marker.companyId + '"]');
-                checkbox.prop('checked', true);
+                checkbox.prop('checked', !checkbox.prop('checked'));
 
             var scrollTop = checkbox.parent().offset().top;
-            var container = $('.hotel-list')
+            var container = $('.hotel-list');
             $('.hotel-list').animate({
-                scrollTop: scrollTop  -container.offset().top + container.scrollTop()
+                scrollTop: checkbox.prop('checked') ? scrollTop - container.offset().top + container.scrollTop() : 0
             }, 2000);
+
+            marker.setIcon(checkbox.prop('checked') ? hoverIcon : icon);
         });
 
         config.companies[id].marker = marker;
