@@ -64,9 +64,9 @@ var gastroBurnerMap = function () {
             filterList();
         }
 
-        map.on('moveend', f);
-        map.on('zoomend', f);
-        map.on('resize', f);
+        //map.on('moveend', f);
+        //map.on('zoomend', f);
+        //map.on('resize', f);
 
         // Geo-Koordinaten abfragen
 
@@ -105,27 +105,16 @@ var gastroBurnerMap = function () {
          * + scrolling
          */
         adaptListHeight = (function () {
-            if ($(window).width() < 1200) {
+            if (!window.matchMedia('(min-width:1200px)').matches) {
                 // mobile --> raus
                 return function () { }
             }
 
-            // var maxHeight = parseInt($('#map').css('height')) + 61;
             var $ul = $('.hotel-list'),
-                $map = $('#map'),
-                // maxHeight = $map.height() + $('.filter').height() - $('.gb-input-group.mb-3').height(),//+ 61;
-                itemHeight = $ul.find('li').first().height(),
-                $mod_gastroburnerapplyform = $('.mod_gastroburnerapplyform'),
-                modHeight = $mod_gastroburnerapplyform.height(),
-                $spacer = $('.js-spacer'),
-                scene = null, controller = new ScrollMagic.Controller();
-
+                $map = $('#map');
 
             return function () {
-                var $newItems = $ul.find('li'),
-                    newItemCount = $newItems.length,
-                    maxHeight = $map.height() + $('.filter').height() - $('.gb-input-group.mb-3').height() + 7,//+ 61;
-                    ulHeight = newItemCount * itemHeight;//$newItems.eq(0).height();
+                var newItemCount = $ul.find('li').length;
 
                 // var duration = Math.max(1, ulHeight - maxHeight);
 
@@ -133,7 +122,7 @@ var gastroBurnerMap = function () {
                     $ul.css({
                         'overflow-y': 'auto',
                         'overflow-x': 'hidden',
-                        'height': maxHeight
+                        'height': $('.js_company_list_item').outerHeight(true) * 3
                     })
                     // if (scene) {
                     //     var state = scene.state();
@@ -400,6 +389,7 @@ var gastroBurnerMap = function () {
 
             var checkbox =  $('[id="company-' + marker.companyId + '"]');
                 checkbox.prop('checked', !checkbox.prop('checked'));
+                checkbox.trigger('change');
 
             var scrollTop = checkbox.parent().offset().top;
             var container = $('.hotel-list');
@@ -547,9 +537,10 @@ window.onload = function () {
         var resize = debounce((function (api) {
             var $list = $('.list-map'),
                 $container = $('.container'),
-                $map = $('#map');
+                $map = $('#map'),
+                $hotelList = $('.hotel-list');
             return function () {
-                if ($(window).width() < 1200) {
+                if (!window.matchMedia('(min-width:1200px)').matches) {
                     $map.css({
                         'position': 'absolute',
                         'left': '-' + ($map.offset().left - 15) + 'px',
@@ -558,13 +549,23 @@ window.onload = function () {
                     $('#js-company-list').css({
                         'margin-top': $map.height() + 20
                     })
+                    $hotelList.css({
+                        'height': 'auto'
+                    });
                     return;
+                } else {
+                    setTimeout(function() {
+                        $hotelList.css({
+                            'height': $('.js_company_list_item').outerHeight(true) * 3
+                        });
+                    },200);
                 }
                 $list.width(parseInt($container.width()) + parseInt($container.css('margin-right')) + 45); // + 3xmargin
                 // setze höhe der karte: laut layout 1060x680
                 // breite ist automatisch
                 $map.height($map.width() * 680 / 1060);
                 api.getMap().invalidateSize(); // Karte neu zeichnen
+
 
             }
         })(gastroBurnerMap), 500);
@@ -579,8 +580,10 @@ window.onload = function () {
     });
 
     $('.js-list-column-checkbox').on('change', function() {
-        $('.js-continue-application').toggleClass('btn--disable', !$('.js-list-column-checkbox:checked').length > 0);
-        $('.js-continue-application').find('strong').text($('.js-list-column-checkbox:checked').length);
+        let $selected = $('.js-list-column-checkbox:checked').length;
+
+        $('.js-continue-application').toggleClass('btn--disable', !$selected > 0);
+        $('.js-counter-btn > span').toggleClass('hasItems', $selected > 0).text($selected)
     });
 
     if($('.js-toggle-checkbox').length > 0) {

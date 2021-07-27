@@ -20,7 +20,9 @@
     <?php foreach (['restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): ?>
     <div class="gastroform_wrapper">
         <input class="gastroform_checkbox js-job-filter" type="checkbox" id="input_<?= $strName ?>" name="<?= $strName ?>" <?= (($this->{$strName}) ? ' checked' : '') ?> data-type="<?= $strName ?>">
-        <label class="gastroform_label js-toggle-label<?= (($this->{$strName}) ? ' active' : '') ?>" for="input_<?= $strName ?>"><?= $GLOBALS['TL_LANG']['tl_apply'][$strName][0] ?></label>
+        <label class="gastroform_label js-toggle-label<?= (($this->{$strName}) ? ' active' : '') ?>" for="input_<?= $strName ?>">
+            <span class="ico-job <?= $strName; ?>"></span><?= $GLOBALS['TL_LANG']['tl_apply'][$strName][0] ?>
+        </label>
     </div>
     <?php endforeach?>
     <br>
@@ -57,7 +59,7 @@
                 <div class="hotel-list-row">
                   <?php if ($company['companyLogo']) : ?>
                   <div class="list-item-col-1"
-                    style="background-image: url(<?= $company['companyLogo'] ?>); background-repeat: no-repeat; background-size: contain; background-position: center;">
+                    style="background-image: url(<?= $company['companyLogo'] ?>); background-repeat: no-repeat; background-size: cover; background-position: center;">
                   </div>
                   <?php else : ?>
                   <div class="list-item-col-1">
@@ -120,9 +122,12 @@
       </div>
     </div>
     <br>
-    <button class="btn btn--primary btn--disable js-continue-application" type="submit" name="action" value="continue">
-        <div class="btninner">Auswahl bestätigen (<strong>0</strong>)</div><span></span>
-    </button>
+    <div class="js-counter-btn">
+        <button class="btn btn--primary btn--disable js-continue-application" type="submit" name="action" value="continue">
+            <div class="btninner">Auswahl bestätigen</div><span></span>
+        </button>
+        <span>0</span>
+    </div>
 
     <?php else: // Betriebe wurden ausgewählt, dann Formular nach "Weiter"-Submit anzeigen. ?>
 
