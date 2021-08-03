@@ -19,6 +19,25 @@ button.active {
   }
 }
 
+.gastroform_label {
+  position: relative;
+  margin-right:0;
+  padding-left:45px;
+}
+
+.ico-job {
+  position: absolute;
+  left:1rem;
+  display:inline-block;
+  width:22px;
+  height:22px;
+  background:url(/bundles/contaogastroburner/images/berufe.svg) top center/cover no-repeat;
+  &.cook { background-position-y: -22px; }
+  &.hotelcleaner { background-position-y: -44px; }
+  &.hotelmanager { background-position-y: -66px; }
+  &.gastro { background-position-y: -88px; }
+}
+
 .gb-input-group {
   position: relative;
   display: flex;
@@ -188,7 +207,7 @@ button.active {
     padding: 0;
     .hotel-list {
       label {
-        margin-bottom: 20px
+        margin-bottom: 20px;
       }
       li {
         input[type="checkbox"] {
@@ -201,21 +220,24 @@ button.active {
             display: block;
             border: 3px solid #D7D7D7;
             border-radius: 15px;
-            padding: 15px;
+            padding: 10px;
             position: relative;
             .hotel-list-row {
               display: flex;
               flex-wrap:wrap;
+              align-items:center;
 
               /* Bild */
               .list-item-col-1 {
-                flex:1 0 100%;
-                margin-bottom:15px;
-                height:100px;
+                flex:0 1 66px;
+                height:40px;
+                margin-right:20px;
+                border-radius: 4px;
               }
 
               /* Checkbox */
               .list-item-col-3 {
+                display:none;
                 position:absolute;
                 top:-5%;
                 right:-5%;
@@ -232,11 +254,11 @@ button.active {
 
               /* Text */
               .list-item-col-2 {
-                flex:0 1 100%;
+                flex:1 0 auto;
                 h4 {
                   position: relative;
                   top: 0;
-                  font-size: 18px;
+                  font-size: 10px;
                   line-height: 21px;
                   margin-bottom: 0px;
                 }
@@ -249,25 +271,25 @@ button.active {
                 .list-item-jobs {
                   display: flex;
                   justify-content: flex-start;
-                  margin:15px 0;
+                  margin:0;
                   .list-item-job {
-                    height: 36px;
-                    width: 36px;
+                    height: 28px;
+                    width: 28px;
                     background-color: #D7D7D7;
                     border-radius: 50%;
                     background-size: 85%;
                     background-repeat: no-repeat, repeat;
                     background-position: center 0px;
                     background-image: url('../images/berufe.svg');
-                    margin-right: 15px;
+                    margin-right: 10px;
                     &:last-child {
                       margin-right: 0;
                     }
-                    &.cook { background-position: center -119px }
-                    &.gastro { background-position: center 3px }
-                    &.hotelcleaner { background-position: center -58px }
-                    &.hotelmanager { background-position: center -89px }
-                    &.restaurant { background-position: center -28px }
+                    &.cook { background-position: center 2px }
+                    &.gastro { background-position: center -94px }
+                    &.hotelcleaner { background-position: center -45px }
+                    &.hotelmanager { background-position: center -69px }
+                    &.restaurant { background-position: center -22px }
                   }
                 }
               }
@@ -405,21 +427,11 @@ button.active {
 
 @media(min-width: 768px) {
   .gastroform_label {
-    position: relative;
+    margin-right:15px;
   }
 
   .ico-job {
-    position: absolute;
     top:1.5rem;
-    left:1rem;
-    display:inline-block;
-    width:22px;
-    height:22px;
-    background:url(/bundles/contaogastroburner/images/berufe.svg) top center/cover no-repeat;
-    &.cook { background-position-y: -22px; }
-    &.hotelcleaner { background-position-y: -44px; }
-    &.hotelmanager { background-position-y: -66px; }
-    &.gastro { background-position-y: -88px; }
   }
 
   .js-counter-btn {
@@ -435,11 +447,16 @@ button.active {
 }
 
 @media(min-width: 992px) {
+  .gastroform_label {
+    padding-left:70px;
+  }
+
   .ico-job {
     top:1rem;
     width: 50px;
     height: 50px;
-    &.cook { background-position-y: -50px; }
+    &.restaurant { background-position-y: -50px; }
+    &.cook { background-position-y: 0; }
     &.hotelcleaner { background-position-y: -100px; }
     &.hotelmanager { background-position-y: -150px; }
     &.gastro { background-position-y: -200px; }
@@ -453,6 +470,11 @@ button.active {
       padding: 0px 0px 0px 15px;
       .hotel-list {
         overflow-y: hidden;
+        li .list-column-checkbox + label .hotel-list-row .list-item-col-2 {
+          p {
+            margin-bottom:10px;
+          }
+        }
       }
     }
   }

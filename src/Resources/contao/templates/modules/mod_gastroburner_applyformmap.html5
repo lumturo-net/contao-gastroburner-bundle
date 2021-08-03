@@ -59,7 +59,7 @@
                 <div class="hotel-list-row">
                   <?php if ($company['companyLogo']) : ?>
                   <div class="list-item-col-1"
-                    style="background-image: url(<?= $company['companyLogo'] ?>); background-repeat: no-repeat; background-size: cover; background-position: center;">
+                    style="background-image: url(<?= $company['companyLogo'] ?>); background-repeat: no-repeat; background-size: contain; background-position: center;">
                   </div>
                   <?php else : ?>
                   <div class="list-item-col-1">
@@ -124,7 +124,7 @@
     <br>
     <div class="js-counter-btn">
         <button class="btn btn--primary btn--disable js-continue-application" type="submit" name="action" value="continue">
-            <div class="btninner">Auswahl bestätigen</div><span></span>
+            <div class="btninner">Auswählen</div><span></span>
         </button>
         <span>0</span>
     </div>

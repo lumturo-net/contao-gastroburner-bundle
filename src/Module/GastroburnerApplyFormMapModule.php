@@ -150,7 +150,7 @@ class GastroburnerApplyFormMapModule extends \Contao\Module
             $arrCompany['shortdesc'] = preg_replace("!([\b\t\n\r\f\"\\'])!", "", $arrCompany['shortdesc']);
             $arrCompany['shortname'] = preg_replace("!([\b\t\n\r\f\"\\'])!", "", $arrCompany['shortname']);
             $arrCompany['company']   = preg_replace("!([\b\t\n\r\f\"\\'])!", "", $arrCompany['company']);
-            $arrCompany['companyLogo'] = $objLogo->path ?? 'https://via.placeholder.com/170x100.png&text=Hotel-Logo';
+            $arrCompany['companyLogo'] = $objLogo->path ?? '/resources/img/Placeholder-Logo_big@2x.jpg';
             $arrCompanies[$arrCompany['id']] = $arrCompany;
         }
 

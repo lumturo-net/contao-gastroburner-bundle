@@ -550,7 +550,8 @@ window.onload = function () {
                         'margin-top': $map.height() + 20
                     })
                     $hotelList.css({
-                        'height': 'auto'
+                        'height': '400px',
+                        'overflow': 'scroll'
                     });
                     return;
                 } else {
