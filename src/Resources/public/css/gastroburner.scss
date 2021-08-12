@@ -151,6 +151,7 @@ button.active {
   position: absolute;
   width:100vw;
   height: 200px;
+  left:calc((100% - 100vw) / 2);
 }
 
 .spacer {
@@ -381,10 +382,6 @@ button.active {
 }
 
 @media(min-width: 576px) {
-  #map {
-    left:calc((540px - 100vw) / 2);
-  }
-
   .list-map {
     .list-column {
       .hotel-list {
@@ -437,10 +434,6 @@ button.active {
 }
 
 @media(min-width: 768px) {
-  #map {
-    left:calc((597px - 100vw) / 2);
-  }
-
   .js-counter-btn {
     > span {
       top: -2rem;
@@ -454,10 +447,6 @@ button.active {
 }
 
 @media(min-width: 992px) {
-  #map {
-    left:calc((900px - 100vw) / 2);
-  }
-
   .ico-job {
     width: 50px;
     height: 50px;
@@ -466,6 +455,12 @@ button.active {
     &.hotelcleaner { background-position-y: -100px; }
     &.hotelmanager { background-position-y: -150px; }
     &.gastro { background-position-y: -200px; }
+  }
+
+  .gastroburner-form .widget,
+  .gastroform_wrapper,
+  .contact_form .widget {
+    margin-right:20px;
   }
 }
 
