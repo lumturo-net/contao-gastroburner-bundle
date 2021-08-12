@@ -20,18 +20,23 @@ button.active {
 }
 
 .gastroform_label {
-  position: relative;
-  margin-right:0;
-  padding-left:45px;
+  display:flex;
+  align-items: center;
+  padding:14px 0;
+}
+
+.gastroburner-form .widget,
+.gastroform_wrapper,
+.contact_form .widget {
+  margin-bottom:20px;
+  min-height:auto;
 }
 
 .ico-job {
-  position: absolute;
-  left:1rem;
-  display:inline-block;
   width:22px;
   height:22px;
   background:url(/bundles/contaogastroburner/images/berufe.svg) top center/cover no-repeat;
+  margin:0 15px;
   &.cook { background-position-y: -22px; }
   &.hotelcleaner { background-position-y: -44px; }
   &.hotelmanager { background-position-y: -66px; }
@@ -143,7 +148,9 @@ button.active {
 }
 
 #map {
-  height: $map_height
+  position: absolute;
+  width:100vw;
+  height: 200px;
 }
 
 .spacer {
@@ -204,7 +211,7 @@ button.active {
   }
 
   .list-column {
-    padding: 0;
+    margin-top: 220px;
     .hotel-list {
       label {
         margin-bottom: 20px;
@@ -374,6 +381,10 @@ button.active {
 }
 
 @media(min-width: 576px) {
+  #map {
+    left:calc((540px - 100vw) / 2);
+  }
+
   .list-map {
     .list-column {
       .hotel-list {
@@ -426,12 +437,8 @@ button.active {
 }
 
 @media(min-width: 768px) {
-  .gastroform_label {
-    margin-right:15px;
-  }
-
-  .ico-job {
-    top:1.5rem;
+  #map {
+    left:calc((597px - 100vw) / 2);
   }
 
   .js-counter-btn {
@@ -447,12 +454,11 @@ button.active {
 }
 
 @media(min-width: 992px) {
-  .gastroform_label {
-    padding-left:70px;
+  #map {
+    left:calc((900px - 100vw) / 2);
   }
 
   .ico-job {
-    top:1rem;
     width: 50px;
     height: 50px;
     &.restaurant { background-position-y: -50px; }
@@ -464,10 +470,16 @@ button.active {
 }
 
 @media(min-width:1200px) {
+  #map {
+    position: static;
+    width: auto;
+    left:inherit;
+    height: $map_height;
+  }
+
   .list-map {
     .list-column {
-      width: 575px;
-      padding: 0px 0px 0px 15px;
+      margin-top:0;
       .hotel-list {
         overflow-y: hidden;
         li .list-column-checkbox + label .hotel-list-row .list-item-col-2 {

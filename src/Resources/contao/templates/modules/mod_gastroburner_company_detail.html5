@@ -1,0 +1,9 @@
+<?php if(is_null($this->company)): ?>
+<h1 class="ce_headline first">404</h1>
+<div class="ce_text last block">
+    <h2>Falsche Seite bestellt.</h2>
+    <p>Guck mal, hier ist tote Hose. Check einfach Richtung <a href="">Startseite</a> aus oder bimmle durch: 0381 80 899 390.</p>
+</div>
+<?php else: ?>
+<h1 class="ce_headline first"><?= $this->company['shortname']; ?></h1>
+<?php endif; ?>

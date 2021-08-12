@@ -21,7 +21,7 @@
     <div class="gastroform_wrapper">
         <input class="gastroform_checkbox js-job-filter" type="checkbox" id="input_<?= $strName ?>" name="<?= $strName ?>" <?= (($this->{$strName}) ? ' checked' : '') ?> data-type="<?= $strName ?>">
         <label class="gastroform_label js-toggle-label<?= (($this->{$strName}) ? ' active' : '') ?>" for="input_<?= $strName ?>">
-            <span class="ico-job <?= $strName; ?>"></span><?= $GLOBALS['TL_LANG']['tl_apply'][$strName][0] ?>
+            <span class="ico-job <?= $strName; ?>"></span><span><?= $GLOBALS['TL_LANG']['tl_apply'][$strName][0] ?></span>
         </label>
     </div>
     <?php endforeach?>
@@ -30,7 +30,6 @@
 
     <!-- Liste / Formular-->
     <div class="row list-map js-list-map">
-
       <div class="col-12 col-xl-5 list-column order-last order-xl-first" id="js-company-list">
         <h3 class="d-none d-xl-block">Liste</h3>
         <div class="gb-input-group mb-3">
@@ -39,7 +38,8 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#d7d7d7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="10.5" cy="10.5" r="7.5" />
                 <line x1="21" y1="21" x2="15.8" y2="15.8" />
-              </svg></span>
+              </svg>
+            </span>
           </div>
           <input id="js-search" type="text" class="form-control gastroform-input" aria-label="Suche in der Liste" placeholder="Suche in der Liste">
           <div class="gb-input-group-append">

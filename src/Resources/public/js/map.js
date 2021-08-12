@@ -535,7 +535,10 @@ window.onload = function () {
          * Breite von Karte / Liste anpassen
          */
         var resize = debounce((function (api) {
-            var $list = $('.list-map'),
+            api.getMap().invalidateSize(); // Karte neu zeichnen
+        })(gastroBurnerMap));
+
+           /* var $list = $('.list-map'),
                 $container = $('.container'),
                 $map = $('#map'),
                 $hotelList = $('.hotel-list');
@@ -565,11 +568,11 @@ window.onload = function () {
                 // setze höhe der karte: laut layout 1060x680
                 // breite ist automatisch
                 $map.height($map.width() * 680 / 1060);
-                api.getMap().invalidateSize(); // Karte neu zeichnen
+
 
 
             }
-        })(gastroBurnerMap), 500);
+        })(gastroBurnerMap), 500);*/
 
         $(window).resize(function () { resize(); });
         resize();

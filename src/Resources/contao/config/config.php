@@ -7,6 +7,7 @@ $GLOBALS['FE_MOD']['miscellaneous']['gastroburnerapplyformmap'] = 'Lumturo\Conta
 $GLOBALS['FE_MOD']['miscellaneous']['gastroburnerregisterform'] = 'Lumturo\ContaoGastroburnerBundle\Module\GastroburnerRegistrationModule';
 $GLOBALS['FE_MOD']['miscellaneous']['gastroburnerpersonaldata'] = 'Lumturo\ContaoGastroburnerBundle\Module\GastroburnerPersonalDataModule';
 $GLOBALS['FE_MOD']['miscellaneous']['gastroburnercompanies'] = 'Lumturo\ContaoGastroburnerBundle\Module\GastroburnerCompanies';
+$GLOBALS['FE_MOD']['miscellaneous']['gastroburnercompanydetail'] = 'Lumturo\ContaoGastroburnerBundle\Module\GastroburnerCompanyDetail';
 $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/gastroburner.js';
 $GLOBALS['TL_CSS'][] = 'bundles/contaogastroburner/css/gastroburner.min.css';
 // Backend modules
