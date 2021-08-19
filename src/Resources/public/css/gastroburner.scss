@@ -230,7 +230,7 @@ button.active {
             display: block;
             border: 3px solid #D7D7D7;
             border-radius: 15px;
-            padding: 8px;
+            padding: 5px;
             position: relative;
             .hotel-list-row {
               display: flex;
@@ -485,7 +485,7 @@ button.active {
         li {
           .list-column-checkbox {
             + label {
-              padding:15px;
+              padding:12px;
               .hotel-list-row {
                 .list-item-col-1 {
 
