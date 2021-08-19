@@ -31,7 +31,6 @@
     <!-- Liste / Formular-->
     <div class="row list-map js-list-map">
       <div class="col-12 col-xl-5 list-column order-last order-xl-first" id="js-company-list">
-        <h3 class="d-none d-xl-block">Liste</h3>
         <div class="gb-input-group mb-3">
           <div class="gb-input-group-prepend">
             <span class="gb-input-group-text">
@@ -58,19 +57,17 @@
                 <span class="name" style="display:none;"><?= $company['company'] ?></span>
                 <div class="hotel-list-row">
                   <?php if ($company['companyLogo']) : ?>
-                  <div class="list-item-col-1"
-                    style="background-image: url(<?= $company['companyLogo'] ?>); background-repeat: no-repeat; background-size: contain; background-position: center;">
-                  </div>
+                  <div class="list-item-col-1" style="background: #ffffff url(<?= $company['companyLogo'] ?>) center center/contain no-repeat;"></div>
                   <?php else : ?>
                   <div class="list-item-col-1">
-                    <img src="<?= $company['companyLogo'] ?>">
+                    <img src="/resources/img/Placeholder-Logo_small@2x.jpg">
                   </div>
                   <?php endif ?>
                   <div class="list-item-col-2">
                     <h4><?= $company['shortname'] ?></h4>
                       <p class="d-none d-xl-block"><?= $company['shortdesc'] ?></p>
                       <div class="list-item-jobs">
-                        <?php foreach(array('restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro') as $strKey) : ?>
+                        <?php foreach(array('restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro') as $strKey): ?>
                         <?php if ($company[$strKey] > 0) : ?>
                         <div class="list-item-job <?= $strKey ?>"></div>
                         <?php endif; ?>
@@ -93,7 +90,6 @@
         <script type="text/javascript">
           var companies = JSON.parse('<?= json_encode($this->companies) ?>');
         </script>
-        <h3 class="d-none d-xl-block">Karte</h3>
         <div id="map"></div>
 
         <!-- Suchformular-->
