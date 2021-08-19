@@ -216,6 +216,8 @@ button.active {
   .list-column {
     margin-top: 220px;
     .hotel-list {
+      height:260px;
+      overflow-y:scroll;
       label {
         margin-bottom: 20px;
       }
@@ -361,7 +363,7 @@ button.active {
 
 .js-counter-btn {
   position: relative;
-  display:inline-block;
+  display:block;
   > span {
     position: absolute;
     top: -1rem;
@@ -382,12 +384,18 @@ button.active {
       color: #fff;
     }
   }
+
+  > .btn {
+    width:100%;
+    padding:20px 25px;
+  }
 }
 
 @media(min-width: 576px) {
   .list-map {
     .list-column {
       .hotel-list {
+        height:auto;
         li {
           .list-column-checkbox {
             + label {
@@ -517,5 +525,10 @@ button.active {
 
   .js-counter-btn {
     margin-top:50px;
+    display:inline-block;
+    > .btn {
+      width:auto;
+      padding:15px 25px;
+    }
   }
 }
