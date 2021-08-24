@@ -100,124 +100,12 @@ var gastroBurnerMap = function () {
      * Initialisierung Liste
      */
     function bootstrapList() {
-        /**
-         * Höhe der Liste auf Höhe der Map-Spalte setzen
-         * + scrolling
-         */
-        adaptListHeight = (function () {
-            if (!window.matchMedia('(min-width:1200px)').matches) {
-                // mobile --> raus
-                return function () { }
-            }
-
-            var $ul = $('.hotel-list'),
-                $map = $('#map');
-
-            return function () {
-                var newItemCount = $ul.find('li').length;
-
-                // var duration = Math.max(1, ulHeight - maxHeight);
-
-                // if (true) {// || ulHeight > maxHeight) {
-                    $ul.css({
-                        'overflow-y': 'auto',
-                        'overflow-x': 'hidden',
-                        'height': $('.js_company_list_item').outerHeight(true) * 3
-                    })
-                    // if (scene) {
-                    //     var state = scene.state();
-                    //     // console.log(state);
-                    //     if (scene.duration() != duration) {
-                    //         if (state == "BEFORE") {
-                    //             // nur länge anpassen, rest dann in der szene
-                    //             scene.duration(duration);
-                    //             scene.update(true);
-                    //         }
-                    //         if (state == "DURING") {
-                    //             // länge anpassen und an den Anfang springen
-                    //             $spacer.css('height', modHeight + duration);
-                    //             $(window).scrollTop(scene.triggerPosition());
-                    //             scene.duration(duration);
-                    //             scene.update(true);
-                    //         }
-                    //         if (state == "AFTER") {
-                    //             // Länge anpassen
-                    //             // console.log('AFTER: duration=' + duration)
-                    //             scene.duration(duration);
-                    //             // scene.update(true);
-                    //         }
-                    //         return;
-                    //     }
-                    // }
-
-                    // scene = new ScrollMagic.Scene({
-                    //     triggerElement: '.js-spacer',//'.mod_gastroburnerapplyform',
-                    //     triggerHook: 0,
-                    //     duration: duration
-                    // })
-                    //     // .addIndicators({ name: 'pin' })
-                    //     .on('start', function (e) {
-                    //         var dir = e.target.controller().info("scrollDirection");
-                    //         var duration = this.duration();
-                    //         if (dir == 'FORWARD') {
-                    //             $spacer.css('height', modHeight + duration);
-                    //             $mod_gastroburnerapplyform.css({
-                    //                 position: 'fixed',
-                    //                 top: 0,
-                    //                 'z-index': 2
-                    //             });
-                    //         } else {
-                    //             $spacer.css('height', 0);
-                    //             $mod_gastroburnerapplyform.css({
-                    //                 position: 'initial',
-                    //                 top: 0
-                    //             });
-                    //             $(window).scrollTop($mod_gastroburnerapplyform.offset().top);
-                    //         }
-                    //     })
-                    //     .on('progress', function (e) {
-                    //         var progress = e.progress.toFixed(3);
-                    //         var scrollTop = progress * duration;
-                    //         $ul.scrollTop(scrollTop);
-                    //     })
-                    //     .on('end', function (e) {
-                    //         var dir = e.target.controller().info("scrollDirection");
-                    //         var duration = this.duration();
-                    //         if (dir == 'FORWARD') {
-                    //             $spacer.css('height', duration)
-                    //             $mod_gastroburnerapplyform.css({
-                    //                 position: 'initial',//'relative',
-                    //                 top: duration
-                    //             })
-                    //             $(window).scrollTop(scene.triggerPosition())// + duration);
-                    //             // $(window).scrollTop($mod_gastroburnerapplyform.offset().top);
-                    //         } else {
-                    //             $spacer.css('height', modHeight + duration);
-                    //             $mod_gastroburnerapplyform.css({
-                    //                 position: 'fixed',
-                    //                 top: 0
-                    //             });
-
-                    //             $(window).scrollTop($mod_gastroburnerapplyform.offset().top);
-                    //         }
-
-                    //     })
-                    //     .addTo(controller);
-
-                // }
-                // else {
-                //     console.log('scene wech')
-                // }
-                itemCount = newItemCount;
-            }
-        })();
-
         var listOptions = {
             // page: config.list.pagination.entries_per_page,
             // pagination: true,
             valueNames: ['id', 'shortname', 'name']//, 'description']
         };
-        list = new List('js-company-list', listOptions);//, config.companies);
+        list = new List('company-list', listOptions);//, config.companies);
 
         /**
          * Listen-Update-Event: setzt / löscht die Marker
@@ -247,76 +135,56 @@ var gastroBurnerMap = function () {
         list.update();
 
         // Filter nach Job-Button
-        $('.js-job-filter').on('click', function (e) {
-            // e.preventDefault();
-            var $this = $(this);
-            var type = $this.data('type')
-            var $label = $this.next('label')
-            if ($label.hasClass('active')) {
-                filter.job[type] = false;
-            } else {
-                filter.job[type] = true;
-            }
-            $label.toggleClass('active');
+        $('.job-filter-item input').on('change', function (e) {
+            filter.job[$(this).data('type')] = !filter.job[$(this).data('type')];
             filterList();
         });
 
         // Filter nach Sucheingabe
-        $('#js-search').on('input', function (e) {
+        $('.js-search-in-list input').on('input', function (e) {
             filter.job.search = $(this).val();
             filterList();
-            $(this).focus();
         });
-        $('#js-clear-search').on('click', function () {
-            $('#js-search').val('');
+        $('.js-search-in-list button').on('click', function () {
+            $('.js-search-in-list input').val('');
             filter.job.search = '';
             filterList();
         });
 
         // hover der Menü-Einträge
-        $('.js_company_list_item').hover(function (companies, icon) {
-            return function (e) {
-                var id = $(this).data('id');
-                var marker = companies[id].marker;
-                if (marker) {
-                    marker.setIcon(icon);
+        $('.company-item').hover(
+            function (companies, icon) {
+                return function (e) {
+                    var id = $(this).data('id');
+                    var marker = companies[id].marker;
+                    if (marker) {
+                        marker.setIcon(icon);
+                    }
                 }
-            }
-        }(companies, hoverIcon), function (companies, icon) {
-            return function (e) {
-                var id = $(this).data('id');
-                var marker = companies[id].marker;
-                if (marker && !$(this).prev('input[type="checkbox"]').prop('checked')) {
-                    marker.setIcon(icon);
-                }
-            }
-        }(companies, icon));
+            }(companies, hoverIcon),
 
-        $('.js_company_list_item').on('click', function() {
-            var id = $(this).data('id');
+            function (companies, icon) {
+                return function (e) {
+                    var id = $(this).data('id');
+                    var marker = companies[id].marker;
+                    if (marker && !$(this).find('input[type="checkbox"]').prop('checked')) {
+                        marker.setIcon(icon);
+                    }
+                }
+            }(companies, icon)
+        );
+
+        $('.company-item input').on('change', function() {
+            var id = $(this).val();
             var marker = config.companies[id].marker;
             if (marker) {
-                if(!$(this).prev('input[type="checkbox"]').prop('checked')) {
-                    marker.setIcon(hoverIcon);
-                } else {
-                    marker.setIcon(icon);
-                }
+                marker.setIcon($(this).is(':checked') ? hoverIcon : icon);
             }
-        });
 
-        // Click auf Ausbildungsbetriebe in der Liste
-        // Da sie durch die Pagination versteckt und nicht mehr gezählt werden können,
-        // muss ich die Werten als "hidden" ins form duplizieren
-        $('form').on('change', '.js-list-column-checkbox', function () {
-            var $this = $(this);
-            if ($this.prop('checked')) {
-                $('form').append('<input type="hidden" class="js-hidden-company" name="hidden_companies[]" value="' + $this.val() + '">');
-                $('.js-form-div').removeClass('d-xl-none');
+            if ($(this).is(':checked')) {
+                $('#apply_form').append('<input type="hidden" class="js-hidden-company" name="hidden_companies[]" value="' + id + '">');
             } else {
-                $('.js-hidden-company[value="' + $this.val() + '"]').remove();
-                if (!$('.js-hidden-company').length) {
-                    $('.js-form-div').addClass('d-xl-none');
-                }
+                $('.js-hidden-company[value="' + id + '"]').remove();
             }
         });
 
@@ -347,9 +215,6 @@ var gastroBurnerMap = function () {
             });
 
         });
-
-        adaptListHeight();
-
     }
 
     /**
@@ -364,13 +229,14 @@ var gastroBurnerMap = function () {
         var filter = function (item) {
             var id = item.values().id;
             var company = config.companies[id];
+
             return _filterByJob(company) &&
-            _filterByMarkerVisibility(company) &&
-            _filterBySearch(company) &&
-            _filterByLatLon(company);
+                   _filterByMarkerVisibility(company) &&
+                   _filterBySearch(company) &&
+                   _filterByLatLon(company);
         }
+
         list.filter(filter);
-        adaptListHeight();
     }
 
     /**
@@ -483,22 +349,7 @@ var gastroBurnerMap = function () {
             config = _config;
             var bsMap = bootstrapMap;
             var bsList = bootstrapList;
-            // loadCss('//unpkg.com/leaflet@1.5.1/dist/leaflet.css');
             loadCss('/bundles/contaogastroburner/css/leaflet.css');
-            /*
-            require([
-                // '//unpkg.com/leaflet@1.5.1/dist/leaflet.js',
-                '/bundles/contaogastroburner/js/leaflet.js',
-            //     '//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js'
-            ], function () {
-                // require([
-                    // '//unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js'
-                // ], function () {
-                    bsMap();
-                    // bsList();
-                // });
-            });
-            */
             $('<div class="js-spacer spacer"></div>').insertBefore('.mod_gastroburnerapplyform');
             bsMap();
             bsList();
@@ -510,14 +361,11 @@ var gastroBurnerMap = function () {
         resizeList() {
             filterList();
         }
-        // filterByLatLon(minLat, minLon, maxLat, maxLon) { },
-        // filterByDistance(lat, lon, km) { },
-        // filterByJob(cook, gastro, hotelmanager) { }
     }
 }();
 
 window.onload = function () {
-    if($('.js-list-map').length > 0) {
+    if($('#map').length > 0) {
         gastroBurnerMap.bootstrap({
             map: {
                 center: [54.0887, 12.14049],
@@ -530,64 +378,25 @@ window.onload = function () {
             },
             companies: companies
         });
-
-        /**
-         * Breite von Karte / Liste anpassen
-         */
-        var resize = debounce((function (api) {
-            api.getMap().invalidateSize(); // Karte neu zeichnen
-        })(gastroBurnerMap));
-
-           /* var $list = $('.list-map'),
-                $container = $('.container'),
-                $map = $('#map'),
-                $hotelList = $('.hotel-list');
-            return function () {
-                if (!window.matchMedia('(min-width:1200px)').matches) {
-                    $map.css({
-                        'position': 'absolute',
-                        'left': '-' + ($map.offset().left - 15) + 'px',
-                        'width': $(window).width()
-                    });
-                    $('#js-company-list').css({
-                        'margin-top': $map.height() + 20
-                    })
-                    $hotelList.css({
-                        'height': '400px',
-                        'overflow': 'scroll'
-                    });
-                    return;
-                } else {
-                    setTimeout(function() {
-                        $hotelList.css({
-                            'height': $('.js_company_list_item').outerHeight(true) * 3
-                        });
-                    },200);
-                }
-                $list.width(parseInt($container.width()) + parseInt($container.css('margin-right')) + 45); // + 3xmargin
-                // setze höhe der karte: laut layout 1060x680
-                // breite ist automatisch
-                $map.height($map.width() * 680 / 1060);
-
-
-
-            }
-        })(gastroBurnerMap), 500);*/
-
-        $(window).resize(function () { resize(); });
-        resize();
     }
+
+    $('.js-map-mode, .js-list-mode').on('click', function() {
+        $('.map-container').toggleClass('active');
+        gastroBurnerMap.getMap().invalidateSize();
+        $('.js-search-in-list').toggleClass('d-flex d-none');
+        $('.js-list-mode').toggleClass('active');
+    });
 
     $('.js-toggle-checkbox').on('click', function () {
         $('.js-submit-application').toggleClass('btn--disable');
         $(this).toggleClass('active');
     });
 
-    $('.js-list-column-checkbox').on('change', function() {
-        let $selected = $('.js-list-column-checkbox:checked').length;
+    $('.company-item input').on('change', function() {
+        let $selected = $('.company-item input:checked').length;
 
-        $('.js-continue-application').toggleClass('btn--disable', !$selected > 0);
-        $('.js-counter-btn > span').toggleClass('hasItems', $selected > 0).text($selected)
+        $('.js-counter-btn button').toggleClass('btn--disable', !$selected > 0);
+        $('.js-counter-btn .counter').toggleClass('hasItems', $selected > 0).text($selected)
     });
 
     if($('.js-toggle-checkbox').length > 0) {
@@ -608,21 +417,3 @@ window.onload = function () {
         $(this).parents('.company').remove();
     });
 }
-// Returns a function, that, as long as it continues to be invoked, will not
-// be triggered. The function will be called after it stops being called for
-// N milliseconds. If `immediate` is passed, trigger the function on the
-// leading edge, instead of the trailing.
-function debounce(func, wait, immediate) {
-    var timeout;
-    return function () {
-        var context = this, args = arguments;
-        var later = function () {
-            timeout = null;
-            if (!immediate) func.apply(context, args);
-        };
-        var callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
-    };
-};

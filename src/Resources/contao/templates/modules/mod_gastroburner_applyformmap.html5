@@ -4,132 +4,105 @@
 
 <?php $this->block('content');?>
 
-<div class="js-apply-form-wrapper">
-  <form id="apply_form" method="POST" action="<?= $this->url ?>">
+<form id="apply_form" method="POST" action="<?= $this->url ?>">
     <input type="hidden" name="REQUEST_TOKEN" value="<?=REQUEST_TOKEN?>">
-      <?php foreach($this->post['hidden_companies'] as $strId) : ?>
-      <input type="hidden" class="js-hidden-company" name="hidden_companies[]" value="<?= $strId ?>">
-      <?php endforeach; ?>
+    <?php foreach($this->post['hidden_companies'] as $strId) : ?>
+    <input type="hidden" class="js-hidden-company" name="hidden_companies[]" value="<?= $strId ?>">
+    <?php endforeach; ?>
 
     <?php if(empty($this->hiddenCompanies)): ?>
     <div class="error_box">
-      <?php if (isset($this->errors['jobs'])): ?>
-      <p class="error">Bitte mindestens einen Beruf auswählen.</p>
-      <?php endif;?>
+        <?php if (isset($this->errors['jobs'])): ?>
+        <p class="error">Bitte mindestens einen Beruf auswählen.</p>
+        <?php endif;?>
     </div>
-    <?php foreach (['restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): ?>
-    <div class="gastroform_wrapper">
-        <input class="gastroform_checkbox js-job-filter" type="checkbox" id="input_<?= $strName ?>" name="<?= $strName ?>" <?= (($this->{$strName}) ? ' checked' : '') ?> data-type="<?= $strName ?>">
-        <label class="gastroform_label js-toggle-label<?= (($this->{$strName}) ? ' active' : '') ?>" for="input_<?= $strName ?>">
+    <?php foreach (['cook', 'restaurant', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): ?>
+    <div class="job-filter-item">
+        <input type="checkbox" id="input_<?= $strName ?>" name="<?= $strName ?>" <?= (($this->{$strName}) ? ' checked' : '') ?> data-type="<?= $strName ?>">
+        <label class="<?= (($this->{$strName}) ? ' active' : '') ?>" for="input_<?= $strName ?>">
             <span class="ico-job <?= $strName; ?>"></span><span><?= $GLOBALS['TL_LANG']['tl_apply'][$strName][0] ?></span>
         </label>
     </div>
-    <?php endforeach?>
-    <br>
+    <?php endforeach ?>
 
-
-    <!-- Liste / Formular-->
-    <div class="row list-map js-list-map">
-      <div class="col-12 col-xl-5 list-column order-last order-xl-first" id="js-company-list">
-        <div class="gb-input-group mb-3">
-          <div class="gb-input-group-prepend">
-            <span class="gb-input-group-text">
-              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#d7d7d7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="10.5" cy="10.5" r="7.5" />
-                <line x1="21" y1="21" x2="15.8" y2="15.8" />
-              </svg>
-            </span>
-          </div>
-          <input id="js-search" type="text" class="form-control gastroform-input" aria-label="Suche in der Liste" placeholder="Suche in der Liste">
-          <div class="gb-input-group-append">
-            <button class="btn btn-outline-secondary" type="button" id="js-clear-search">
-              Suche löschen
-              <div class="search_cross"></div>
-            </button>
-          </div>
+    <div class="list-map-container row mt-4 mt-xl-5">
+        <div class="col-xl-5 order-1 order-xl-0">
+            <div class="js-search-in-list d-flex">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#8c8c8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="10.5" cy="10.5" r="7.5" />
+                    <line x1="21" y1="21" x2="15.8" y2="15.8" />
+                </svg>
+                <input type="text" class="form-control" aria-label="Suche in der Liste" placeholder="Suche in der Liste">
+                <button type="button">&times;</button>
+            </div>
+            <div id="company-list">
+                <ul class="list">
+                <?php foreach($this->companies as $company): ?>
+                    <li class="company-item" data-id="<?= $company['id'] ?>">
+                        <input type="checkbox" id="company-<?= $company['id'] ?>" value="<?= $company['id'] ?>"<?= ((in_array($company['id'], $this->post['hidden_companies']) ? 'checked="checked"' : '')) ?>>
+                        <label for="company-<?= $company['id'] ?>">
+                            <span class="id d-none"><?= $company['id'] ?></span>
+                            <span class="name d-none"><?= $company['company'] ?></span>
+                            <?php if ($company['companyLogo']) : ?>
+                            <div class="company-item-logo" style="background: #ffffff url(<?= $company['companyLogo'] ?>) center center/contain no-repeat;"></div>
+                            <?php else : ?>
+                            <div class="company-item-logo">
+                                <img src="/resources/img/Placeholder-Logo_small@2x.jpg">
+                            </div>
+                            <?php endif; ?>
+                            <div class="company-item-detail">
+                                <h4 class="shortname"><?= $company['shortname'] ?></h4>
+                                <p class="d-none d-xl-block"><?= $company['shortdesc'] ?></p>
+                                <div class="company-item-jobs">
+                                <?php foreach(array('cook', 'restaurant', 'hotelcleaner', 'hotelmanager', 'gastro') as $strKey): if ($company[$strKey] > 0) : ?>
+                                    <div class="company-item-job-container">
+                                        <div class="company-item-job <?= $strKey ?>"></div>
+                                    </div>
+                                <?php endif; endforeach; ?>
+                                </div>
+                            </div>
+                        </label>
+                    </li>
+                <?php endforeach; ?>
+                </ul>
+            </div>
+            <div class="js-list-mode active"></div>
         </div>
-          <ul class="hotel-list list">
-            <?php foreach($this->companies as $company): ?>
-            <li>
-              <input type="checkbox" id="company-<?= $company['id'] ?>" value="<?= $company['id'] ?>" class="list-column-checkbox js-list-column-checkbox" <?= ((in_array($company['id'], $this->post['hidden_companies']) ? 'checked="checked"' : '')) ?>>
-              <label for="company-<?= $company['id'] ?>" class="js_company_list_item" data-id="<?= $company['id'] ?>">
-                <span class="id" style="display:none;"><?= $company['id'] ?></span>
-                <span class="name" style="display:none;"><?= $company['company'] ?></span>
-                <div class="hotel-list-row">
-                  <?php if ($company['companyLogo']) : ?>
-                  <div class="list-item-col-1" style="background: #ffffff url(<?= $company['companyLogo'] ?>) center center/contain no-repeat;"></div>
-                  <?php else : ?>
-                  <div class="list-item-col-1">
-                    <img src="/resources/img/Placeholder-Logo_small@2x.jpg">
-                  </div>
-                  <?php endif ?>
-                  <div class="list-item-col-2">
-                    <h4><?= $company['shortname'] ?></h4>
-                      <p class="d-none d-xl-block"><?= $company['shortdesc'] ?></p>
-                      <div class="list-item-jobs">
-                        <?php foreach(array('restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro') as $strKey): ?>
-                        <?php if ($company[$strKey] > 0) : ?>
-                        <div class="list-item-job <?= $strKey ?>"></div>
-                        <?php endif; ?>
-                        <?php endforeach; ?>
-                      </div>
-                  </div>
-                  <div class="list-item-col-3">
-                    <div class="hotellist_inputcheckbox"></div>
-                  </div>
+        <div class="col-xl-7 order-0 order-xl-1">
+            <script type="text/javascript">
+                var companies = JSON.parse('<?= json_encode($this->companies) ?>');
+            </script>
+            <div class="map-container">
+                <div id="map"></div>
+                <button type="button" class="js-map-mode">O</button>
+                <div class="row mb-3 map-filter">
+                    <div class="col-6">
+                        <input class="js-filter-zip gastroform_input" type="text" name="zip" placeholder="PLZ">
+                    </div>
+                    <div class="col-6">
+                        <select class="gastroform_input js-surrounding">
+                            <option>Umkreis</option>
+                            <option value="5000">5km</option>
+                            <option value="15000">15km</option>
+                            <option value="50000">50km</option>
+                            <option value="100000">100km</option>
+                        </select>
+                    </div>
                 </div>
-              </label>
-            </li>
-            <?php endforeach; ?>
-          </ul>
-        <!-- </div> -->
-      </div>
-      <!-- Map -->
-      <div class="col-12 col-xl-7 order-first order-xl-last">
-
-        <script type="text/javascript">
-          var companies = JSON.parse('<?= json_encode($this->companies) ?>');
-        </script>
-        <div id="map"></div>
-
-        <!-- Suchformular-->
-        <div class="row filter d-none d-xl-flex">
-          <div class="col-12 col-md-7">
-            <div class="gastroform_wrapper gastroform_wrapper--vorname">
-              <label class="gastroform_inputlabel">Postleitzahl</label>
-              <input class="js-filter-zip gastroform_input" type="text" name="zip">
             </div>
-          </div>
-          <div class="col-12 col-md-5">
-            <div class="gastroform_wrapper gastroform_wrapper--vorname">
-              <label class="gastroform_inputlabel">Umkreis</label>
-              <div class="gastroform_selectWrapper">
-                <select class="js-surrounding">
-                  <option>Bitte wählen</option>
-                  <option value="5000">5km</option>
-                  <option value="15000">15km</option>
-                  <option value="50000">50km</option>
-                  <option value="100000">100km</option>
-                </select>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-    <br>
-    <div class="js-counter-btn">
-        <button class="btn btn--primary btn--disable js-continue-application" type="submit" name="action" value="continue">
-            <div class="btninner">Auswählen</div><span></span>
-        </button>
-        <span>0</span>
+        <div class="js-counter-btn order-2">
+            <button class="btn btn--primary btn--disable" type="submit" name="action" value="continue">
+                <div class="btninner">Auswählen <div class="counter">0</div></div><span></span>
+            </button>
+        </div>
     </div>
 
-    <?php else: // Betriebe wurden ausgewählt, dann Formular nach "Weiter"-Submit anzeigen. ?>
+<?php else: // Betriebe wurden ausgewählt, dann Formular nach "Weiter"-Submit anzeigen. ?>
 
     <h3 id="formularancor">Deine Auswahl.</h3>
     <div class="companies">
-        <?php foreach($this->companies as $company): ?>
+    <?php foreach($this->companies as $company): ?>
         <div class="company full-size">
             <div class="company-inner">
                 <button type="button" class="btn-remove-company" data-id="<?= $company['id']; ?>"><span>&times;</span></button>
@@ -139,9 +112,9 @@
                 <h4><?= $company['shortname'] ?></h4>
                 <p><?= $company['shortdesc'] ?></p>
                 <div class="company-jobs">
-                    <?php foreach(['restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strKey) : if($company[$strKey] > 0): ?>
-                        <div class="company-job <?= $strKey ?>"></div>
-                    <?php endif; endforeach; ?>
+                <?php foreach(['restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strKey) : if($company[$strKey] > 0): ?>
+                    <div class="company-job <?= $strKey ?>"></div>
+                <?php endif; endforeach; ?>
                 </div>
                 <div class="company-detail">
                     <div class="company-map-address">
@@ -162,7 +135,7 @@
                 </div>
             </div>
         </div>
-        <?php endforeach; ?>
+    <?php endforeach; ?>
     </div>
 
     <!-- Kontaktform -->
@@ -207,12 +180,9 @@
             <div class="btninner">Jetzt Ausbildung reservieren</div><span></span>
         </button>
     </div>
-    <?php foreach (['restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): ?>
-    <?php if(isset($this->post[$strName])): ?>
+    <?php foreach (['restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): if(isset($this->post[$strName])): ?>
     <input class="gastroform_checkbox js-job-filter" type="hidden" id="input_<?= $strName ?>" name="<?= $strName ?>" value="1">
-    <?php endif; ?>
-    <?php endforeach?>
-    <?php endif; ?>
-  </form>
-</div>
+    <?php endif; endforeach ?>
+<?php endif; ?>
+</form>
 <?php $this->endblock();?>

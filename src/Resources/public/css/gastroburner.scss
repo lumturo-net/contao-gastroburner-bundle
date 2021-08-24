@@ -1,12 +1,7 @@
-$map_height : 400px;
+/** Globale Styles fuer andere FE Mod */
 
 button.active {
   background-color: red
-}
-
-/* button-gruppe über der suchliste copy von bootstrap */
-.fa-search::before {
-  content: "\f002";
 }
 
 .search {
@@ -19,516 +14,290 @@ button.active {
   }
 }
 
-.gastroform_label {
-  display:inline-flex;
-  align-items: center;
-  padding:14px 20px 14px 0;
-  white-space: nowrap;
-  width: auto;
-}
-
-.gastroburner-form .widget,
-.gastroform_wrapper,
-.contact_form .widget {
-  margin-bottom:20px;
-  min-height:auto;
-}
-
-.ico-job {
-  width:22px;
-  height:22px;
-  background:url(/bundles/contaogastroburner/images/berufe.svg) top center/cover no-repeat;
-  margin:0 5px 0 15px;
-  &.cook { background-position-y: -22px; }
-  &.hotelcleaner { background-position-y: -44px; }
-  &.hotelmanager { background-position-y: -66px; }
-  &.gastro { background-position-y: -88px; }
-}
-
-.gb-input-group {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  width: 100%;
-  .gb-input-group-prepend {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    display: flex;
-    .gb-input-group-text {
-      display: flex;
-      align-items: center;
-      padding: .8rem 0rem 0rem 1.2rem;
-      margin-bottom: 0;
-      font-size: 1rem;
-      font-weight: 400;
-      line-height: 1.5;
-      color: #D7D7D7;
-      text-align: center;
-      white-space: nowrap;
-      img {
-        margin: 0
-      }
-    }
-  }
-
-  > .form-control {
-    position: relative;
-    flex: 1 1 0%;
-    min-width: 0;
-    margin-bottom: 0;
-    display: block;
-    width: 100%;
-    height: calc(1.5em + .75rem + 2px);
-    padding: 1.4rem 3.1rem;
-    font-size: 1.1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    border: 3px solid #D7D7D7;
-    color: #D7D7D7;
-    background-color: #fff;
-    background-clip: padding-box;
-  }
-
-  .gb-input-group-append {
-    position: absolute;
-    right: 0;
-    display: flex;
-    margin-left: -1px;
-  }
-
-  .btn {
-    display: flex;
-    align-items: center;
-    text-indent: -999em;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    position: relative;
-    z-index: 2;
-    cursor: pointer;
-    padding: 0px;
-    background: initial;
-    transform: initial;
-    text-transform: initial;
-    font-weight: 400;
-    color: #D7D7D7;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-color: transparent;
-    border: 1px solid transparent;
-    padding: .8rem 1.4rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: .25rem;
-    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-    > .search_cross {
-      position: relative;
-      height: 1.2em;
-      width: 1.2em;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      &::before,
-      &::after {
-        position: absolute;
-        content: '';
-        width: 100%;
-        height: 2px;
-        background-color: #d7d7d7;
-        &::before { transform: rotate(45deg); }
-        &::after { transform: rotate(-45deg); }
-      }
-    }
-  }
-}
-
-#map {
-  position: absolute;
-  width:100vw;
-  height: 200px;
-  left:calc((100% - 100vw) / 2);
-}
-
-.spacer {
-  background-color: white;
-}
-
 .select_one_answer {
   padding-top: 24px;
   padding-bottom: 47px;
 }
 
-.filter {
-  margin-top: 1.5em;
-  .gastroform_wrapper {
-    width: 100%;
-    margin-bottom: 0px;
-    margin-top: 30px;
-    .gastroform_selectWrapper {
-      position: relative;
-      width: 100%;
-      &::before {
-        content: "\25BE";
-        color: #D7D7D7;
-        font-size: 50px;
-        pointer-events: none;
-        position: absolute;
-        right: 25px;
-        top: 20px;
-      }
+.gastroburner-form .widget {
+  margin-bottom:20px;
+  min-height:auto;
+}
 
-      select {
-        font-family: 'Zilla Slab', 'Courier New', Arial;
-        font-size: 1.5em;
-        appearance: none;
-        -moz-appearance: none;
-        -webkit-appearance: none;
-        border: 4px solid #D7D7D7;
-        background-color: white;
-        border-radius: 0px;
-        color: #D7D7D7;
-        cursor: pointer;
-        height: 65px;
-        outline: none;
-        padding-left: 10px;
-        width: 100%;
-      }
+/** Bewerbungsseite Styles */
+
+.list-map-container {
+  padding-bottom:5rem;
+}
+
+/** Jobfilter ueber Liste & Karte */
+.job-filter-item {
+  display:inline-block;
+  font-size: 1.25rem;
+  margin-bottom:1.25rem;
+  input {
+    display:none;
+  }
+
+  input:checked ~ label {
+    background:#ffd500;
+    border-color:#ffd500;
+  }
+
+  label {
+    display:inline-flex;
+    align-items: center;
+    padding:.75rem 1rem;
+    border:3px solid #D7D7D7;
+    border-radius:50rem;
+    white-space:nowrap;
+    &:hover {
+      background:#ffd500;
+      border-color:#ffd500;
+      cursor: pointer;
+    }
+
+    .ico-job {
+      width:32px;
+      height:32px;
+      background:url(/bundles/contaogastroburner/images/berufe.svg) top center/cover no-repeat;
+      margin:0 5px 0 0;
+      &.restaurant { background-position-y: -32px; }
+      &.hotelcleaner { background-position-y: -64px; }
+      &.hotelmanager { background-position-y: -96px; }
+      &.gastro { background-position-y: -128px; }
     }
   }
 }
 
-#apply_form {
-  margin-top:70px;
-}
-
-.list-map {
-  h3 {
-    margin-top:0;
+/** Suchleiste ueber Liste */
+.js-search-in-list {
+  border:3px solid #D7D7D7;
+  align-items: center;
+  input,
+  button {
+    border:0;
+    background:none;
+    &:focus-visible {
+      outline:none;
+    }
   }
 
-  .list-column {
-    margin-top: 220px;
-    .hotel-list {
-      height:260px;
-      overflow-y:scroll;
-      label {
-        margin-bottom: 20px;
-      }
-      li {
-        input[type="checkbox"] {
-          display: none
-        }
+  svg {
+    flex:0 0 1.25rem;
+    margin:0 .5rem;
+  }
 
-        .list-column-checkbox {
-          + label {
-            background-color: white;
-            display: block;
-            border: 3px solid #D7D7D7;
-            border-radius: 15px;
-            padding: 5px;
-            position: relative;
-            .hotel-list-row {
-              display: flex;
-              flex-wrap:wrap;
-              align-items:center;
+  input {
+    width:100%; /* Fix für mobile Ansicht */
+    flex:1 1 100%;
+    font-size: 1.25rem;
+    padding:.75rem 0;
+    font-family:Raleway, -apple-system, system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  }
 
-              /* Bild */
-              .list-item-col-1 {
-                flex:0 1 66px;
-                height:40px;
-                margin-right:10px;
-                border-radius: 10px;
-              }
+  button {
+    position: relative;
+    top:-2px;
+    color:#8c8c8c;
+    font-size: 3rem;
+    font-weight: 300;
+    padding:0 .75rem;
+    line-height:1;
+    cursor: pointer;
+  }
+}
 
-              /* Checkbox */
-              .list-item-col-3 {
-                display:none;
-                position:absolute;
-                top:-5%;
-                right:-5%;
-                .hotellist_inputcheckbox {
-                  background-color: #ffffff;
-                  margin: 0;
-                  border: 3px solid #d7d7d7;
-                  border-radius: 10px;
-                  display: inline-block;
-                  height: 30px;
-                  width: 30px;
-                }
-              }
+#company-list {
+  .list {
+    overflow:scroll;
+    height:300px;
+  }
+}
 
-              /* Text */
-              .list-item-col-2 {
-                flex:1 0 auto;
-                h4 {
-                  position: relative;
-                  top: 0;
-                  font-family:Raleway;
-                  font-size: 10px;
-                  line-height: 21px;
-                  margin-bottom: 0px;
-                }
-
-                p {
-                  font-size: 12px;
-                  line-heigt: 16px;
-                }
-
-                .list-item-jobs {
-                  display: flex;
-                  justify-content: flex-start;
-                  margin:0;
-                  .list-item-job {
-                    height: 28px;
-                    width: 28px;
-                    background-color: #D7D7D7;
-                    border-radius: 50%;
-                    background-size: 85%;
-                    background-repeat: no-repeat, repeat;
-                    background-position: center 0px;
-                    background-image: url('../images/berufe.svg');
-                    margin-right: 10px;
-                    &:last-child {
-                      margin-right: 0;
-                    }
-                    &.cook { background-position: center -22px }
-                    &.gastro { background-position: center -94px }
-                    &.hotelcleaner { background-position: center -45px }
-                    &.hotelmanager { background-position: center -69px }
-                    &.restaurant { background-position: center 2px }
-                  }
-                }
-              }
-            }
-          }
-
-          &:checked + label {
-            background-color: #FFD500;
-            border-color: #FFD500;
-            .list-item-col-2 {
-              .list-item-jobs {
-                .list-item-job {
-                  background-color: white;
-                  color: #8c8c8c;
-                }
-              }
-            }
-            .list-item-col-3 {
-              .hotellist_inputcheckbox {
-                border: 3px solid #FFD500;
-                &::after {
-                  content: '';
-                  display: block;
-                  width: 10px;
-                  height: 18px;
-                  background-color: #ffffff;
-                  border: solid #000000;
-                  border-width: 0 4px 4px 0;
-                  -webkit-transform: rotate(45deg);
-                  -moz-transform: rotate(45deg);
-                  -o-transform: rotate(45deg);
-                  transform: rotate(45deg);
-                  margin-top: 2px;
-                  margin-left: 8px;
-                }
-              }
-            }
-
-            .hotel-list-row {
-              .list-item-col-2 {
-                .list-item-jobs {
-                  .list-item-job {
-                    background-color: white
-                  }
-                }
-              }
-            }
-          }
+/** Ausbildungsbetrieb-Container + Elemente */
+.company-item {
+  margin:.625rem 0;
+  input {
+    display:none;
+    &:checked {
+      ~ label {
+        border-color:#ffd500;
+        background:#ffd500;
+        .company-item-job-container {
+          background-color:#ffffff;
         }
       }
     }
   }
 
-  .form-div {
-    margin-top: 60px;
+  label {
+    display:flex;
+    border:3px solid #d7d7d7;
+    padding:.3125rem;
+    border-radius: 1rem;
   }
-}
 
-.js-counter-btn {
-  position: relative;
-  display:block;
-  > span {
-    position: absolute;
-    top: -1rem;
-    right: -1rem;
-    width: 50px;
-    height: 50px;
-    padding-top: 1.6rem;
+  .company-item-logo {
+    flex:0 0 60px;
+    height:44px;
+    margin-right:.625rem;
+    border-radius: .625rem;
+  }
+
+  .company-item-detail {
+    h4 {
+      font-size: .625rem;
+      line-height: 11px;
+      margin-bottom:.25rem;
+    }
+  }
+
+  .company-item-jobs {
+    display:flex;
+  }
+
+  .company-item-job-container {
     border-radius: 50%;
-    background: #D7D7D7;
-    color: #fff;
-    font-family: sans-serif;
+    padding:.2rem;
+    margin-right:.35rem;
+    background:#d7d7d7;
+  }
+
+  .company-item-job {
+    width:22px;
+    height:22px;
+    background:url(/bundles/contaogastroburner/images/berufe.svg) top center/cover no-repeat;
+    &.restaurant { background-position-y: -22px; }
+    &.hotelcleaner { background-position-y: -44px; }
+    &.hotelmanager { background-position-y: -66px; }
+    &.gastro { background-position-y: -88px; }
+  }
+}
+
+/** Overlay-Div ueber Liste wenn Kartenmodus aktiv ist */
+.js-list-mode {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+  &.active {
+    z-index:-1;
+  }
+}
+
+/** Container fuer Karte + Button wird benoetigt */
+.map-container {
+  position: relative;
+  padding-top:120px;
+  transition:padding .3 ease;
+
+  .map-filter {
+    display:none;
+  }
+
+  /** Toggle-Button fuer Karten-Modus */
+  .js-map-mode {
+    position: absolute;
+    z-index: 1000;
+    top: calc(100px - 50%);
+    right: 0;
+    border: 3px solid #d7d7d7;
+    background: #ffffff;
     font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 0;
-    text-align: center;
+    line-height: 1;
+    transform: translate(50%, 0);
+    &:hover {
+      cursor:pointer;
+    }
+  }
+
+
+  /** Kartenstyle im Karten-Modus */
+  &.active {
+    padding-top:420px;
+    #map {
+      height:400px;
+    }
+    .map-filter {
+      display:flex;
+    }
+    .js-map-mode {
+      top:calc(400px - 50%);
+    }
+  }
+}
+
+/** Kartenstyle im Listen-Modus */
+#map {
+  position: absolute;
+  width:100vw;
+  height: 100px;
+  left:calc((100% - 100vw) / 2);
+  top:0;
+}
+
+/** Auswaehlen-Button */
+.js-counter-btn {
+  position: absolute;
+  width:100%;
+  bottom:0;
+  z-index:500;
+  .counter {
+    display:none;
+
     &.hasItems {
+      display:inline-block;
       background: #000;
       color: #fff;
+      border-radius: 50%;
+      font-family: sans-serif;
+      font-size: 1.375rem;
+      font-weight: 700;
+      line-height: 0;
+      text-align: center;
+      padding:1.25rem .75rem;
     }
   }
 
   > .btn {
     width:100%;
-    padding:20px 25px;
-  }
-}
-
-@media(min-width: 576px) {
-  .list-map {
-    .list-column {
-      .hotel-list {
-        height:auto;
-        li {
-          .list-column-checkbox {
-            + label {
-              .hotel-list-row {
-                flex-wrap: nowrap;
-
-                /* Bild */
-                .list-item-col-1 {
-                  flex: 0 1 125px;
-                  height: 100px;
-                  margin-bottom:0;
-                }
-
-                .list-item-col-2 {
-                  flex: 1 0 0%;
-                  padding: 0 10px;
-                }
-
-                .list-item-col-3 {
-                  position: static;
-                }
-              }
-            }
-            &:checked + label {
-              .list-item-col-3 {
-                .hotellist_inputcheckbox {
-                  border: 0;
-                  &::after {
-                    margin-top: 4px;
-                    margin-left: 10px;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .js-counter-btn {
-    > span {
-      top: -1.5rem;
-      right: -1.5rem;
-    }
-  }
-}
-
-@media(min-width: 768px) {
-  .js-counter-btn {
-    > span {
-      top: -2rem;
-      right: -2rem;
-      width: 75px;
-      height: 75px;
-      padding-top: 2.25rem;
-      font-size: 2rem;
-    }
+    padding:1rem;
   }
 }
 
 @media(min-width: 992px) {
-  .ico-job {
-    width: 50px;
-    height: 50px;
-    &.restaurant { background-position-y: -50px; }
-    &.cook { background-position-y: 0; }
-    &.hotelcleaner { background-position-y: -100px; }
-    &.hotelmanager { background-position-y: -150px; }
-    &.gastro { background-position-y: -200px; }
-  }
+  .job-filter-item {
+    margin:0 1.5rem 1.5rem 0;
+    font-size: 2.375rem;
+    label {
+      padding-right:2rem;
+      .ico-job {
+        width: 50px;
+        height: 50px;
+        margin:0 1rem;
 
-  .gastroburner-form .widget,
-  .gastroform_wrapper,
-  .contact_form .widget {
-    margin-right:20px;
+        &.restaurant { background-position-y: -50px; }
+        &.cook { background-position-y: 0; }
+        &.hotelcleaner { background-position-y: -100px; }
+        &.hotelmanager { background-position-y: -150px; }
+        &.gastro { background-position-y: -200px; }
+      }
+    }
   }
 }
 
 @media(min-width:1200px) {
+  .map-container {
+    padding-top:0;
+  }
+
   #map {
     position: static;
     width: auto;
-    left:inherit;
-    height: $map_height;
-  }
-
-  .list-map {
-    margin-top:30px;
-    .list-column {
-      margin-top:0;
-      .hotel-list {
-        overflow-y: hidden;
-
-        li {
-          .list-column-checkbox {
-            + label {
-              padding:12px;
-              .hotel-list-row {
-                .list-item-col-1 {
-
-                }
-
-                .list-item-col-2 {
-                  h4 {
-                    font-size: 18px;
-                    line-height: 1.2;
-                    margin-bottom: 1px;
-                  }
-
-                  p {
-                    font-size: 12px;
-                    line-height: 1.3;
-                    margin-bottom:5px;
-                  }
-                }
-                .list-item-col-3 {
-
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .js-counter-btn {
-    margin-top:50px;
-    display:inline-block;
-    > .btn {
-      width:auto;
-      padding:15px 25px;
-    }
+    left: inherit;
+    height: 400px;
   }
 }
