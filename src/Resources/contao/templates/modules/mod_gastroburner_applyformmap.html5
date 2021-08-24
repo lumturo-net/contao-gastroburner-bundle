@@ -26,7 +26,7 @@
     <?php endforeach ?>
 
     <div class="list-map-container row mt-4 mt-xl-5">
-        <div class="col-xl-5 order-1 order-xl-0">
+        <div class="col-xl-6 order-1 order-xl-0">
             <div class="js-search-in-list d-flex">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#8c8c8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="10.5" cy="10.5" r="7.5" />
@@ -68,18 +68,18 @@
             </div>
             <div class="js-list-mode active"></div>
         </div>
-        <div class="col-xl-7 order-0 order-xl-1">
+        <div class="col-xl-6 order-0 order-xl-1">
             <script type="text/javascript">
                 var companies = JSON.parse('<?= json_encode($this->companies) ?>');
             </script>
             <div class="map-container">
                 <div id="map"></div>
-                <button type="button" class="js-map-mode">O</button>
+                <button type="button" class="js-map-mode">&nbsp;</button>
                 <div class="row mb-3 map-filter">
-                    <div class="col-6">
+                    <div class="col-6 col-xl-7">
                         <input class="js-filter-zip gastroform_input" type="text" name="zip" placeholder="PLZ">
                     </div>
-                    <div class="col-6">
+                    <div class="col-6 col-xl-5">
                         <select class="gastroform_input js-surrounding">
                             <option>Umkreis</option>
                             <option value="5000">5km</option>

@@ -147,6 +147,7 @@ button.active {
 
   .company-item-detail {
     h4 {
+      font-family:Raleway, -apple-system, system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
       font-size: .625rem;
       line-height: 11px;
       margin-bottom:.25rem;
@@ -205,10 +206,11 @@ button.active {
     top: calc(100px - 50%);
     right: 0;
     border: 3px solid #d7d7d7;
-    background: #ffffff;
+    background: #ffffff url(/bundles/contaogastroburner/images/Map.svg) center center no-repeat;
     font-size: 1.5rem;
     line-height: 1;
-    transform: translate(50%, 0);
+    transform: translate(0, -30%);
+    padding:.5rem 1rem;
     &:hover {
       cursor:pointer;
     }
@@ -225,7 +227,9 @@ button.active {
       display:flex;
     }
     .js-map-mode {
-      top:calc(400px - 50%);
+      top:0;
+      transform: translate(0, 30%);
+      background: #ffffff url(/bundles/contaogastroburner/images/Close.svg) center center no-repeat;
     }
   }
 }
@@ -290,14 +294,86 @@ button.active {
 }
 
 @media(min-width:1200px) {
+  .js-map-mode,
+  .js-list-mode {
+    display:none;
+  }
+
+  #company-list {
+    .list {
+      overflow:scroll;
+      height:850px;
+    }
+  }
+
+  .company-item {
+    margin:.625rem 0;
+
+    label {
+      padding:.75rem;
+    }
+
+    .company-item-logo {
+      flex:0 0 170px;
+      height:100px;
+      margin-right:1rem;
+      border-radius: .625rem;
+    }
+
+    .company-item-detail {
+      h4 {
+        font-size: 1.125rem;
+        line-height: 21px;
+        margin-bottom:1px;
+      }
+
+      p {
+        font-size:.75rem;
+        font-family:Raleway, -apple-system, system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        margin-bottom:0;
+      }
+    }
+
+    .company-item-job-container {
+      margin-right:1rem;
+    }
+
+    .company-item-job {
+      width:32px;
+      height:32px;
+      &.restaurant { background-position-y: -32px; }
+      &.hotelcleaner { background-position-y: -64px; }
+      &.hotelmanager { background-position-y: -96px; }
+      &.gastro { background-position-y: -128px; }
+    }
+  }
+
   .map-container {
     padding-top:0;
+    height:100%;
+    .map-filter {
+      display:flex;
+      position: absolute;
+      bottom:-20px;
+    }
   }
 
   #map {
     position: static;
-    width: auto;
-    left: inherit;
-    height: 400px;
+    left:0;
+    width:calc(100vw - 50%);
+    height: 830px;
+  }
+
+  .js-counter-btn {
+    position: static;
+    flex:0 1 50%;
+    margin-top:2rem;
+    .btn {
+      padding:1.5rem;
+      .btninner {
+        line-height: 1.5;
+      }
+    }
   }
 }
