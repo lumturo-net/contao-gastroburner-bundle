@@ -47,7 +47,7 @@ button.active {
   label {
     display:inline-flex;
     align-items: center;
-    padding:.75rem 1rem .75rem 0.9rem;
+    padding:.75rem .875rem .75rem .875rem;
     border:3px solid #D7D7D7;
     border-radius:50rem;
     white-space:nowrap;
@@ -283,10 +283,11 @@ button.active {
     margin:0 1.5rem 1.5rem 0;
     font-size: 2.375rem;
     label {
-      padding:.75rem .9rem .75rem .9rem;
+      padding:1.125rem 2.875rem;
       .ico-job {
         width: 50px;
         height: 50px;
+        margin-right:1rem;
 
         &.restaurant { background-position-y: -50px; }
         &.cook { background-position-y: 0; }
