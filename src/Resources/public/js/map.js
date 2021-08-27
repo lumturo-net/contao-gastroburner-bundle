@@ -142,6 +142,11 @@ var gastroBurnerMap = function () {
 
         // Filter nach Sucheingabe
         $('.js-search-in-list input').on('input', function (e) {
+            if(e.keyCode == 13) {
+                e.preventDefault();
+                return false;
+            }
+
             filter.job.search = $(this).val();
             filterList();
         });
@@ -190,6 +195,11 @@ var gastroBurnerMap = function () {
 
         // Suche nach PLZ
         $('.js-filter-zip').on('input', function (e) {
+            if(e.keyCode == 13) {
+                e.preventDefault();
+                return false;
+            }
+
             var zip = $(this).val();
             if (zip.length < 5) {
                 return;
@@ -281,7 +291,7 @@ var gastroBurnerMap = function () {
             return true;
         }
         var regexp = new RegExp(filter.job.search, 'i');
-        return company.shortname.search(regexp) != -1 || company.company.search(regexp) != -1 || company.description.search(regexp) != -1;
+        return company.shortname.search(regexp) != -1 || company.company.search(regexp) != -1 || company.shortdesc.search(regexp) != -1;
     }
 
     function _filterByJob(company) {
@@ -364,11 +374,11 @@ var gastroBurnerMap = function () {
     }
 }();
 
-window.onload = function () {
+document.addEventListener('DOMContentLoaded', function() {
     if($('#map').length > 0) {
         gastroBurnerMap.bootstrap({
             map: {
-                center: [54.0887, 12.14049],
+                center: [54.081417, 12.7653133],
                 zoom: 8
             },
             list: {
@@ -416,4 +426,4 @@ window.onload = function () {
         $('.js-hidden-company[value="' + $(this).data('id') + '"]').remove();
         $(this).parents('.company').remove();
     });
-}
+});
