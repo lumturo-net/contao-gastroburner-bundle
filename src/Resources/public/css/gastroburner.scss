@@ -283,11 +283,10 @@ button.active {
     margin:0 1.5rem 1.5rem 0;
     font-size: 2.375rem;
     label {
-      padding-right:2rem;
+      padding:.75rem .9rem .75rem .9rem;
       .ico-job {
         width: 50px;
         height: 50px;
-        margin:0 1rem;
 
         &.restaurant { background-position-y: -50px; }
         &.cook { background-position-y: 0; }
