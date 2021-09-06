@@ -2,6 +2,7 @@
 
 namespace Lumturo\ContaoGastroburnerBundle\Module;
 
+use Contao\Template;
 use Exception;
 use Contao\PageModel;
 use Contao\FilesModel;
@@ -39,12 +40,12 @@ class GastroburnerApplyFormMapModule extends \Contao\Module
         } else {
             // $GLOBALS['TL_JAVASCRIPT'][] = 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js';
             // // $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/require.js';
-            $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/leaflet.js';
+            $GLOBALS['TL_BODY'][] = Template::generateScriptTag('bundles/contaogastroburner/js/leaflet.js');
             // $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/list.min.js';
-            $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/list.js';
-            $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/map.js';
-            $GLOBALS['TL_JAVASCRIPT'][] = 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.js';
-            $GLOBALS['TL_JAVASCRIPT'][] = 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js';
+            $GLOBALS['TL_BODY'][] = Template::generateScriptTag('bundles/contaogastroburner/js/list.js');
+            $GLOBALS['TL_BODY'][] = Template::generateScriptTag('bundles/contaogastroburner/js/map.js');
+            $GLOBALS['TL_BODY'][] = Template::generateScriptTag('https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.js');
+            $GLOBALS['TL_BODY'][] = Template::generateScriptTag('https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js');
             $GLOBALS['TL_CSS'][] = 'bundles/contaogastroburner/css/companies.min.css';
         }
 

@@ -25,9 +25,7 @@
                     </address>
                 </div>
                 <nav>
-                    <?php if(!empty($company['website'])): ?>
-                    <a href="<?= $company['website']; ?>" target="_blank" title="Zur Website: <?= $company['website']; ?>">Zur Website ➔</a>
-                    <?php endif; ?>
+                    <a href="/ausbildungsbetriebe/details/<?= $company['id']; ?>.html" title="Mehr erfahren">Mehr erfahren ➔</a>
                     <form action="{{link_url::ausbildung-sichern}}" method="post">
                         <input type="hidden" name="hidden_companies[]" value="<?= $company['id']; ?>">
                         <button class="submit_link">Direkt bewerben ➔</button>
