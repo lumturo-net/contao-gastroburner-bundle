@@ -399,15 +399,15 @@ document.addEventListener('DOMContentLoaded', function() {
             companies: companies
         });
 
-        var $listMapContainer = $('.list-map-container');
-        var $listMapContainerOffsetTop = $listMapContainer.offset().top;
+        var $mapContainer = $('.map-container');
+        var $mapContainerOffsetTop = $mapContainer.offset().top;
     }
 
     $('.js-map-mode, .js-list-mode').on('click', function() {
         $('.map-container').toggleClass('active').toggleClass('map-mode');
         $('.map-container').parents('form').toggleClass('map-mode');
         gastroBurnerMap.getMap().invalidateSize();
-        $('.js-search-in-list').toggleClass('d-flex d-none');
+        $('.js-search-in-list .list-search-container').toggleClass('d-flex d-none');
         $('.js-list-mode').toggleClass('active');
     });
 
@@ -441,12 +441,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     $(document).on('scroll', function() {
         if(!window.matchMedia('(min-width:1200px)').matches) {
-            $listMapContainer.addClass('fixed', $listMapContainer[0].getBoundingClientRect().top <= 0);
-            $listMapContainer.parents('form').addClass('has-fixed', $listMapContainer[0].getBoundingClientRect().top <= 0);
+            if($mapContainer[0].getBoundingClientRect().top <= 0) {
+                $('.js-search-in-list').addClass('fixed');
+                $('.js-counter-btn').addClass('fixed');
+                $mapContainer.addClass('fixed');
+                $mapContainer.parent('div').addClass('has-fixed');
 
-            if($listMapContainer.offset().top < $listMapContainerOffsetTop) {
-                $listMapContainer.removeClass('fixed');
-                $listMapContainer.parents('form').removeClass('has-fixed');
+            }
+
+            if($mapContainer.offset().top < $mapContainerOffsetTop) {
+                $('.js-search-in-list').removeClass('fixed');
+                $('.js-counter-btn').removeClass('fixed');
+                $mapContainer.removeClass('fixed');
+                $mapContainer.parent('div').removeClass('has-fixed');
             }
         }
     });

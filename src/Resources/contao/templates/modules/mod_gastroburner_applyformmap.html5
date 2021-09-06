@@ -27,13 +27,15 @@
 
     <div class="list-map-container row mt-4 mt-xl-5">
         <div class="col-xl-6 order-1 order-xl-0">
-            <div class="js-search-in-list d-flex">
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#8c8c8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="10.5" cy="10.5" r="7.5" />
-                    <line x1="21" y1="21" x2="15.8" y2="15.8" />
-                </svg>
-                <input type="text" class="form-control" aria-label="Suche in der Liste" placeholder="Suche in der Liste">
-                <button type="button">&times;</button>
+            <div class="js-search-in-list">
+                <div class="list-search-container d-flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#8c8c8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="10.5" cy="10.5" r="7.5" />
+                        <line x1="21" y1="21" x2="15.8" y2="15.8" />
+                    </svg>
+                    <input type="text" class="form-control" aria-label="Suche in der Liste" placeholder="Suche in der Liste">
+                    <button type="button">&times;</button>
+                </div>
             </div>
             <div id="company-list">
                 <ul class="list">
@@ -93,8 +95,9 @@
         </div>
         <div class="js-counter-btn order-2">
             <button class="btn btn--primary btn--disable" type="submit" name="action" value="continue">
-                <div class="btninner">Auswählen <div class="counter">0</div></div><span></span>
+                <div class="btninner">Auswählen <div class="counter d-xl-none">0</div></div><span></span>
             </button>
+            <div class="counter d-none">0</div>
         </div>
     </div>
 
