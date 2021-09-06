@@ -441,7 +441,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     $(document).on('scroll', function() {
         if(!window.matchMedia('(min-width:1200px)').matches) {
-            if($mapContainer[0].getBoundingClientRect().top <= 0) {
+            if($mapContainer.position().top <= 0) {
                 $('.js-search-in-list').addClass('fixed');
                 $('.js-counter-btn').addClass('fixed');
                 $mapContainer.addClass('fixed');
