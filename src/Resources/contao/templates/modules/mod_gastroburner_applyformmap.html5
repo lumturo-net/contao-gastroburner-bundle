@@ -74,8 +74,8 @@
             </script>
             <div class="map-container">
                 <div id="map"></div>
-                <button type="button" class="js-map-mode">&nbsp;</button>
-                <div class="row mb-3 map-filter">
+                <div class="js-map-mode"></div>
+                <div class="row map-filter">
                     <div class="col-6 col-xl-7">
                         <input class="js-filter-zip gastroform_input" type="text" name="zip" placeholder="PLZ">
                     </div>

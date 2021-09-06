@@ -64,9 +64,9 @@ var gastroBurnerMap = function () {
             filterList();
         }
 
-        //map.on('moveend', f);
-        //map.on('zoomend', f);
-        //map.on('resize', f);
+        map.on('moveend', f);
+        map.on('zoomend', f);
+        map.on('resize', f);
 
         // Geo-Koordinaten abfragen
 
@@ -116,7 +116,6 @@ var gastroBurnerMap = function () {
                 // marker entsprechechend löschen / anzeigen
                 var _companies = list.items;
                 for (var i in _companies) {
-                    // if (i == 0) continue; // dummy list entry
                     var id = _companies[i].values().id;
                     if (_companies[i].visible()) {
                         if (!config.companies[id].marker) {
@@ -188,8 +187,10 @@ var gastroBurnerMap = function () {
 
             if ($(this).is(':checked')) {
                 $('#apply_form').append('<input type="hidden" class="js-hidden-company" name="hidden_companies[]" value="' + id + '">');
+                config.companies[id].selected = true;
             } else {
                 $('.js-hidden-company[value="' + id + '"]').remove();
+                config.companies[id].selected = false;
             }
         });
 
@@ -241,7 +242,10 @@ var gastroBurnerMap = function () {
             var company = config.companies[id];
 
             return _filterByJob(company) &&
-                   _filterByMarkerVisibility(company) &&
+                   (
+                       _filterByMarkerVisibility(company) ||
+                       _filterBySelected(company)
+                   ) &&
                    _filterBySearch(company) &&
                    _filterByLatLon(company);
         }
@@ -261,19 +265,21 @@ var gastroBurnerMap = function () {
             marker.setIcon(icon);
         }
         marker.addTo(map);
+        marker.bindPopup('<h5>' + config.companies[id].shortname + '</h5><img src="' + config.companies[id].companyLogo + '" width="60" height="44">');
         marker.on('click', function() {
-
             var checkbox =  $('[id="company-' + marker.companyId + '"]');
                 checkbox.prop('checked', !checkbox.prop('checked'));
                 checkbox.trigger('change');
 
             var scrollTop = checkbox.parent().offset().top;
-            var container = $('.hotel-list');
-            $('.hotel-list').animate({
+            var container = $('#company-list .list');
+            $('#company-list .list').animate({
                 scrollTop: checkbox.prop('checked') ? scrollTop - container.offset().top + container.scrollTop() : 0
             }, 2000);
 
             marker.setIcon(checkbox.prop('checked') ? hoverIcon : icon);
+            checkbox.prop('checked') ? config.companies[id].selected = true : null;
+            !checkbox.prop('checked') ? marker.closePopup() : null;
         });
 
         config.companies[id].marker = marker;
@@ -310,6 +316,10 @@ var gastroBurnerMap = function () {
         } else {
             return true;// kein filter gesetzt
         }
+    }
+
+    function _filterBySelected(company) {
+        return company.selected;
     }
 
     function _filterByLatLon(company) {
@@ -388,10 +398,14 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             companies: companies
         });
+
+        var $listMapContainer = $('.list-map-container');
+        var $listMapContainerOffsetTop = $listMapContainer.offset().top;
     }
 
     $('.js-map-mode, .js-list-mode').on('click', function() {
-        $('.map-container').toggleClass('active');
+        $('.map-container').toggleClass('active').toggleClass('map-mode');
+        $('.map-container').parents('form').toggleClass('map-mode');
         gastroBurnerMap.getMap().invalidateSize();
         $('.js-search-in-list').toggleClass('d-flex d-none');
         $('.js-list-mode').toggleClass('active');
@@ -412,8 +426,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if($('.js-toggle-checkbox').length > 0) {
         $('#apply_form').on('submit', function (e) {
             if ($('.js-toggle-checkbox').hasClass('active')) {
-                //$('#apply_form').unbind('submit');
-                //$('.js-submit-application').trigger('click');
                 return true;
             } else {
                 $('.js-dataprivacy').addClass('error');
@@ -425,5 +437,17 @@ document.addEventListener('DOMContentLoaded', function() {
     $('.btn-remove-company').on('click', function() {
         $('.js-hidden-company[value="' + $(this).data('id') + '"]').remove();
         $(this).parents('.company').remove();
+    });
+
+    $(document).on('scroll', function() {
+        if(!window.matchMedia('(min-width:1200px)').matches) {
+            $listMapContainer.addClass('fixed', $listMapContainer[0].getBoundingClientRect().top <= 0);
+            $listMapContainer.parents('form').addClass('has-fixed', $listMapContainer[0].getBoundingClientRect().top <= 0);
+
+            if($listMapContainer.offset().top < $listMapContainerOffsetTop) {
+                $listMapContainer.removeClass('fixed');
+                $listMapContainer.parents('form').removeClass('has-fixed');
+            }
+        }
     });
 });

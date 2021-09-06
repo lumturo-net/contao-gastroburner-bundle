@@ -26,8 +26,24 @@ button.active {
 
 /** Bewerbungsseite Styles */
 
+.has-fixed {
+  padding-bottom:850px;
+  &.map-mode {
+    padding-bottom:calc(850px + 20vh);
+    .js-counter-btn {
+      bottom:48vh;
+    }
+  }
+}
+
 .list-map-container {
   padding-bottom:5rem;
+  &.fixed {
+    position: fixed;
+    top:0;
+    width: 314px;
+    margin-top:0 !important;
+  }
 }
 
 /** Jobfilter ueber Liste & Karte */
@@ -108,14 +124,14 @@ button.active {
   }
 }
 
+/** Ausbildungsbetrieb-Container + Elemente */
 #company-list {
   .list {
     overflow:scroll;
-    height:300px;
+    height:70vh;
   }
 }
 
-/** Ausbildungsbetrieb-Container + Elemente */
 .company-item {
   margin:.625rem 0;
   input {
@@ -129,6 +145,10 @@ button.active {
         }
       }
     }
+  }
+
+  &:last-child {
+    margin-bottom:100px;
   }
 
   label {
@@ -180,8 +200,8 @@ button.active {
 .js-list-mode {
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
+  left: calc((100% - 100vw) /2);
+  right: calc((100% - 100vw) /2);
   bottom: 0;
   cursor: pointer;
   &.active {
@@ -192,8 +212,8 @@ button.active {
 /** Container fuer Karte + Button wird benoetigt */
 .map-container {
   position: relative;
-  padding-top:120px;
-  transition:padding .3 ease;
+  height:20vh;
+  margin:0 calc((100% - 100vw) / 2) 20px calc((100% - 100vw) / 2);
 
   .map-filter {
     display:none;
@@ -202,16 +222,21 @@ button.active {
   /** Toggle-Button fuer Karten-Modus */
   .js-map-mode {
     position: absolute;
-    z-index: 1000;
-    top: calc(100px - 50%);
-    right: 0;
-    border: 3px solid #d7d7d7;
-    background: #ffffff url(/bundles/contaogastroburner/images/Map.svg) center center no-repeat;
-    font-size: 1.5rem;
-    line-height: 1;
-    transform: translate(0, -30%);
-    padding:.5rem 1rem;
-    &:hover {
+    top:0;
+    width:100%;
+    height:100%;
+    z-index:2000;
+    &::after {
+      content:'\00a0';
+      position: absolute;
+      top:8%;
+      right:3%;
+      z-index: 1000;
+      border: 3px solid #d7d7d7;
+      background: #ffffff url(/bundles/contaogastroburner/images/Map.svg) center center no-repeat;
+      font-size: 1.5rem;
+      line-height: 1;
+      padding:.5rem 1rem;
       cursor:pointer;
     }
   }
@@ -219,35 +244,35 @@ button.active {
 
   /** Kartenstyle im Karten-Modus */
   &.active {
-    padding-top:420px;
-    #map {
-      height:400px;
-    }
+    height:70vh;
+    margin-bottom:5rem;
     .map-filter {
       display:flex;
+      margin: 1rem 23px;
     }
+
     .js-map-mode {
-      top:0;
-      transform: translate(0, 30%);
-      background: #ffffff url(/bundles/contaogastroburner/images/Close.svg) center center no-repeat;
+      width:44px;
+      height:44px;
+      top:2%;
+      right:2%;
+      &::after {
+        top:3%;
+        background: #ffffff url(/bundles/contaogastroburner/images/Close.svg) center center no-repeat;
+      }
     }
   }
 }
 
-/** Kartenstyle im Listen-Modus */
 #map {
-  position: absolute;
-  width:100vw;
-  height: 100px;
-  left:calc((100% - 100vw) / 2);
-  top:0;
+  height: 100%;
 }
 
 /** Auswaehlen-Button */
 .js-counter-btn {
   position: absolute;
   width:88%;
-  bottom:0;
+  bottom:100px;
   left:50%;
   transform:translateX(-50%);
   z-index:500;
@@ -275,6 +300,7 @@ button.active {
   > .btn {
     width:100%;
     padding:1rem;
+    box-shadow: 0 0 2rem rgba(0, 0, 0, .5);
   }
 }
 
@@ -376,6 +402,7 @@ button.active {
   .map-container {
     padding-top:0;
     height:100%;
+    margin:0;
     .map-filter {
       display:flex;
       position: absolute;
