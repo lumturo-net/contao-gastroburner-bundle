@@ -54,7 +54,7 @@
                             <?php endif; ?>
                             <div class="company-item-detail">
                                 <h4 class="shortname"><?= $company['shortname'] ?></h4>
-                                <p class="d-none d-xl-block"><?= $company['shortdesc'] ?></p>
+                                <p class="d-none js-toggle-checkbox-xl-block"><?= $company['shortdesc'] ?></p>
                                 <div class="company-item-jobs">
                                 <?php foreach(array('cook', 'restaurant', 'hotelcleaner', 'hotelmanager', 'gastro') as $strKey): if ($company[$strKey] > 0) : ?>
                                     <div class="company-item-job-container">
@@ -175,8 +175,8 @@
             <textarea class="gastroform_input<?= isset($this->errors['beschreibung']) ? ' error' : '' ?>" name="beschreibung" placeholder="Hier kannst du dich kurz beschreiben. Bist du noch Schüler? Wo kommst du her? Hast du Hobbys oder Erfahrungen die in deinem Gastro-Beruf hilfreich sein können?"><?= $this->post['beschreibung'] ?? '' ?></textarea>
         </div>
 
-        <div>
-            <div class="gastroform_inputcheckbox js-toggle-checkbox"></div>
+        <div class="js-toggle-checkbox">
+            <div class="gastroform_inputcheckbox"></div>
             <p class="js-dataprivacy dataprivacy">Deine Daten nicht an Dritte weitergegeben. Sie werden ausschließlich für die Übersendung möglicher Ausbildungsangebote an dich in unserer Datenbank gesichert. Genaue Informationen findest du in unserer <a href="{{link_url::19}}" target="_blank">Datenschutzerklärung</a></p>
         </div>
         <button class="btn btn--primary btn--disable js-submit-application" type="submit" name="action" value="apply">
