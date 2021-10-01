@@ -439,21 +439,23 @@ $(document).ready(function() {
         $(this).parents('.company').remove();
     });
 
-    $(document).on('scroll', function() {
-        if(!window.matchMedia('(min-width:1200px)').matches) {
-            if($mapContainer[0].getBoundingClientRect().top <= 0) {
-                $('.js-search-in-list').addClass('fixed');
-                $('.js-counter-btn').addClass('fixed');
-                $mapContainer.addClass('fixed');
-                $mapContainer.parent('div').addClass('has-fixed');
-            }
+    if($('#map').length > 0) {
+        $(document).on('scroll', function() {
+            if(!window.matchMedia('(min-width:1200px)').matches) {
+                if($mapContainer[0].getBoundingClientRect().top <= 0) {
+                    $('.js-search-in-list').addClass('fixed');
+                    $('.js-counter-btn').addClass('fixed');
+                    $mapContainer.addClass('fixed');
+                    $mapContainer.parent('div').addClass('has-fixed');
+                }
 
-            if($mapContainer.offset().top < $mapContainerOffsetTop) {
-                $('.js-search-in-list').removeClass('fixed');
-                $('.js-counter-btn').removeClass('fixed');
-                $mapContainer.removeClass('fixed');
-                $mapContainer.parent('div').removeClass('has-fixed');
+                if($mapContainer.offset().top < $mapContainerOffsetTop) {
+                    $('.js-search-in-list').removeClass('fixed');
+                    $('.js-counter-btn').removeClass('fixed');
+                    $mapContainer.removeClass('fixed');
+                    $mapContainer.parent('div').removeClass('has-fixed');
+                }
             }
-        }
-    });
+        });
+    }
 });
