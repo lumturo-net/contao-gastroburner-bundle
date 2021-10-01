@@ -12,7 +12,7 @@ button.active {
   width: 100%;
   padding: 20px 80px;
   display: block;
-
+F
   &::before {
     content: "L"
   }
@@ -31,7 +31,11 @@ button.active {
 /** Bewerbungsseite Styles */
 
 .has-fixed {
-  padding-top:30.5vh;
+  padding-top:28.75vh;
+}
+
+.map-mode.has-fixed {
+  padding-top:85.75vh;
 }
 
 .list-map-container {
@@ -47,7 +51,7 @@ button.active {
     display:none;
   }
 
-  input:checked ~ label {
+  input:checked + label {
     background:#ffd500;
     border-color:#ffd500;
   }
@@ -59,12 +63,6 @@ button.active {
     border:3px solid #D7D7D7;
     border-radius:50rem;
     white-space:nowrap;
-    &:hover {
-      background:#ffd500;
-      border-color:#ffd500;
-      cursor: pointer;
-    }
-
     .ico-job {
       width:32px;
       height:32px;
@@ -337,6 +335,16 @@ button.active {
 }
 
 @media(min-width:1200px) {
+  .job-filter-item {
+    label {
+      &:hover {
+        background:#ffd500;
+        border-color:#ffd500;
+        cursor: pointer;
+      }
+    }
+  }
+
   .js-map-mode,
   .js-list-mode {
     display:none;

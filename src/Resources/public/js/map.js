@@ -389,7 +389,7 @@ $(document).ready(function() {
         gastroBurnerMap.bootstrap({
             map: {
                 center: [54.081417, 12.7653133],
-                zoom: 8
+                zoom: 6
             },
             list: {
                 pagination: {
@@ -406,6 +406,7 @@ $(document).ready(function() {
     $('.js-map-mode, .js-list-mode').on('click', function() {
         $('.map-container').toggleClass('active').toggleClass('map-mode');
         $('.map-container').parents('form').toggleClass('map-mode');
+        $('.map-container').parent('div').toggleClass('map-mode');
         gastroBurnerMap.getMap().invalidateSize();
         $('.js-search-in-list .list-search-container').toggleClass('d-flex d-none');
         $('.js-list-mode').toggleClass('active');
@@ -418,6 +419,7 @@ $(document).ready(function() {
 
     $('.company-item input').on('change', function() {
         let $selected = $('.company-item input:checked').length;
+        companies[$(this).val()].selected = companies[$(this).val()].selected ? true : false;
 
         $('.js-counter-btn button').toggleClass('btn--disable', !$selected > 0);
         $('.js-counter-btn .counter').toggleClass('hasItems', $selected > 0).text($selected)
