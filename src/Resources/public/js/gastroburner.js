@@ -130,16 +130,16 @@ window.onload = function () {
     }
 
     $('#apply_form').on('submit', function (e) {
-        if($('.js-toggle-checkbox').length > 0) {
-            if ($('.js-toggle-checkbox').hasClass('active')) {
-                return true;
-            }
-            e.preventDefault();
-            $('.js-dataprivacy').addClass('error');
-            return false;
+        if($('.company-checkbox:checked').length > 0) {
+            return true;
         }
 
-        return true;
+        if($('.js-toggle-checkbox.active').length > 0) {
+            return true;
+        }
 
+        e.preventDefault();
+        $('.js-dataprivacy').addClass('error');
+        return false;
     })
 };

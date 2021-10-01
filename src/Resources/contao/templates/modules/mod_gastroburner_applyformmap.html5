@@ -41,7 +41,7 @@
                 <ul class="list">
                 <?php foreach($this->companies as $company): ?>
                     <li class="company-item" data-id="<?= $company['id'] ?>">
-                        <input type="checkbox" id="company-<?= $company['id'] ?>" value="<?= $company['id'] ?>"<?= ((in_array($company['id'], $this->post['hidden_companies']) ? 'checked="checked"' : '')) ?>>
+                        <input type="checkbox" class="company-checkbox" id="company-<?= $company['id'] ?>" value="<?= $company['id'] ?>"<?= ((in_array($company['id'], $this->post['hidden_companies']) ? 'checked="checked"' : '')) ?>>
                         <label for="company-<?= $company['id'] ?>">
                             <span class="id d-none"><?= $company['id'] ?></span>
                             <span class="name d-none"><?= $company['company'] ?></span>
