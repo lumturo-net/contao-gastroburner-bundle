@@ -1,5 +1,9 @@
 /** Globale Styles fuer andere FE Mod */
 
+footer {
+  z-index:1000;
+}
+
 button.active {
   background-color: red
 }
