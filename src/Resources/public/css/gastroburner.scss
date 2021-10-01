@@ -218,7 +218,7 @@ F
     position: fixed;
     top:0;
     left:0;
-    z-index:1000;
+    z-index:800;
   }
 
   .map-filter {
@@ -283,7 +283,7 @@ F
     bottom:25px;
     left:50%;
     transform:translateX(-50%);
-    z-index:500;
+    z-index:900;
   }
   .btninner {
     font-size:1.5rem
