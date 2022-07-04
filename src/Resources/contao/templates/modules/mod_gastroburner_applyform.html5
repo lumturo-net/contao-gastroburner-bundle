@@ -27,11 +27,12 @@
 <div class="row" style="margin-top: 200px;">
     <div class="col-sm-2">
 <!-- Filter-Buttons -->
-        <button class="js-filter" data-type="restaurant">Restaurantfachkraft</button>
-        <button class="js-filter" data-type="cook">Koch</button>
-        <button class="js-filter" data-type="hotelmanager">Hotelkauf-mann/-frau</button>
-        <button class="js-filter" data-type="hotelcleaner">Hotelfachkraft</button>
-        <button class="js-filter" data-type="gastro">Fachkraft im Gastgewerbe</button>
+        <button class="js-filter" data-type="restaurant">Fachmann/-frau für Restaurants und Veranstaltungsgastronomie</button>
+        <button class="js-filter" data-type="cook">Koch/Köchin</button>
+        <button class="js-filter" data-type="kitchen">Fachkraft Küche</button>
+        <button class="js-filter" data-type="hotelmanager">Kaufmann/-frau für Hotelmanagement</button>
+        <button class="js-filter" data-type="hotelcleaner">Hotelfachmann/-frau</button>
+        <button class="js-filter" data-type="gastro">Fachkraft für Gastronomie</button>
 
       <div id="company_list">
         <input class="search" />
@@ -71,7 +72,7 @@
     <?php if (isset($this->errors['jobs'])): ?>
       <p class="error">Bitte mindestens einen Beruf auswählen.</p>
     <?php endif;?>
-    <?php foreach (['restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): ?>
+    <?php foreach (['restaurant', 'cook', 'kitchen', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): ?>
       <br><input type="checkbox" name="<?php echo $strName ?>" <?php echo ((isset($this->post[$strName]) && (strlen(trim($this->post[$strName])))) ? ' checked' : '') ?>><label><?php echo $GLOBALS['TL_LANG']['tl_apply'][$strName][0] ?></label>
     <?php endforeach?>
     <br>
@@ -105,7 +106,7 @@
   <?php foreach($this->post['hidden_companies'] as $company_id) : ?>
     <input type="hidden" class="js-hidden-company" name="hidden-companies[]" value="<?php echo $company_id ?>">
   <?php endforeach; ?>
-  
+
   <!-- <button type="submit">Kontakt zu den Unternehmen aufnehmen</button> -->
     <button type="submit" name="action" value="apply">Kontakt zu den Unternehmen aufnehmen</button>
   <!-- </form> -->

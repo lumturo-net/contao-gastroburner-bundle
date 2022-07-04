@@ -9,7 +9,7 @@
             <h4><?= $company['shortname'] ?></h4>
             <p><?= $company['shortdesc'] ?></p>
             <div class="company-jobs">
-                <?php foreach(['restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strKey) : if($company[$strKey] > 0): ?>
+                <?php foreach(['restaurant', 'cook', 'kitchen', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strKey) : if($company[$strKey] > 0): ?>
                     <div class="company-job <?= $strKey ?>"></div>
                 <?php endif; endforeach; ?>
             </div>
