@@ -23,6 +23,16 @@
               </div>
             </li>
             <li class="gastromatlist__item js-gastromatlist__item">
+              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/chef.png" alt="Koch"></div>
+              <div class="gastromatlist__imageclip"><img class="" src="resources/img/chef.png" alt="Koch"></div>
+              <div class="gastromatlist__tooltip">Fachkraft Küche</div>
+              <div class="gastromatlist__copy">
+                    <span class="gastromatlist__copyheadline">Fachkraft Küche</span>
+                    <span class="gastromatlist__copytext">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dolor doloribus fugit nisi provident quibusdam quod rerum sint sit voluptate.</span>
+                    <span class="gastromatlist__copyclose js-close-gastromatlist-copy">schließen</span>
+              </div>
+            </li>
+            <li class="gastromatlist__item js-gastromatlist__item">
               <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/receptionist.png" alt="Hotelkaufffrau"></div>
               <div class="gastromatlist__imageclip"><img class="" src="resources/img/receptionist.png" alt="Hotelkaufffrau"></div>
               <div class="gastromatlist__tooltip">Hotelkaufmann/-frau</div>
@@ -32,7 +42,7 @@
                   <span class="gastromatlist__copyclose js-close-gastromatlist-copy">schließen</span>
               </div>
             </li>
-            <li class="gastromatlist__item gastromatlist__item--fullwidth js-gastromatlist__item">
+            <li class="gastromatlist__item js-gastromatlist__item">
               <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/waiter.png" alt="Restaurantfachkraft"></div>
               <div class="gastromatlist__imageclip"><img class="" src="resources/img/waiter.png" alt="Restaurantfachkraft"></div>
               <div class="gastromatlist__tooltip">Restaurantfachkraft</div>
@@ -42,7 +52,7 @@
                 <span class="gastromatlist__copyclose js-close-gastromatlist-copy">schließen</span>
               </div>
             </li>
-            <li class="gastromatlist__item gastromatlist__item--desktop js-gastromatlist__item">
+            <li class="gastromatlist__item js-gastromatlist__item">
               <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/maid.png" alt="Hotelfachkraft"></div>
               <div class="gastromatlist__imageclip"><img class="" src="resources/img/maid.png" alt="Hotelfachkraft"></div>
               <div class="gastromatlist__tooltip">Hotelfachkraft</div>
@@ -105,6 +115,11 @@
                 <div class="result__checkbox"></div>
                 <div class="result__copy"><div class="result__indicator"></div><span>Koch/in</span> <span class="js-value">75%</span></div>
                 <div class="result__info"><a href="{{link_url::6}}" class="result__info__link" target="_blank" title="{{link_title::6}}">i</a></div>
+              </div>
+              <div class="result__item js-KITCHEN" data-type="cook">
+                  <div class="result__checkbox"></div>
+                  <div class="result__copy"><div class="result__indicator"></div><span>Fachkraft Küche</span> <span class="js-value">75%</span></div>
+                  <div class="result__info"><a href="{{link_url::6}}" class="result__info__link" target="_blank" title="{{link_title::6}}">i</a></div>
               </div>
               <div class="result__item js-RESTAURANT" data-type="restaurant">
                 <div class="result__checkbox"></div>
