@@ -20,8 +20,8 @@ var gastroBurnerMap = function () {
 
 
     /**
-     *  css wird von requirejs nicht unterstützt 
-     * @param {*} url 
+     *  css wird von requirejs nicht unterstützt
+     * @param {*} url
      */
     function loadCss(url) {
         var link = document.createElement("link");
@@ -100,135 +100,12 @@ var gastroBurnerMap = function () {
      * Initialisierung Liste
      */
     function bootstrapList() {
-        /**
-         * Höhe der Liste auf Höhe der Map-Spalte setzen
-         * + scrolling
-         */
-        adaptListHeight = (function () {
-            if ($(window).width() < 1200) {
-                // mobile --> raus
-                return function () { }
-            }
-
-            // var maxHeight = parseInt($('#map').css('height')) + 61;
-            var $ul = $('.hotel-list'),
-                $map = $('#map'),
-                // maxHeight = $map.height() + $('.filter').height() - $('.gb-input-group.mb-3').height(),//+ 61;
-                itemHeight = $ul.find('li').first().height(),
-                $mod_gastroburnerapplyform = $('.mod_gastroburnerapplyform'),
-                modHeight = $mod_gastroburnerapplyform.height(),
-                $spacer = $('.js-spacer'),
-                scene = null, controller = new ScrollMagic.Controller();
-
-
-            return function () {
-                var $newItems = $ul.find('li'),
-                    newItemCount = $newItems.length,
-                    maxHeight = $map.height() + $('.filter').height() - $('.gb-input-group.mb-3').height() + 7,//+ 61;
-                    ulHeight = newItemCount * itemHeight;//$newItems.eq(0).height();
-
-                // var duration = Math.max(1, ulHeight - maxHeight);
-
-                // if (true) {// || ulHeight > maxHeight) {
-                    $ul.css({
-                        'overflow-y': 'auto',
-                        'overflow-x': 'hidden',
-                        'height': maxHeight
-                    })
-                    // if (scene) {
-                    //     var state = scene.state();
-                    //     // console.log(state);
-                    //     if (scene.duration() != duration) {
-                    //         if (state == "BEFORE") {
-                    //             // nur länge anpassen, rest dann in der szene
-                    //             scene.duration(duration);
-                    //             scene.update(true);
-                    //         }
-                    //         if (state == "DURING") {
-                    //             // länge anpassen und an den Anfang springen
-                    //             $spacer.css('height', modHeight + duration);
-                    //             $(window).scrollTop(scene.triggerPosition());
-                    //             scene.duration(duration);
-                    //             scene.update(true);
-                    //         }
-                    //         if (state == "AFTER") {
-                    //             // Länge anpassen
-                    //             // console.log('AFTER: duration=' + duration)
-                    //             scene.duration(duration);
-                    //             // scene.update(true);
-                    //         }
-                    //         return;
-                    //     }
-                    // }
-
-                    // scene = new ScrollMagic.Scene({
-                    //     triggerElement: '.js-spacer',//'.mod_gastroburnerapplyform',
-                    //     triggerHook: 0,
-                    //     duration: duration
-                    // })
-                    //     // .addIndicators({ name: 'pin' })
-                    //     .on('start', function (e) {
-                    //         var dir = e.target.controller().info("scrollDirection");
-                    //         var duration = this.duration();
-                    //         if (dir == 'FORWARD') {
-                    //             $spacer.css('height', modHeight + duration);
-                    //             $mod_gastroburnerapplyform.css({
-                    //                 position: 'fixed',
-                    //                 top: 0,
-                    //                 'z-index': 2
-                    //             });
-                    //         } else {
-                    //             $spacer.css('height', 0);
-                    //             $mod_gastroburnerapplyform.css({
-                    //                 position: 'initial',
-                    //                 top: 0
-                    //             });
-                    //             $(window).scrollTop($mod_gastroburnerapplyform.offset().top);
-                    //         }
-                    //     })
-                    //     .on('progress', function (e) {
-                    //         var progress = e.progress.toFixed(3);
-                    //         var scrollTop = progress * duration;
-                    //         $ul.scrollTop(scrollTop);
-                    //     })
-                    //     .on('end', function (e) {
-                    //         var dir = e.target.controller().info("scrollDirection");
-                    //         var duration = this.duration();
-                    //         if (dir == 'FORWARD') {
-                    //             $spacer.css('height', duration)
-                    //             $mod_gastroburnerapplyform.css({
-                    //                 position: 'initial',//'relative',
-                    //                 top: duration
-                    //             })
-                    //             $(window).scrollTop(scene.triggerPosition())// + duration);
-                    //             // $(window).scrollTop($mod_gastroburnerapplyform.offset().top);
-                    //         } else {
-                    //             $spacer.css('height', modHeight + duration);
-                    //             $mod_gastroburnerapplyform.css({
-                    //                 position: 'fixed',
-                    //                 top: 0
-                    //             });
-
-                    //             $(window).scrollTop($mod_gastroburnerapplyform.offset().top);
-                    //         }
-
-                    //     })
-                    //     .addTo(controller);
-
-                // }
-                // else {
-                //     console.log('scene wech')
-                // }
-                itemCount = newItemCount;
-            }
-        })();
-
         var listOptions = {
             // page: config.list.pagination.entries_per_page,
             // pagination: true,
             valueNames: ['id', 'shortname', 'name']//, 'description']
         };
-        list = new List('js-company-list', listOptions);//, config.companies);
+        list = new List('company-list', listOptions);//, config.companies);
 
         /**
          * Listen-Update-Event: setzt / löscht die Marker
@@ -239,7 +116,6 @@ var gastroBurnerMap = function () {
                 // marker entsprechechend löschen / anzeigen
                 var _companies = list.items;
                 for (var i in _companies) {
-                    // if (i == 0) continue; // dummy list entry
                     var id = _companies[i].values().id;
                     if (_companies[i].visible()) {
                         if (!config.companies[id].marker) {
@@ -258,69 +134,73 @@ var gastroBurnerMap = function () {
         list.update();
 
         // Filter nach Job-Button
-        $('.js-job-filter').on('click', function (e) {
-            // e.preventDefault();
-            var $this = $(this);
-            var type = $this.data('type')
-            var $label = $this.next('label')
-            if ($label.hasClass('active')) {
-                filter.job[type] = false;
-            } else {
-                filter.job[type] = true;
-            }
-            $label.toggleClass('active');
+        $('.job-filter-item input').on('change', function (e) {
+            filter.job[$(this).data('type')] = !filter.job[$(this).data('type')];
             filterList();
         });
 
         // Filter nach Sucheingabe
-        $('#js-search').on('input', function (e) {
+        $('.js-search-in-list input').on('input', function (e) {
+            if(e.keyCode == 13) {
+                e.preventDefault();
+                return false;
+            }
+
             filter.job.search = $(this).val();
             filterList();
-            $(this).focus();
         });
-        $('#js-clear-search').on('click', function () {
-            $('#js-search').val('');
+        $('.js-search-in-list button').on('click', function () {
+            $('.js-search-in-list input').val('');
             filter.job.search = '';
             filterList();
         });
 
         // hover der Menü-Einträge
-        $('.js_company_list_item').hover(function (companies, icon) {
-            return function (e) {
-                var id = $(this).data('id');
-                var marker = companies[id].marker;
-                if (marker) {
-                    marker.setIcon(icon);
+        $('.company-item').hover(
+            function (companies, icon) {
+                return function (e) {
+                    var id = $(this).data('id');
+                    var marker = companies[id].marker;
+                    if (marker) {
+                        marker.setIcon(icon);
+                    }
                 }
-            }
-        }(companies, hoverIcon), function (companies, icon) {
-            return function (e) {
-                var id = $(this).data('id');
-                var marker = companies[id].marker;
-                if (marker) {
-                    marker.setIcon(icon);
-                }
-            }
-        }(companies, icon));
+            }(companies, hoverIcon),
 
-        // Click auf Ausbildungsbetriebe in der Liste
-        // Da sie durch die Pagination versteckt und nicht mehr gezählt werden können,
-        // muss ich die Werten als "hidden" ins form duplizieren
-        $('form').on('change', '.js-list-column-checkbox', function () {
-            var $this = $(this);
-            if ($this.prop('checked')) {
-                $('form').append('<input type="hidden" class="js-hidden-company" name="hidden_companies[]" value="' + $this.val() + '">');
-                $('.js-form-div').removeClass('d-xl-none');
-            } else {
-                $('.js-hidden-company[value="' + $this.val() + '"]').remove();
-                if (!$('.js-hidden-company').length) {
-                    $('.js-form-div').addClass('d-xl-none');
+            function (companies, icon) {
+                return function (e) {
+                    var id = $(this).data('id');
+                    var marker = companies[id].marker;
+                    if (marker && !$(this).find('input[type="checkbox"]').prop('checked')) {
+                        marker.setIcon(icon);
+                    }
                 }
+            }(companies, icon)
+        );
+
+        $('.company-item input').on('change', function() {
+            var id = $(this).val();
+            var marker = config.companies[id].marker;
+            if (marker) {
+                marker.setIcon($(this).is(':checked') ? hoverIcon : icon);
+            }
+
+            if ($(this).is(':checked')) {
+                $('#apply_form').append('<input type="hidden" class="js-hidden-company" name="hidden_companies[]" value="' + id + '">');
+                config.companies[id].selected = true;
+            } else {
+                $('.js-hidden-company[value="' + id + '"]').remove();
+                config.companies[id].selected = false;
             }
         });
 
         // Suche nach PLZ
         $('.js-filter-zip').on('input', function (e) {
+            if(e.keyCode == 13) {
+                e.preventDefault();
+                return false;
+            }
+
             var zip = $(this).val();
             if (zip.length < 5) {
                 return;
@@ -346,9 +226,6 @@ var gastroBurnerMap = function () {
             });
 
         });
-
-        adaptListHeight();
-
     }
 
     /**
@@ -358,31 +235,53 @@ var gastroBurnerMap = function () {
         list.filter(); // alle Filter löschen
         /**
          * Filter-Funktion für Liste
-         * @param {*} item 
+         * @param {*} item
          */
         var filter = function (item) {
             var id = item.values().id;
             var company = config.companies[id];
-            return _filterByJob(company) && 
-            _filterByMarkerVisibility(company) && 
-            _filterBySearch(company) &&
-            _filterByLatLon(company);
+
+            return _filterByJob(company) &&
+                   (
+                       _filterByMarkerVisibility(company) ||
+                       _filterBySelected(company)
+                   ) &&
+                   _filterBySearch(company) &&
+                   _filterByLatLon(company);
         }
+
         list.filter(filter);
-        adaptListHeight();
     }
 
     /**
-     * @param {Object} company - kompl. JS Object 
-     * @param {Icon} icon 
+     * @param {Object} company - kompl. JS Object
+     * @param {Icon} icon
      */
     function _addMarker(company, icon) {
         var id = company.id;
         var marker = L.marker([config.companies[id].lat, config.companies[id].lon]);
+            marker['companyId'] = id;
         if (icon) {
             marker.setIcon(icon);
         }
         marker.addTo(map);
+        marker.bindPopup('<h5>' + config.companies[id].shortname + '</h5><img src="' + config.companies[id].companyLogo + '" width="60" height="44">');
+        marker.on('click', function() {
+            var checkbox =  $('[id="company-' + marker.companyId + '"]');
+                checkbox.prop('checked', !checkbox.prop('checked'));
+                checkbox.trigger('change');
+
+            var scrollTop = checkbox.parent().offset().top;
+            var container = $('#company-list .list');
+            $('#company-list .list').animate({
+                scrollTop: checkbox.prop('checked') ? scrollTop - container.offset().top + container.scrollTop() : 0
+            }, 2000);
+
+            marker.setIcon(checkbox.prop('checked') ? hoverIcon : icon);
+            checkbox.prop('checked') ? config.companies[id].selected = true : null;
+            !checkbox.prop('checked') ? marker.closePopup() : null;
+        });
+
         config.companies[id].marker = marker;
     }
 
@@ -398,7 +297,7 @@ var gastroBurnerMap = function () {
             return true;
         }
         var regexp = new RegExp(filter.job.search, 'i');
-        return company.shortname.search(regexp) != -1 || company.company.search(regexp) != -1 || company.description.search(regexp) != -1;
+        return company.shortname.search(regexp) != -1 || company.company.search(regexp) != -1 || company.shortdesc.search(regexp) != -1;
     }
 
     function _filterByJob(company) {
@@ -419,11 +318,15 @@ var gastroBurnerMap = function () {
         }
     }
 
+    function _filterBySelected(company) {
+        return company.selected;
+    }
+
     function _filterByLatLon(company) {
         if (!filter.distance) {
             return true;
         }
-        
+
         var  lat = parseFloat(company.lat),
         lon = parseFloat(company.lon),
         filterDistance = filter.distance / 1000;
@@ -466,22 +369,7 @@ var gastroBurnerMap = function () {
             config = _config;
             var bsMap = bootstrapMap;
             var bsList = bootstrapList;
-            // loadCss('//unpkg.com/leaflet@1.5.1/dist/leaflet.css');
             loadCss('/bundles/contaogastroburner/css/leaflet.css');
-            /*
-            require([
-                // '//unpkg.com/leaflet@1.5.1/dist/leaflet.js',
-                '/bundles/contaogastroburner/js/leaflet.js',
-            //     '//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js'
-            ], function () {
-                // require([
-                    // '//unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js'
-                // ], function () {
-                    bsMap();
-                    // bsList();
-                // });
-            });
-            */
             $('<div class="js-spacer spacer"></div>').insertBefore('.mod_gastroburnerapplyform');
             bsMap();
             bsList();
@@ -493,90 +381,83 @@ var gastroBurnerMap = function () {
         resizeList() {
             filterList();
         }
-        // filterByLatLon(minLat, minLon, maxLat, maxLon) { },
-        // filterByDistance(lat, lon, km) { },
-        // filterByJob(cook, gastro, hotelmanager) { }
     }
 }();
 
-window.onload = function () {
-    gastroBurnerMap.bootstrap({
-        map: {
-            center: [54.0887, 12.14049],
-            zoom: 8
-        },
-        list: {
-            pagination: {
-                entries_per_page: 3
-            }
-        },
-        companies: companies
+$(document).ready(function() {
+    if($('#map').length > 0) {
+        gastroBurnerMap.bootstrap({
+            map: {
+                center: [54.081417, 12.7653133],
+                zoom: 6
+            },
+            list: {
+                pagination: {
+                    entries_per_page: 3
+                }
+            },
+            companies: companies
+        });
+
+        var $mapContainer = $('.map-container');
+        var $mapContainerOffsetTop = $mapContainer.offset().top;
+    }
+
+    $('.js-map-mode, .js-list-mode').on('click', function() {
+        $('.map-container').toggleClass('active').toggleClass('map-mode');
+        $('.map-container').parents('form').toggleClass('map-mode');
+        $('.map-container').parent('div').toggleClass('map-mode');
+        gastroBurnerMap.getMap().invalidateSize();
+        $('.js-search-in-list .list-search-container').toggleClass('d-flex d-none');
+        $('.js-list-mode').toggleClass('active');
     });
 
-    /**
-     * Breite von Karte / Liste anpassen
-     */
-    var resize = debounce((function (api) {
-        var $list = $('.list-map'),
-            $container = $('.container'),
-            $map = $('#map');
-        return function () {
-            if ($(window).width() < 1200) {
-                $map.css({
-                    'position': 'absolute',
-                    'left': '-' + ($map.offset().left - 15) + 'px',
-                    'width': $(window).width()
-                });
-                $('#js-company-list').css({
-                    'margin-top': $map.height() + 20
-                })
-                return;
-            }
-            $list.width(parseInt($container.width()) + parseInt($container.css('margin-right')) + 45); // + 3xmargin
-            // setze höhe der karte: laut layout 1060x680
-            // breite ist automatisch
-            $map.height($map.width() * 680 / 1060);
-            api.getMap().invalidateSize(); // Karte neu zeichnen
-
-        }
-    })(gastroBurnerMap), 500);
-
-    $(window).resize(function () {
-        resize();
-    });
-    resize();
-
-    // $('.js-toggle-label').on('click', function () {
-    //     $(this).toggleClass('active');
-    // });
     $('.js-toggle-checkbox').on('click', function () {
         $('.js-submit-application').toggleClass('btn--disable');
         $(this).toggleClass('active');
     });
-    $('#apply_form').on('submit', function (e) {
-        if ($('.js-toggle-checkbox').hasClass('active')) {
-            return true;
-        }
-        e.preventDefault();
-        $('.js-dataprivacy').addClass('error');
-        return false;
-    })
-}
-// Returns a function, that, as long as it continues to be invoked, will not
-// be triggered. The function will be called after it stops being called for
-// N milliseconds. If `immediate` is passed, trigger the function on the
-// leading edge, instead of the trailing.
-function debounce(func, wait, immediate) {
-    var timeout;
-    return function () {
-        var context = this, args = arguments;
-        var later = function () {
-            timeout = null;
-            if (!immediate) func.apply(context, args);
-        };
-        var callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
-    };
-};
+
+    $('.company-item input').on('change', function() {
+        let $selected = $('.company-item input:checked').length;
+        companies[$(this).val()].selected = companies[$(this).val()].selected ? true : false;
+
+        $('.js-counter-btn button').toggleClass('btn--disable', !$selected > 0);
+        $('.js-counter-btn .counter').toggleClass('hasItems', $selected > 0).text($selected)
+    });
+
+    if($('.js-toggle-checkbox').length > 0) {
+        $('#apply_form').on('submit', function (e) {
+            if ($('.js-toggle-checkbox').hasClass('active')) {
+                return true;
+            } else {
+                $('.js-dataprivacy').addClass('error');
+                return false;
+            }
+        });
+    }
+
+    $('.btn-remove-company').on('click', function() {
+        $('.js-hidden-company[value="' + $(this).data('id') + '"]').remove();
+        $(this).parents('.company').remove();
+    });
+
+    if($('#map').length > 0) {
+        $(document).on('scroll', function() {
+            if(!window.matchMedia('(min-width:1200px)').matches) {
+                if($mapContainer[0].getBoundingClientRect().top <= 0) {
+                    $('.js-search-in-list').addClass('fixed');
+                    $('.js-counter-btn').addClass('fixed');
+                    $mapContainer.addClass('fixed');
+                    $mapContainer.parent('div').addClass('has-fixed');
+                }
+
+                if($mapContainer.offset().top < $mapContainerOffsetTop) {
+                    $('.js-search-in-list').removeClass('fixed');
+                    $('.js-counter-btn').removeClass('fixed');
+                    $mapContainer.removeClass('fixed');
+                    $mapContainer.parent('div').removeClass('has-fixed');
+                }
+            }
+        });
+    }
+});

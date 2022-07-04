@@ -1,0 +1,101 @@
+<?php if(is_null($this->company)): ?>
+<h1 class="ce_headline first">404</h1>
+<div class="ce_text last block">
+    <h2>Falsche Seite bestellt.</h2>
+    <p>Guck mal, hier ist tote Hose. Check einfach Richtung <a href="">Startseite</a> aus oder bimmle durch: 0381 80 899 390.</p>
+</div>
+<?php else: ?>
+<style>
+    .ce_headline.first {
+        margin-bottom:3.5rem;
+    }
+
+    .ce_headline.first span {
+        display:block;
+        color:#ffffff;
+        text-transform: uppercase;
+        font-size: 3.5rem;
+        letter-spacing: 3px;
+    }
+
+    aside {
+        background:#FFF6DB;
+        padding:3rem;
+        box-shadow: 1rem 1rem 2px rgba(92,92,92,0.5);
+        color:#8C8C8C;
+    }
+
+    .logo {
+        border-radius: 1rem;
+        margin-bottom:0;
+    }
+
+    aside h2 {
+        margin-top:20px;
+    }
+
+    aside address {
+        font-family:Raleway, -apple-system, system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        font-size: 1.5rem;
+        font-style:normal;
+        line-height:1.5;
+
+    }
+
+    .section--yellow {
+        background:transparent;
+    }
+
+    .buttons {
+        margin:4rem 0 0 1rem;
+    }
+</style>
+<h1 class="ce_headline first">
+    <span>Ausbildungsbetrieb</span>
+    <?= $this->company['shortname']; ?>
+</h1>
+<div class="row">
+    <div class="col-xl-6">
+        <p><?= nl2br($this->company['description']); ?></p>
+        <a href="/ausbildungsbetriebe.html" class="btn">
+            <div class="btninner">Zurück <span></span></div>
+        </a>
+    </div>
+    <div class="col-xl-5 offset-xl-1">
+        <aside>
+            <img src="<?= $this->company['companyLogo']->path; ?>" class="logo">
+            <h2>Kontakt</h2>
+            <address>
+                Telefon: <?= $this->company['phone']; ?><br>
+                <?php if(!empty($this->company['mobile'])): ?>
+                Mobil: <?= $this->company['mobile']; ?><br>
+                <?php endif; ?>
+                <?php if(!empty($this->company['fax'])): ?>
+                Telefax: <?= $this->company['fax']; ?><br>
+                <?php endif; ?>
+
+                E-Mail: <?= $this->company['email']; ?><br><br>
+                <?= $this->company['shortname']; ?>
+                <?= $this->company['street']; ?><br>
+                <?= $this->company['postal']; ?> <?= $this->company['city']; ?>
+            </address>
+        </aside>
+        <div class="buttons">
+            <?php if(!empty($this->company['website'])): ?>
+            <div class="section--yellow">
+                <a class="btn btn--primary" href="<?= $this->company['website']; ?>">
+                    <div class="btninner">Zur Website <span></span></div>
+                </a>
+            </div><br>
+            <?php endif; ?>
+            <form action="{{link_url::ausbildung-sichern}}" method="post">
+                <input type="hidden" name="hidden_companies[]" value="<?= $this->company['id']; ?>">
+                <button class="btn btn--primary">
+                    <div class="btninner">Jetzt bewerben <span></span></div>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<?php endif; ?>

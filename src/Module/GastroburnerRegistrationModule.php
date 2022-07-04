@@ -10,6 +10,7 @@
 
 namespace Lumturo\ContaoGastroburnerBundle\Module;
 
+use Contao\Controller;
 use Contao\CoreBundle\OptIn\OptIn;
 use Contao\Input as Input;
 use Contao\Config as Config;
@@ -453,6 +454,7 @@ class GastroburnerRegistrationModule extends \Contao\ModuleRegistration
 		$arrTokenData['activation'] = $optInToken->getIdentifier();
 		$arrTokenData['domain'] = Idna::decode(Environment::get('host'));
 		$arrTokenData['link'] = Idna::decode(Environment::get('base')) . Environment::get('request') . ((strpos(Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $optInToken->getIdentifier();
+		$arrTokenData['profile'] = Idna::decode(Environment::get('base') . Controller::replaceInsertTags('{{link_url::38}}'));
 		$arrTokenData['channels'] = '';
 
 		$bundles = System::getContainer()->getParameter('kernel.bundles');

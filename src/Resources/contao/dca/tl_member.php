@@ -62,6 +62,9 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['shortname'] = array(
     ),
     'sql' => "varchar(255) NOT NULL default ''",
 );
+$GLOBALS['TL_DCA']['tl_member']['fields']['street']['eval']['mandatory'] = true;
+$GLOBALS['TL_DCA']['tl_member']['fields']['postal']['eval']['mandatory'] = true;
+$GLOBALS['TL_DCA']['tl_member']['fields']['city']['eval']['mandatory'] = true;
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['restaurant'] = array(
     'label' => &$GLOBALS['TL_LANG']['tl_member']['restaurant'],

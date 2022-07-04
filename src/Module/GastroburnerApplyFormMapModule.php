@@ -2,9 +2,15 @@
 
 namespace Lumturo\ContaoGastroburnerBundle\Module;
 
+use Contao\Template;
+use Exception;
+use Contao\PageModel;
+use Contao\FilesModel;
+use Contao\Controller;
 use Contao\Database;
 use Contao\Email;
 use Contao\Validator;
+use Contao\FrontendTemplate;
 
 class GastroburnerApplyFormMapModule extends \Contao\Module
 {
@@ -34,12 +40,13 @@ class GastroburnerApplyFormMapModule extends \Contao\Module
         } else {
             // $GLOBALS['TL_JAVASCRIPT'][] = 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js';
             // // $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/require.js';
-            $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/leaflet.js';
+            $GLOBALS['TL_BODY'][] = Template::generateScriptTag('bundles/contaogastroburner/js/leaflet.js');
             // $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/list.min.js';
-            $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/list.js';
-            $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaogastroburner/js/map.js';
-            $GLOBALS['TL_JAVASCRIPT'][] = 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.js';
-            $GLOBALS['TL_JAVASCRIPT'][] = 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js';
+            $GLOBALS['TL_BODY'][] = Template::generateScriptTag('bundles/contaogastroburner/js/list.js');
+            $GLOBALS['TL_BODY'][] = Template::generateScriptTag('bundles/contaogastroburner/js/map.js');
+            $GLOBALS['TL_BODY'][] = Template::generateScriptTag('https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.js');
+            $GLOBALS['TL_BODY'][] = Template::generateScriptTag('https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js');
+            $GLOBALS['TL_CSS'][] = 'bundles/contaogastroburner/css/companies.min.css';
         }
 
         return parent::generate();
@@ -63,11 +70,12 @@ class GastroburnerApplyFormMapModule extends \Contao\Module
             $this->Template->{$strName} = (($this->Input->post($strName) || ($this->Input->get($strName))) ? true : false);
         }
 
+        $arrPostKeys = array_keys($_POST);
+        foreach ($arrPostKeys as $strKey) {
+            $arrPost[$strKey] = $this->Input->post($strKey);
+        }
+
         if ($this->Input->post('action') == 'apply') {
-            $arrPostKeys = array_keys($_POST);
-            foreach ($arrPostKeys as $strKey) {
-                $arrPost[$strKey] = $this->Input->post($strKey);
-            }
             $arrValues = [];
             if (!strlen($this->Input->post('name'))) {
                 $arrErrors['name'] = true;
@@ -104,27 +112,54 @@ class GastroburnerApplyFormMapModule extends \Contao\Module
             }
         }
 
+        $arrFields = [
+            'id',
+            'company',
+            'street',
+            'postal',
+            'city',
+            'lat',
+            'lon',
+            'email',
+            'shortname',
+            'shortdesc',
+            'restaurant',
+            'cook',
+            'hotelcleaner',
+            'hotelmanager',
+            'gastro',
+            'companyLogo',
+            'website'
+        ];
 
-        $arrFields = ['id', 'company', 'street', 'postal', 'city', 'lat', 'lon', 'email', 'shortname', 'shortdesc', 'restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro', 'companyLogo'];
-        $arrDbCompanies= Database::getInstance()->prepare('SELECT ' . implode(', ', $arrFields) . ' FROM tl_member WHERE disable=\'\' AND show_in_frontend=\'1\' ORDER BY shortname;')->execute()->fetchAllAssoc();
-        $arrCompanies = array();
-        foreach ($arrDbCompanies as $arrCompany) {
-            $objLogo = \FilesModel::findOneBy('uuid', $arrCompany['companyLogo']);
+        $arrCompanies = [];
+        if(!empty($arrPost['hidden_companies'])) {
+            $clause = implode(',', array_fill(0, count($arrPost['hidden_companies']), '?'));
+            $arrCompaniesCollection = Database::getInstance()
+                                              ->prepare('SELECT ' . implode(', ', $arrFields) . ' FROM tl_member WHERE disable=\'\' AND show_in_frontend=\'1\' AND id IN(' . $clause . ') ORDER BY shortname;')
+                                              ->execute($arrPost['hidden_companies'])
+                                              ->fetchAllAssoc();
+        } else {
+            $arrCompaniesCollection = Database::getInstance()
+                                              ->prepare('SELECT ' . implode(', ', $arrFields) . ' FROM tl_member WHERE disable=\'\' AND show_in_frontend=\'1\' ORDER BY shortname;')
+                                              ->execute()
+                                              ->fetchAllAssoc();
+        }
+
+        foreach ($arrCompaniesCollection as $arrCompany) {
+            $objLogo = FilesModel::findOneBy('uuid', $arrCompany['companyLogo']);
             $arrCompany['shortdesc'] = preg_replace("!([\b\t\n\r\f\"\\'])!", "", $arrCompany['shortdesc']);
             $arrCompany['shortname'] = preg_replace("!([\b\t\n\r\f\"\\'])!", "", $arrCompany['shortname']);
-            $arrCompany['company'] = preg_replace("!([\b\t\n\r\f\"\\'])!", "", $arrCompany['company']);
-            if ($objLogo) {
-                $arrCompany['companyLogo'] = $objLogo->path;
-            } else {
-                $arrCompany['companyLogo'] = 'https://via.placeholder.com/170x100.png&text=Hotel-Logo';
-            }
+            $arrCompany['company']   = preg_replace("!([\b\t\n\r\f\"\\'])!", "", $arrCompany['company']);
+            $arrCompany['companyLogo'] = $objLogo->path ?? '/resources/img/Placeholder-Logo_big@2x.jpg';
             $arrCompanies[$arrCompany['id']] = $arrCompany;
         }
 
         $this->Template->post = $arrPost;
         $this->Template->companies = $arrCompanies;
+        $this->Template->hiddenCompanies = $arrPost['hidden_companies'];
         $this->Template->errors = $arrErrors;
-        $this->Template->url = \Controller::generateFrontendUrl($objPage->row()); //$this->getApplyFormPageUrl();
+        $this->Template->url = Controller::generateFrontendUrl($objPage->row()); //$this->getApplyFormPageUrl();
     }
 
     /**
@@ -136,14 +171,18 @@ class GastroburnerApplyFormMapModule extends \Contao\Module
             return;
         }
 
-        $arrCompanies = Database::getInstance()->prepare('SELECT * FROM tl_member WHERE  id in (?) ORDER BY shortname;')->execute(implode(',', $arrPost['hidden_companies']))->fetchAllAssoc();
+        $clause = implode(',', array_fill(0, count($arrPost['hidden_companies']), '?'));
+        $arrCompanies = Database::getInstance()
+                                ->prepare('SELECT * FROM tl_member WHERE  id in (' . $clause . ') ORDER BY shortname;')
+                                ->execute($arrPost['hidden_companies'])
+                                ->fetchAllAssoc();
 
         foreach ($arrCompanies as $arrCompany) {
             $objEmail = new Email();
             $objEmail->charset = 'utf-8';
             $objEmail->subject = 'Bewerber von der Webseite Gastroburner.de';
-            $objEmail->from = 'no-reply@gastroburner.de';
-            $objHtmlMailTemplate = new \Contao\FrontendTemplate('mail_gastroburner_application');
+            $objEmail->from = 'service@gastroburner.de';
+            $objHtmlMailTemplate = new FrontendTemplate('mail_gastroburner_application');
             $objHtmlMailTemplate->post = $arrPost;
             $objHtmlMailTemplate->company = $arrCompany;
             $objEmail->html = $objHtmlMailTemplate->parse();
@@ -156,13 +195,13 @@ class GastroburnerApplyFormMapModule extends \Contao\Module
         $intPageId = $GLOBALS['TL_CONFIG']['gastroburner_applyform_page'];
 
         if ($intPageId) {
-            $objApplyPage = \PageModel::findById($intPageId);
+            $objApplyPage = PageModel::findById($intPageId);
             if ($objApplyPage) {
-                $strApplyUrl = \Controller::generateFrontendUrl($objApplyPage->row());
+                $strApplyUrl = Controller::generateFrontendUrl($objApplyPage->row());
                 return $strApplyUrl;
             }
         } else {
-            throw new \Exception('Bitte erst in den Settings die Bewerbungsseite setzen');
+            throw new Exception('Bitte erst in den Settings die Bewerbungsseite setzen');
         }
     }
 }

@@ -1,5 +1,5 @@
 {
-    "name": "lumturo/contao-gastroburner-bundle",
+    "name": "lumturo-net/contao-gastroburner-bundle",
     "type": "contao-bundle",
     "description": "Gastroburner-Abfrage-Game",
     "license": "LGPL-3.0-or-later",
@@ -11,8 +11,7 @@
     ],
     "require": {
         "php": "^7.0",
-        "contao/core-bundle": "4.8.*",
-        "symfony/framework-bundle": "^4.2"
+        "contao/core-bundle": "^4.9"
     },
     "conflict": {
         "contao/core": "*",
