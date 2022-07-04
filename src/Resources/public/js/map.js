@@ -8,6 +8,7 @@ var gastroBurnerMap = function () {
             job: {
                 restaurant: false,
                 cook: false,
+                kitchen: false,
                 hotelmanager: false,
                 hotelcleaner: false,
                 gastro: false
@@ -136,6 +137,15 @@ var gastroBurnerMap = function () {
         // Filter nach Job-Button
         $('.job-filter-item input').on('change', function (e) {
             filter.job[$(this).data('type')] = !filter.job[$(this).data('type')];
+            filterList();
+        });
+
+        // Filter nach Job-Button (wenn Button per GET-Parameter gechecked)
+        $('.job-filter-item input').each(function($index, $element) {
+            if($($element).is(':checked')) {
+                filter.job[$(this).data('type')] = !filter.job[$(this).data('type')];
+            }
+
             filterList();
         });
 
