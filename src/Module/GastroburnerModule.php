@@ -22,11 +22,12 @@ class GastroburnerModule extends \Module
     ];
 
     public static $JOBS = [
-        'RESTAURANT' => 'Restaurantfachkraft',
-        'COOK' => 'Koch',
-        'HOTELCLEANER' => 'Hotelfachkraft',
-        'HOTELMANAGER' => 'Hotelkauf-mann/-frau',
-        'GASTRO' => 'Fachkraft im Gastgewerbe',
+        'RESTAURANT' => 'Fachmann/-frau für Restaurants und Veranstaltungsgastronomie',
+        'COOK' => 'Koch/Köchin',
+        'KITCHEN' => 'Fachkraft Küche',
+        'HOTELCLEANER' => 'Hotelfachmann/-frau',
+        'HOTELMANAGER' => 'Kaufmann/-frau für Hotelmanagement',
+        'GASTRO' => 'Fachkraft für Gastronomie',
     ];
 
     public static $POINTS = [

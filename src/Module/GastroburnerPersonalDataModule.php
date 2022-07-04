@@ -60,7 +60,7 @@ class GastroburnerPersonalDataModule extends \Contao\Module
 
 			return $objTemplate->parse();
 		}
-		
+
 		// hole mir die Felder, die im Frontend editierbar sein sollen vom eigentliche Register-Modul
 		$objOriginalRegistrationModule = \Contao\ModuleModel::findOneBy(array('type=?', 'editable!=?'), array('registration', ''), array());
 		$this->editable = \Contao\StringUtil::deserialize($objOriginalRegistrationModule->editable);
@@ -339,7 +339,7 @@ class GastroburnerPersonalDataModule extends \Contao\Module
 		}
 
 		// ziehe die job-fields raus, um den rest (in der mitte vom template) per Schleife ausgeben zu können.
-		foreach (array('restaurant', 'cook', 'hotelcleaner', 'hotelmanager', 'gastro') as $strField) {
+		foreach (array('restaurant', 'cook', 'kitchen', 'hotelcleaner', 'hotelmanager', 'gastro') as $strField) {
 			$arrJobFields[$strField] = $arrNamedFields[$strField];
 			unset($arrNamedFields[$strField]);
 		}

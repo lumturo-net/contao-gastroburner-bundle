@@ -13,9 +13,9 @@
         <div class="gastromat">
           <ul class="gastromatlist">
             <li class="gastromatlist__item js-gastromatlist__item">
-              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/chef.png" alt="Koch"></div>
-              <div class="gastromatlist__imageclip"><img class="" src="resources/img/chef.png" alt="Koch"></div>
-              <div class="gastromatlist__tooltip">Koch</div>
+              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/chef.png" alt="Koch/Köchin"></div>
+              <div class="gastromatlist__imageclip"><img class="" src="resources/img/chef.png" alt="Koch/Köchin"></div>
+              <div class="gastromatlist__tooltip">Koch/Köchin</div>
               <div class="gastromatlist__copy">
                   <span class="gastromatlist__copyheadline">Koch/Köchin</span>
                   <span class="gastromatlist__copytext">Wenn du schon länger der Held am Herd bist, gern mit leckeren Zutaten hantierst und niemandem die Suppe versalzt – dann greif zu für deine Zukunft.</span>
@@ -23,8 +23,8 @@
               </div>
             </li>
             <li class="gastromatlist__item js-gastromatlist__item">
-              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/chef.png" alt="Koch"></div>
-              <div class="gastromatlist__imageclip"><img class="" src="resources/img/chef.png" alt="Koch"></div>
+              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/chef.png" alt="Fachkraft Küche"></div>
+              <div class="gastromatlist__imageclip"><img class="" src="resources/img/chef.png" alt="Fachkraft Küche"></div>
               <div class="gastromatlist__tooltip">Fachkraft Küche</div>
               <div class="gastromatlist__copy">
                     <span class="gastromatlist__copyheadline">Fachkraft Küche</span>
@@ -33,41 +33,41 @@
               </div>
             </li>
             <li class="gastromatlist__item js-gastromatlist__item">
-              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/receptionist.png" alt="Hotelkaufffrau"></div>
-              <div class="gastromatlist__imageclip"><img class="" src="resources/img/receptionist.png" alt="Hotelkaufffrau"></div>
-              <div class="gastromatlist__tooltip">Hotelkaufmann/-frau</div>
+              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/receptionist.png" alt="Kaufmann/-frau für Hotelmanagement"></div>
+              <div class="gastromatlist__imageclip"><img class="" src="resources/img/receptionist.png" alt="Kaufmann/-frau für Hotelmanagement"></div>
+              <div class="gastromatlist__tooltip">Kaufmann/-frau für Hotelmanagement</div>
               <div class="gastromatlist__copy">
-                  <span class="gastromatlist__copyheadline">Hotelkauf-<br>mann/-frau</span>
+                  <span class="gastromatlist__copyheadline">Kaufmann/-frau für Hotelmanagement</span>
                   <span class="gastromatlist__copytext">Wenn Rechenaufgaben für dich kein Garteneinsatz sind, wenn du Freude am Einkaufen hast und weißt, wie man einen Laden schmeißt – dann greif zu für deine Zukunft.</span>
                   <span class="gastromatlist__copyclose js-close-gastromatlist-copy">schließen</span>
               </div>
             </li>
             <li class="gastromatlist__item js-gastromatlist__item">
-              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/waiter.png" alt="Restaurantfachkraft"></div>
-              <div class="gastromatlist__imageclip"><img class="" src="resources/img/waiter.png" alt="Restaurantfachkraft"></div>
-              <div class="gastromatlist__tooltip">Restaurantfachkraft</div>
+              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/waiter.png" alt="Fachmann/-frau für Restaurants & Veranstaltungsgastronomie"></div>
+              <div class="gastromatlist__imageclip"><img class="" src="resources/img/waiter.png" alt="Fachmann/-frau für Restaurants & Veranstaltungsgastronomie"></div>
+              <div class="gastromatlist__tooltip">Fachmann/-frau für Restaurants & Veranstaltungsgastronomie</div>
               <div class="gastromatlist__copy">
-                <span class="gastromatlist__copyheadline">Restaurant-<br>fachkraft</span>
+                <span class="gastromatlist__copyheadline">Fachmann/-frau für Restaurants & Veranstaltungsgastronomie</span>
                 <span class="gastromatlist__copytext">Wenn du große Events auf die Beine stellen willst, Menüs mit einem Smiley servierst und dufte mit Leuten kannst – dann greif zu für deine Zukunft.</span>
                 <span class="gastromatlist__copyclose js-close-gastromatlist-copy">schließen</span>
               </div>
             </li>
             <li class="gastromatlist__item js-gastromatlist__item">
-              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/maid.png" alt="Hotelfachkraft"></div>
-              <div class="gastromatlist__imageclip"><img class="" src="resources/img/maid.png" alt="Hotelfachkraft"></div>
-              <div class="gastromatlist__tooltip">Hotelfachkraft</div>
+              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/maid.png" alt="Hotelfachmann/-frau"></div>
+              <div class="gastromatlist__imageclip"><img class="" src="resources/img/maid.png" alt="Hotelfachmann/-frau"></div>
+              <div class="gastromatlist__tooltip">Hotelfachmann/-frau</div>
               <div class="gastromatlist__copy">
-                <span class="gastromatlist__copyheadline">Hotelfachkraft</span>
+                <span class="gastromatlist__copyheadline">Hotelfachmann/-frau</span>
                 <span class="gastromatlist__copytext">Wenn sich Gäste bei dir wie Freunde fühlen, wenn du gern Pläne schmiedest und man stets mit dir rechnen kann – dann greif zu für deine Zukunft.</span>
                 <span class="gastromatlist__copyclose js-close-gastromatlist-copy">schließen</span>
               </div>
             </li>
             <li class="gastromatlist__item js-gastromatlist__item">
-              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/bartender.png" alt="Fachkraft im Gastgewerbe"></div>
-              <div class="gastromatlist__imageclip"><img class="" src="resources/img/bartender.png" alt="Fachkraft im Gastgewerbe"></div>
-              <div class="gastromatlist__tooltip">Fachkraft im Gastgewerbe</div>
+              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/bartender.png" alt="Fachkraft für Gastronomie"></div>
+              <div class="gastromatlist__imageclip"><img class="" src="resources/img/bartender.png" alt="Fachkraft für Gastronomie"></div>
+              <div class="gastromatlist__tooltip">Fachkraft für Gastronomie</div>
               <div class="gastromatlist__copy">
-                <span class="gastromatlist__copyheadline">Fachkraft im Gastgewerbe</span>
+                <span class="gastromatlist__copyheadline">Fachkraft für Gastronomie</span>
                 <span class="gastromatlist__copytext">Wenn die Küche dein Spielzimmer ist und du Glanz in die Hütte bringst und ein Gästefan bist – dann greif zu für deine Zukunft.</span>
                 <span class="gastromatlist__copyclose js-close-gastromatlist-copy">schließen</span>
               </div>
@@ -116,10 +116,10 @@
                 <div class="result__copy"><div class="result__indicator"></div><span>Koch/in</span> <span class="js-value">75%</span></div>
                 <div class="result__info"><a href="{{link_url::6}}" class="result__info__link" target="_blank" title="{{link_title::6}}">i</a></div>
               </div>
-              <div class="result__item js-KITCHEN" data-type="cook">
+              <div class="result__item js-KITCHEN" data-type="kitchen">
                   <div class="result__checkbox"></div>
                   <div class="result__copy"><div class="result__indicator"></div><span>Fachkraft Küche</span> <span class="js-value">75%</span></div>
-                  <div class="result__info"><a href="{{link_url::6}}" class="result__info__link" target="_blank" title="{{link_title::6}}">i</a></div>
+                  <div class="result__info"><a href="{{link_url::72}}" class="result__info__link" target="_blank" title="{{link_title::72}}">i</a></div>
               </div>
               <div class="result__item js-RESTAURANT" data-type="restaurant">
                 <div class="result__checkbox"></div>
@@ -128,7 +128,7 @@
               </div>
               <div class="result__item js-HOTELCLEANER" data-type="hotelcleaner">
                 <div class="result__checkbox"></div>
-                <div class="result__copy"><div class="result__indicator"></div><span>Hotelfachkraft</span> <span class="js-value">50%</span></div>
+                <div class="result__copy"><div class="result__indicator"></div><span>Hotelfachmann/-frau</span> <span class="js-value">50%</span></div>
                 <div class="result__info"><a href="{{link_url::8}}" class="result__info__link" target="_blank" title="{{link_title::8}}">i</a></div>
               </div>
               <div class="result__item js-HOTELMANAGER" data-type="hotelmanager">
@@ -138,7 +138,7 @@
               </div>
               <div class="result__item js-GASTRO" data-type="gastro">
                 <div class="result__checkbox"></div>
-                <div class="result__copy"><div class="result__indicator"></div><span>Fachkraft im Gastgewerbe</span> <span class="js-value">80%</span></div>
+                <div class="result__copy"><div class="result__indicator"></div><span>Fachkraft für Gastronomie</span> <span class="js-value">80%</span></div>
                 <div class="result__info"><a href="{{link_url::10}}" class="result__info__link" target="_blank" title="{{link_title::10}}">i</a></div>
               </div>
               <div class="select_one_answer"><p class="color-black">Wähle die Berufe, die dir gefallen und starte jetzt deine Initiativ-Berwerbung.</p></div>
@@ -146,6 +146,7 @@
                 <input type="hidden" name="REQUEST_TOKEN" value="<?= REQUEST_TOKEN ?>">
                 <input class="hidden_job" type="hidden" name="restaurant">
                 <input class="hidden_job" type="hidden" name="cook">
+                <input class="hidden_job" type="hidden" name="kitchen">
                 <input class="hidden_job" type="hidden" name="hotelcleaner">
                 <input class="hidden_job" type="hidden" name="hotelmanager">
                 <input class="hidden_job" type="hidden" name="gastro">

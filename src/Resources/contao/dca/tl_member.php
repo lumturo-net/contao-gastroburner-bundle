@@ -20,7 +20,7 @@ $GLOBALS['TL_DCA']['tl_member']['list']['label']['label_callback'] = array('tl_g
 
 $GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace('company,', 'company,shortname,companyLogo,description,shortdesc,', $GLOBALS['TL_DCA']['tl_member']['palettes']['default']);
 $GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace('country;', 'country,lat,lon;', $GLOBALS['TL_DCA']['tl_member']['palettes']['default']);
-$GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace('newsletter;', 'newsletter;{job_legend},show_in_frontend,restaurant,cook,hotelcleaner,hotelmanager,gastro;', $GLOBALS['TL_DCA']['tl_member']['palettes']['default']);
+$GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace('newsletter;', 'newsletter;{job_legend},show_in_frontend,restaurant,cook,kitchen,hotelcleaner,hotelmanager,gastro;', $GLOBALS['TL_DCA']['tl_member']['palettes']['default']);
 
 // Add load callback
 // $GLOBALS['TL_DCA']['tl_member']['config']['onload_callback'][] = array('Newsletter', 'updateAccount');
@@ -79,6 +79,18 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['restaurant'] = array(
 );
 $GLOBALS['TL_DCA']['tl_member']['fields']['cook'] = array(
     'label' => &$GLOBALS['TL_LANG']['tl_member']['cook'],
+    'exclude' => true,
+    'inputType' => 'text',
+    'eval' => array(
+        'rgxp' => 'natural',
+        'mandatory' => true,
+        'feEditable' => true,
+    ),
+    'sql' => "INT(10) unsigned NOT NULL default '0'",
+);
+
+$GLOBALS['TL_DCA']['tl_member']['fields']['kitchen'] = array(
+    'label' => &$GLOBALS['TL_LANG']['tl_member']['kitchen'],
     'exclude' => true,
     'inputType' => 'text',
     'eval' => array(
