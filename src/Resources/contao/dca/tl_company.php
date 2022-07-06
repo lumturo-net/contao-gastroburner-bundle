@@ -88,7 +88,7 @@ $GLOBALS['TL_DCA']['tl_company'] = array
     // Palettes
     'palettes' => array
     (
-        'default' => '{name_legend},shortname,name;{address_legend},street,number,zip,city,lat,lon;{contact_legend},contact,email;{job_legend},restaurant,cook,kitchen,system,hotelcleaner,hotelmanager,gastro;{description_legend},shortdesc,description',
+        'default' => '{name_legend},shortname,name;{address_legend},street,number,zip,city,lat,lon;{contact_legend},contact,email;{job_legend},restaurant,cook,kitchen,systemg,hotelcleaner,hotelmanager,gastro;{description_legend},shortdesc,description',
     ),
 
     // Subpalettes

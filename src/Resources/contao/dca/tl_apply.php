@@ -88,7 +88,7 @@ $GLOBALS['TL_DCA']['tl_apply'] = array
     // Palettes
     'palettes' => array
     (
-        'default' => '{name_legend},vorname,name,email;{job_legend},restaurant,cook,kitchen,system,hotelcleaner,hotelmanager,gastro;{beschreibung_legend},beschreibung',
+        'default' => '{name_legend},vorname,name,email;{job_legend},restaurant,cook,kitchen,systemg,hotelcleaner,hotelmanager,gastro;{beschreibung_legend},beschreibung',
     ),
 
     // Subpalettes
