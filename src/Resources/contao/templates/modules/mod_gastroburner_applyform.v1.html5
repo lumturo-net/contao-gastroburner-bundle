@@ -12,7 +12,7 @@
     <p class="error">Bitte mindestens einen Beruf auswählen.</p>
     <?php endif;?>
   </div>
-    <?php foreach (['restaurant', 'cook', 'kitchen', 'system', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): ?>
+    <?php foreach (['restaurant', 'cook', 'kitchen', 'systemg', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): ?>
       <div class="gastroform_wrapper"><input class="gastroform_checkbox" type="checkbox" id="input_<?php echo $strName ?>" name="<?php echo $strName ?>" <?php echo (($this->{$strName}) ? ' checked' : '') ?>><label class="gastroform_label js-toggle-label<?php echo (($this->{$strName}) ? ' active' : '') ?>" for="input_<?php echo $strName ?>"><?php echo $GLOBALS['TL_LANG']['tl_apply'][$strName][0] ?></label></div>
     <?php endforeach?>
     <br>

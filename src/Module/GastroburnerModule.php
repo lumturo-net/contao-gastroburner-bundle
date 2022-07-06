@@ -25,7 +25,7 @@ class GastroburnerModule extends \Module
         'RESTAURANT' => 'Fachmann/-frau für Restaurants und Veranstaltungsgastronomie',
         'COOK' => 'Koch/Köchin',
         'KITCHEN' => 'Fachkraft Küche',
-        'SYSTEM' => 'Fachmann/-frau für Systemgastronomie',
+        'SYSTEMG' => 'Fachmann/-frau für Systemgastronomie',
         'HOTELCLEANER' => 'Hotelfachmann/-frau',
         'HOTELMANAGER' => 'Kaufmann/-frau für Hotelmanagement',
         'GASTRO' => 'Fachkraft für Gastronomie',
@@ -77,7 +77,7 @@ class GastroburnerModule extends \Module
             'OFFICE'         => 2,
             'FLEXIBLE'       => 3,
         ],
-        'SYSTEM'         => [
+        'SYSTEMG'         => [
             'STRESS'         => 2,
             'TEAM'           => 2,
             'LEADERSHIP'     => 1,

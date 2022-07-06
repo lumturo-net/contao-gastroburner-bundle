@@ -131,7 +131,7 @@
                   <div class="result__copy"><div class="result__indicator"></div><span>Fachkraft Küche</span> <span class="js-value">75%</span></div>
                   <div class="result__info"><a href="{{link_url::72}}" class="result__info__link" target="_blank" title="{{link_title::72}}">i</a></div>
               </div>
-              <div class="result__item js-SYSTEM" data-type="system">
+              <div class="result__item js-SYSTEMG" data-type="system">
                   <div class="result__checkbox"></div>
                   <div class="result__copy"><div class="result__indicator"></div><span>Fachmann/-frau für Systemgastronomie</span> <span class="js-value">75%</span></div>
                   <div class="result__info"><a href="{{link_url::72}}" class="result__info__link" target="_blank" title="{{link_title::72}}">i</a></div>

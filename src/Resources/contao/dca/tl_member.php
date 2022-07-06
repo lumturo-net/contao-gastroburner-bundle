@@ -101,8 +101,8 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['kitchen'] = array(
     'sql' => "INT(10) unsigned NOT NULL default '0'",
 );
 
-$GLOBALS['TL_DCA']['tl_member']['fields']['system'] = array(
-    'label' => &$GLOBALS['TL_LANG']['tl_member']['system'],
+$GLOBALS['TL_DCA']['tl_member']['fields']['systemg'] = array(
+    'label' => &$GLOBALS['TL_LANG']['tl_member']['systemg'],
     'exclude' => true,
     'inputType' => 'text',
     'eval' => array(

@@ -43,7 +43,7 @@ $GLOBALS['TL_DCA']['tl_apply'] = array
         ),
         'label' => array
         (
-            'fields' => array('vorname', 'name', 'email','restaurant','cook', 'kitchen', 'system', 'hotelcleaner','hotelmanager','gastro'),
+            'fields' => array('vorname', 'name', 'email','restaurant','cook', 'kitchen', 'systemg', 'hotelcleaner','hotelmanager','gastro'),
 //            'format' => '%s (%d - %s)',
             // 'label_callback' => array('tl_question', 'listValues'),
             'showColumns' => true,
@@ -164,10 +164,10 @@ $GLOBALS['TL_DCA']['tl_apply'] = array
             'eval' => array('mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'),
             'sql' => "char(1) NOT NULL default ''"
         ),
-        'system' => array
+        'systemg' => array
         (
             'filter' => TRUE,
-            'label' => &$GLOBALS['TL_LANG']['tl_apply']['system'],
+            'label' => &$GLOBALS['TL_LANG']['tl_apply']['systemg'],
             'exclude' => false,
             'inputType' => 'checkbox',
             'eval' => array('mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'),

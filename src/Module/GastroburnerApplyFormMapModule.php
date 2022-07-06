@@ -66,7 +66,7 @@ class GastroburnerApplyFormMapModule extends \Contao\Module
         ];
 
         // Berufe kommen per GET und POST
-        foreach (['restaurant', 'cook', 'kitchen', 'system', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName) {
+        foreach (['restaurant', 'cook', 'kitchen', 'systemg', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName) {
             $this->Template->{$strName} = (($this->Input->post($strName) || ($this->Input->get($strName))) ? true : false);
         }
 
@@ -96,7 +96,7 @@ class GastroburnerApplyFormMapModule extends \Contao\Module
             $arrValues['beschreibung'] = $arrPost['beschreibung'];
 
             $arrErrors['jobs'] = true;
-            foreach (['restaurant', 'cook', 'kitchen', 'system', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName) {
+            foreach (['restaurant', 'cook', 'kitchen', 'systemg', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName) {
                 $boolVal = boolval($this->Input->post($strName));
                 if ($boolVal) {
                     unset($arrErrors['jobs']);
@@ -126,7 +126,7 @@ class GastroburnerApplyFormMapModule extends \Contao\Module
             'restaurant',
             'cook',
             'kitchen',
-            'system',
+            'systemg',
             'hotelcleaner',
             'hotelmanager',
             'gastro',

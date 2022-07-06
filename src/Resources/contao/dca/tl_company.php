@@ -43,7 +43,7 @@ $GLOBALS['TL_DCA']['tl_company'] = array
         ),
         'label' => array
         (
-            'fields' => array('shortname', 'restaurant', 'cook', 'kitchen', 'system', 'hotelcleaner', 'hotelmanager', 'gastro'),
+            'fields' => array('shortname', 'restaurant', 'cook', 'kitchen', 'systemg', 'hotelcleaner', 'hotelmanager', 'gastro'),
 //            'format' => '%s (%d - %s)',
             // 'label_callback' => array('tl_question', 'listValues'),
             'showColumns' => true,
@@ -266,10 +266,10 @@ $GLOBALS['TL_DCA']['tl_company'] = array
             'eval' => array('mandatory' => true, 'rgxp' => 'digit', 'maxlength' => 255, 'tl_class' => 'w50'),
             'sql' => "int(10) unsigned NOT NULL default '0'",
         ),
-        'system' => array
+        'systemg' => array
         (
             'filter' => true,
-            'label' => &$GLOBALS['TL_LANG']['tl_company']['system'],
+            'label' => &$GLOBALS['TL_LANG']['tl_company']['systemg'],
             'exclude' => false,
             'inputType' => 'text',
             'eval' => array('mandatory' => true, 'rgxp' => 'digit', 'maxlength' => 255, 'tl_class' => 'w50'),

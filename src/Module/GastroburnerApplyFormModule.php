@@ -50,7 +50,7 @@ class GastroburnerApplyFormModule extends \Module
         ];
 
         // Berufe kommen per GET und POST
-        foreach (['restaurant', 'cook', 'kitchen', 'system', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName) {
+        foreach (['restaurant', 'cook', 'kitchen', 'systemg', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName) {
             $this->Template->{$strName} = (($this->Input->post($strName) || ($this->Input->get($strName))) ? true : false);
         }
 
@@ -79,7 +79,7 @@ class GastroburnerApplyFormModule extends \Module
             $arrValues['beschreibung'] = $arrPost['beschreibung'];
 
             $arrErrors['jobs'] = true;
-            foreach (['restaurant', 'cook', 'kitchen', 'system', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName) {
+            foreach (['restaurant', 'cook', 'kitchen', 'systemg', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName) {
                 $boolVal = boolval($this->Input->post($strName));
                 if ($boolVal) {
                     unset($arrErrors['jobs']);

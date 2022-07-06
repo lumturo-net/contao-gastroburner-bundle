@@ -59,7 +59,7 @@ class GastroburnerCompanyDetail extends Module
         global $objPage;
 
         $intId     = intval(Input::get('auto_item'));
-        $arrFields = ['id', 'company', 'street', 'postal', 'city', 'lat', 'lon', 'phone', 'fax', 'email', 'description', 'shortname', 'shortdesc', 'restaurant', 'cook', 'kitchen', 'system', 'hotelcleaner', 'hotelmanager', 'gastro', 'companyLogo', 'website'];
+        $arrFields = ['id', 'company', 'street', 'postal', 'city', 'lat', 'lon', 'phone', 'fax', 'email', 'description', 'shortname', 'shortdesc', 'restaurant', 'cook', 'kitchen', 'systemg', 'hotelcleaner', 'hotelmanager', 'gastro', 'companyLogo', 'website'];
         $arrDbCompany = Database::getInstance()->prepare('SELECT ' . implode(', ', $arrFields) . ' FROM tl_member WHERE disable=\'\' AND show_in_frontend=\'1\' AND id = \'' . $intId . '\';')->execute()->fetchAllAssoc();
         $arrDbCompany[0]['companyLogo'] = FilesModel::findByUuid($arrDbCompany[0]['companyLogo']);
 
