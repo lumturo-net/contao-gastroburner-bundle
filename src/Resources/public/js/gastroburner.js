@@ -71,12 +71,12 @@ window.onload = function () {
 
 
     function calculateResults() {
-        var result_points = { COOK: 0, KITCHEN: 0, RESTAURANT: 0, HOTELCLEANER: 0, HOTELMANAGER: 0, GASTRO: 0 };
+        var result_points = { COOK: 0, KITCHEN: 0, SYSTEM: 0, RESTAURANT: 0, HOTELCLEANER: 0, HOTELMANAGER: 0, GASTRO: 0 };
         // var max_results = { COOK: 24, RESTAURANT: 24, HOTELCLEANER: 24, HOTELMANAGER: 21, GASTRO: 14 };
-        var max_results = { COOK: 0, KITCHEN: 0, RESTAURANT: 0, HOTELCLEANER: 0, HOTELMANAGER: 0, GASTRO: 0 };
+        var max_results = { COOK: 0, KITCHEN: 0, SYSTEM: 0, RESTAURANT: 0, HOTELCLEANER: 0, HOTELMANAGER: 0, GASTRO: 0 };
 
         // berechne max_results anhand der vorhandenen Fragen
-        var jobs = ['COOK', 'KITCHEN', 'RESTAURANT', 'HOTELCLEANER', 'HOTELMANAGER', 'GASTRO'];
+        var jobs = ['COOK', 'KITCHEN', 'SYSTEM', 'RESTAURANT', 'HOTELCLEANER', 'HOTELMANAGER', 'GASTRO'];
         $('.js-question').each(function (index, question) {
             var $question = $(question);
             var type = $question.data('type');

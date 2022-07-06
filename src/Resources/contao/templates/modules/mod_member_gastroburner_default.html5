@@ -29,6 +29,7 @@
                 <?php echo $this->named_job_fields['restaurant'] ?>
                 <?php echo $this->named_job_fields['cook'] ?>
                 <?php echo $this->named_job_fields['kitchen'] ?>
+                <?php echo $this->named_job_fields['system'] ?>
                 <?php echo $this->named_job_fields['hotelcleaner'] ?>
                 <?php echo $this->named_job_fields['hotelmanager'] ?>
                 <?php echo $this->named_job_fields['gastro'] ?>

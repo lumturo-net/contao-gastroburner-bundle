@@ -30,6 +30,7 @@
         <button class="js-filter" data-type="restaurant">Fachmann/-frau für Restaurants und Veranstaltungsgastronomie</button>
         <button class="js-filter" data-type="cook">Koch/Köchin</button>
         <button class="js-filter" data-type="kitchen">Fachkraft Küche</button>
+        <button class="js-filter" data-type="system">Fachmann/-frau für Systemgastronomie</button>
         <button class="js-filter" data-type="hotelmanager">Kaufmann/-frau für Hotelmanagement</button>
         <button class="js-filter" data-type="hotelcleaner">Hotelfachmann/-frau</button>
         <button class="js-filter" data-type="gastro">Fachkraft für Gastronomie</button>
@@ -72,7 +73,7 @@
     <?php if (isset($this->errors['jobs'])): ?>
       <p class="error">Bitte mindestens einen Beruf auswählen.</p>
     <?php endif;?>
-    <?php foreach (['restaurant', 'cook', 'kitchen', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): ?>
+    <?php foreach (['restaurant', 'cook', 'kitchen', 'system', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): ?>
       <br><input type="checkbox" name="<?php echo $strName ?>" <?php echo ((isset($this->post[$strName]) && (strlen(trim($this->post[$strName])))) ? ' checked' : '') ?>><label><?php echo $GLOBALS['TL_LANG']['tl_apply'][$strName][0] ?></label>
     <?php endforeach?>
     <br>

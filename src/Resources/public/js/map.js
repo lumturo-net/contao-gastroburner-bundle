@@ -9,6 +9,7 @@ var gastroBurnerMap = function () {
                 restaurant: false,
                 cook: false,
                 kitchen: false,
+                system: false,
                 hotelmanager: false,
                 hotelcleaner: false,
                 gastro: false

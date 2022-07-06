@@ -33,6 +33,16 @@
               </div>
             </li>
             <li class="gastromatlist__item js-gastromatlist__item">
+              <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/chef.png" alt="Fachmann/-frau für Systemgastronomie"></div>
+              <div class="gastromatlist__imageclip"><img class="" src="resources/img/chef.png" alt="Fachmann/-frau für Systemgastronomie"></div>
+              <div class="gastromatlist__tooltip">Fachmann/-frau für Systemgastronomie</div>
+              <div class="gastromatlist__copy">
+                  <span class="gastromatlist__copyheadline">Fachmann/-frau für Systemgastronomie</span>
+                  <span class="gastromatlist__copytext">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dolor doloribus fugit nisi provident quibusdam quod rerum sint sit voluptate.</span>
+                  <span class="gastromatlist__copyclose js-close-gastromatlist-copy">schließen</span>
+              </div>
+            </li>
+            <li class="gastromatlist__item js-gastromatlist__item">
               <div class="gastromatlist__wrapper"><img class="gastromatlist__image" src="resources/img/receptionist.png" alt="Kaufmann/-frau für Hotelmanagement"></div>
               <div class="gastromatlist__imageclip"><img class="" src="resources/img/receptionist.png" alt="Kaufmann/-frau für Hotelmanagement"></div>
               <div class="gastromatlist__tooltip">Kaufmann/-frau für Hotelmanagement</div>
@@ -121,6 +131,11 @@
                   <div class="result__copy"><div class="result__indicator"></div><span>Fachkraft Küche</span> <span class="js-value">75%</span></div>
                   <div class="result__info"><a href="{{link_url::72}}" class="result__info__link" target="_blank" title="{{link_title::72}}">i</a></div>
               </div>
+              <div class="result__item js-SYSTEM" data-type="system">
+                  <div class="result__checkbox"></div>
+                  <div class="result__copy"><div class="result__indicator"></div><span>Fachmann/-frau für Systemgastronomie</span> <span class="js-value">75%</span></div>
+                  <div class="result__info"><a href="{{link_url::72}}" class="result__info__link" target="_blank" title="{{link_title::72}}">i</a></div>
+              </div>
               <div class="result__item js-RESTAURANT" data-type="restaurant">
                 <div class="result__checkbox"></div>
                 <div class="result__copy"><div class="result__indicator"></div><span>Restaurant&shy;fach&shy;kraft</span> <span class="js-value">35%</span></div>
@@ -147,6 +162,7 @@
                 <input class="hidden_job" type="hidden" name="restaurant">
                 <input class="hidden_job" type="hidden" name="cook">
                 <input class="hidden_job" type="hidden" name="kitchen">
+                <input class="hidden_job" type="hidden" name="system">
                 <input class="hidden_job" type="hidden" name="hotelcleaner">
                 <input class="hidden_job" type="hidden" name="hotelmanager">
                 <input class="hidden_job" type="hidden" name="gastro">

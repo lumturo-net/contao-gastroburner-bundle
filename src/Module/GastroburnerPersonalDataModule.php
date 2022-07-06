@@ -339,7 +339,7 @@ class GastroburnerPersonalDataModule extends \Contao\Module
 		}
 
 		// ziehe die job-fields raus, um den rest (in der mitte vom template) per Schleife ausgeben zu können.
-		foreach (array('restaurant', 'cook', 'kitchen', 'hotelcleaner', 'hotelmanager', 'gastro') as $strField) {
+		foreach (array('restaurant', 'cook', 'kitchen', 'system', 'hotelcleaner', 'hotelmanager', 'gastro') as $strField) {
 			$arrJobFields[$strField] = $arrNamedFields[$strField];
 			unset($arrNamedFields[$strField]);
 		}

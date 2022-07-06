@@ -16,7 +16,7 @@
         <p class="error">Bitte mindestens einen Beruf auswählen.</p>
         <?php endif;?>
     </div>
-    <?php foreach (['cook', 'kitchen', 'restaurant', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): ?>
+    <?php foreach (['cook', 'kitchen', 'system', 'restaurant', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): ?>
     <div class="job-filter-item">
         <input type="checkbox" id="input_<?= $strName ?>" name="<?= $strName ?>" <?= $this->{$strName} ? ' checked' : '' ?> data-type="<?= $strName ?>">
         <label class="<?= $this->{$strName} ? ' active' : '' ?>" for="input_<?= $strName ?>">
@@ -56,7 +56,7 @@
                                 <h4 class="shortname"><?= $company['shortname'] ?></h4>
                                 <p class="d-none js-toggle-checkbox-xl-block"><?= $company['shortdesc'] ?></p>
                                 <div class="company-item-jobs">
-                                <?php foreach(array('cook', 'kitchen', 'restaurant', 'hotelcleaner', 'hotelmanager', 'gastro') as $strKey): if ($company[$strKey] > 0) : ?>
+                                <?php foreach(array('cook', 'kitchen', 'system', 'restaurant', 'hotelcleaner', 'hotelmanager', 'gastro') as $strKey): if ($company[$strKey] > 0) : ?>
                                     <div class="company-item-job-container">
                                         <div class="company-item-job <?= $strKey ?>"></div>
                                     </div>
@@ -115,7 +115,7 @@
                 <h4><?= $company['shortname'] ?></h4>
                 <p><?= $company['shortdesc'] ?></p>
                 <div class="company-jobs">
-                <?php foreach(['restaurant', 'cook', 'kitchen', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strKey) : if($company[$strKey] > 0): ?>
+                <?php foreach(['restaurant', 'cook', 'kitchen', 'system', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strKey) : if($company[$strKey] > 0): ?>
                     <div class="company-job <?= $strKey ?>"></div>
                 <?php endif; endforeach; ?>
                 </div>
@@ -183,7 +183,7 @@
             <div class="btninner">Jetzt Ausbildung reservieren</div><span></span>
         </button>
     </div>
-    <?php foreach (['restaurant', 'cook', 'kitchen', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): if(isset($this->post[$strName])): ?>
+    <?php foreach (['restaurant', 'cook', 'kitchen', 'system', 'hotelcleaner', 'hotelmanager', 'gastro'] as $strName): if(isset($this->post[$strName])): ?>
     <input class="gastroform_checkbox js-job-filter" type="hidden" id="input_<?= $strName ?>" name="<?= $strName ?>" value="1">
     <?php endif; endforeach ?>
 <?php endif; ?>

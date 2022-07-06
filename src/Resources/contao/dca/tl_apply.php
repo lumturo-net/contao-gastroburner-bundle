@@ -43,7 +43,7 @@ $GLOBALS['TL_DCA']['tl_apply'] = array
         ),
         'label' => array
         (
-            'fields' => array('vorname', 'name', 'email','restaurant','cook', 'kitchen', 'hotelcleaner','hotelmanager','gastro'),
+            'fields' => array('vorname', 'name', 'email','restaurant','cook', 'kitchen', 'system', 'hotelcleaner','hotelmanager','gastro'),
 //            'format' => '%s (%d - %s)',
             // 'label_callback' => array('tl_question', 'listValues'),
             'showColumns' => true,
@@ -88,7 +88,7 @@ $GLOBALS['TL_DCA']['tl_apply'] = array
     // Palettes
     'palettes' => array
     (
-        'default' => '{name_legend},vorname,name,email;{job_legend},restaurant,cook,kitchen,hotelcleaner,hotelmanager,gastro;{beschreibung_legend},beschreibung',
+        'default' => '{name_legend},vorname,name,email;{job_legend},restaurant,cook,kitchen,system,hotelcleaner,hotelmanager,gastro;{beschreibung_legend},beschreibung',
     ),
 
     // Subpalettes
@@ -159,6 +159,15 @@ $GLOBALS['TL_DCA']['tl_apply'] = array
         (
             'filter' => TRUE,
             'label' => &$GLOBALS['TL_LANG']['tl_apply']['kitchen'],
+            'exclude' => false,
+            'inputType' => 'checkbox',
+            'eval' => array('mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'),
+            'sql' => "char(1) NOT NULL default ''"
+        ),
+        'system' => array
+        (
+            'filter' => TRUE,
+            'label' => &$GLOBALS['TL_LANG']['tl_apply']['system'],
             'exclude' => false,
             'inputType' => 'checkbox',
             'eval' => array('mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'),
