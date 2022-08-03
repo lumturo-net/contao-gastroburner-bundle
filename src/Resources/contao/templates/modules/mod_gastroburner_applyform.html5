@@ -30,7 +30,7 @@
         <button class="js-filter" data-type="restaurant">Fachmann/-frau für Restaurants und Veranstaltungsgastronomie</button>
         <button class="js-filter" data-type="cook">Koch/Köchin</button>
         <button class="js-filter" data-type="kitchen">Fachkraft Küche</button>
-        <button class="js-filter" data-type="system">Fachmann/-frau für Systemgastronomie</button>
+        <button class="js-filter" data-type="systemg">Fachmann/-frau für Systemgastronomie</button>
         <button class="js-filter" data-type="hotelmanager">Kaufmann/-frau für Hotelmanagement</button>
         <button class="js-filter" data-type="hotelcleaner">Hotelfachmann/-frau</button>
         <button class="js-filter" data-type="gastro">Fachkraft für Gastronomie</button>

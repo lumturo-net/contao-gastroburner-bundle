@@ -117,7 +117,7 @@
                   <div class="result__copy"><div class="result__indicator"></div><span>Fachkraft Küche</span> <span class="js-value">75%</span></div>
                   <div class="result__info"><a href="{{link_url::72}}" class="result__info__link" target="_blank" title="{{link_title::72}}">i</a></div>
               </div>
-              <div class="result__item js-SYSTEMG" data-type="system">
+              <div class="result__item js-SYSTEMG" data-type="systemg">
                   <div class="result__checkbox"></div>
                   <div class="result__copy"><div class="result__indicator"></div><span>Fachmann/-frau für Systemgastronomie</span> <span class="js-value">75%</span></div>
                   <div class="result__info"><a href="{{link_url::72}}" class="result__info__link" target="_blank" title="{{link_title::72}}">i</a></div>
@@ -148,7 +148,7 @@
                 <input class="hidden_job" type="hidden" name="restaurant">
                 <input class="hidden_job" type="hidden" name="cook">
                 <input class="hidden_job" type="hidden" name="kitchen">
-                <input class="hidden_job" type="hidden" name="system">
+                <input class="hidden_job" type="hidden" name="systemg">
                 <input class="hidden_job" type="hidden" name="hotelcleaner">
                 <input class="hidden_job" type="hidden" name="hotelmanager">
                 <input class="hidden_job" type="hidden" name="gastro">
