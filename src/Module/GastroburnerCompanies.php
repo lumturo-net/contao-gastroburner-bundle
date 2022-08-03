@@ -48,7 +48,7 @@ class GastroburnerCompanies extends \Contao\Module
     {
         global $objPage;
 
-        $arrFields = ['id', 'company', 'street', 'postal', 'city', 'lat', 'lon', 'shortname', 'shortdesc', 'restaurant', 'cook', 'kitchen', 'hotelcleaner', 'hotelmanager', 'gastro', 'companyLogo', 'website'];
+        $arrFields = ['id', 'company', 'street', 'postal', 'city', 'lat', 'lon', 'shortname', 'shortdesc', 'restaurant', 'cook', 'kitchen', 'systemg', 'hotelcleaner', 'hotelmanager', 'gastro', 'companyLogo', 'website'];
         $arrDbCompanies= Database::getInstance()->prepare('SELECT ' . implode(', ', $arrFields) . ' FROM tl_member WHERE disable=\'\' AND show_in_frontend=\'1\' ORDER BY shortname;')->execute()->fetchAllAssoc();
         $arrCompanies = [];
         foreach ($arrDbCompanies as $arrCompany) {

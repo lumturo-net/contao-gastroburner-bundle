@@ -25,3 +25,4 @@ vendor/bin/phpunit
 ```
 
 [1]: https://contao.org
+

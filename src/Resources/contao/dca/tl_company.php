@@ -43,7 +43,7 @@ $GLOBALS['TL_DCA']['tl_company'] = array
         ),
         'label' => array
         (
-            'fields' => array('shortname', 'restaurant', 'cook', 'kitchen', 'hotelcleaner', 'hotelmanager', 'gastro'),
+            'fields' => array('shortname', 'restaurant', 'cook', 'kitchen', 'systemg', 'hotelcleaner', 'hotelmanager', 'gastro'),
 //            'format' => '%s (%d - %s)',
             // 'label_callback' => array('tl_question', 'listValues'),
             'showColumns' => true,
@@ -88,7 +88,7 @@ $GLOBALS['TL_DCA']['tl_company'] = array
     // Palettes
     'palettes' => array
     (
-        'default' => '{name_legend},shortname,name;{address_legend},street,number,zip,city,lat,lon;{contact_legend},contact,email;{job_legend},restaurant,cook,kitchen,hotelcleaner,hotelmanager,gastro;{description_legend},shortdesc,description',
+        'default' => '{name_legend},shortname,name;{address_legend},street,number,zip,city,lat,lon;{contact_legend},contact,email;{job_legend},restaurant,cook,kitchen,systemg,hotelcleaner,hotelmanager,gastro;{description_legend},shortdesc,description',
     ),
 
     // Subpalettes
@@ -261,6 +261,15 @@ $GLOBALS['TL_DCA']['tl_company'] = array
         (
             'filter' => true,
             'label' => &$GLOBALS['TL_LANG']['tl_company']['kitchen'],
+            'exclude' => false,
+            'inputType' => 'text',
+            'eval' => array('mandatory' => true, 'rgxp' => 'digit', 'maxlength' => 255, 'tl_class' => 'w50'),
+            'sql' => "int(10) unsigned NOT NULL default '0'",
+        ),
+        'systemg' => array
+        (
+            'filter' => true,
+            'label' => &$GLOBALS['TL_LANG']['tl_company']['systemg'],
             'exclude' => false,
             'inputType' => 'text',
             'eval' => array('mandatory' => true, 'rgxp' => 'digit', 'maxlength' => 255, 'tl_class' => 'w50'),
