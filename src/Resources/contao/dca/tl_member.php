@@ -214,6 +214,8 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['show_in_frontend'] = array(
     'sql' => "char(1) NOT NULL default ''",
 );
 
+$GLOBALS['TL_DCA']['tl_member']['fields']['country']['eval']['mandatory'] = true;
+
 class tl_gb_member extends Contao\Backend
 {
 
