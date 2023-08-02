@@ -124,7 +124,7 @@
               </div>
               <div class="result__item js-RESTAURANT" data-type="restaurant">
                 <div class="result__checkbox"></div>
-                <div class="result__copy"><div class="result__indicator"></div><span>Restaurant&shy;fach&shy;kraft</span> <span class="js-value">35%</span></div>
+                <div class="result__copy"><div class="result__indicator"></div><span>Fachmann/-frau für Restaurants und Veranstaltungsgastronomie</span> <span class="js-value">35%</span></div>
                 <div class="result__info"><a href="{{link_url::7}}" class="result__info__link" target="_blank" title="{{link_title::7}}">i</a></div>
               </div>
               <div class="result__item js-HOTELCLEANER" data-type="hotelcleaner">
@@ -134,7 +134,7 @@
               </div>
               <div class="result__item js-HOTELMANAGER" data-type="hotelmanager">
                 <div class="result__checkbox"></div>
-                <div class="result__copy"><div class="result__indicator"></div><span>Hotelkaufmann/&shy;frau</span> <span class="js-value">100%</span></div>
+                <div class="result__copy"><div class="result__indicator"></div><span>Kaufmann/-frau für Hotelmanagement</span> <span class="js-value">100%</span></div>
                 <div class="result__info"><a href="{{link_url::9}}" class="result__info__link" target="_blank" title="{{link_title::9}}">i</a></div>
               </div>
               <div class="result__item js-GASTRO" data-type="gastro">
