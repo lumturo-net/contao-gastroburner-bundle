@@ -4,7 +4,7 @@
 $GLOBALS['TL_DCA']['tl_settings']['fields']['gastroburner_applyform_page'] = array(
     'label' => &$GLOBALS['TL_LANG']['tl_settings']['gastroburner_applyform_page'],
     'inputType' => 'pageTree',
-    'eval' => array('mandatory' => TRUE, 'tl_class' => 'w50'),
+    'eval' => array('mandatory' => TRUE, 'tl_class' => 'clr'),
 );
 
 $GLOBALS['TL_DCA']['tl_settings']['fields']['gastroburner_applyform_bcc'] = array(

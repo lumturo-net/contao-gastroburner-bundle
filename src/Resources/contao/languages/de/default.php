@@ -6,6 +6,7 @@ $GLOBALS['TL_LANG']['MOD']['tl_company'][0] = 'Ausbildungsbetriebe';
 
 $GLOBALS['TL_LANG']['tl_settings']['gastroburner_config'] = 'Gastroburner-Config';
 $GLOBALS['TL_LANG']['tl_settings']['gastroburner_applyform_page'][0] = 'Zielseite für Bewerbungen';
+$GLOBALS['TL_LANG']['tl_settings']['gastroburner_applyform_bcc'][0] = 'BCC-Empfänger für Bewerbungen';
 
 // $GLOBALS['TL_LANG']['gastroburner']['category']['STRESS'] = array('STRESSRESISTENZ');
 $GLOBALS['TL_LANG']['tl_question']['question_legend'] = 'Frage';
