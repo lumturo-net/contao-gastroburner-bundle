@@ -188,6 +188,7 @@ class GastroburnerApplyFormMapModule extends \Contao\Module
             $objHtmlMailTemplate->post = $arrPost;
             $objHtmlMailTemplate->company = $arrCompany;
             $objEmail->html = $objHtmlMailTemplate->parse();
+            $objEmail->sendBcc($GLOBALS['TL_CONFIG']['gastroburner_applyform_bcc']);
             $objEmail->sendTo($arrCompany['email']);
         }
     }

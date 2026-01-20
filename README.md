@@ -1,6 +1,6 @@
 # Contao Gastroburner Bundle
 
-Only for internal use... ABC
+Only for internal use...
 
 ## Customize
 
